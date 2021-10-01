@@ -74,14 +74,18 @@ lift_control(void*) {
   if (master.get_digital(DIGITAL_R2) && claw_state == 0)
   {
     //activate claw
+    printf("open \n");
     claw_state = 1 ;
     claw(true) ;
+    pros::delay (500) ;
   }
   else if (master.get_digital(DIGITAL_R2) && claw_state == 1)
   {
     //deactivate claw
     claw_state = 0 ;
     claw(false) ;
+    pros::delay (500) ;
   }
+  pros::delay (20) ;
 }
 }

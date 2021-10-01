@@ -289,11 +289,11 @@
             "-funwind-tables",
             "--std=gnu++17",
             "-o",
-            "bin/Intakes.cpp.o",
-            "src\\Intakes.cpp"
+            "bin/B6-Bar.cpp.o",
+            "src\\B6-Bar.cpp"
         ],
         "directory": "C:\\Users\\benja\\OneDrive\\Documents\\GitHub\\62A_OGZodiac",
-        "file": "src\\Intakes.cpp"
+        "file": "src\\B6-Bar.cpp"
     },
     {
         "arguments": [
@@ -326,10 +326,10 @@
             "-funwind-tables",
             "--std=gnu++17",
             "-o",
-            "bin/B6-Bar.cpp.o",
-            "src\\B6-Bar.cpp"
+            "bin/Intakes.cpp.o",
+            "src\\Intakes.cpp"
         ],
         "directory": "C:\\Users\\benja\\OneDrive\\Documents\\GitHub\\62A_OGZodiac",
-        "file": "src\\B6-Bar.cpp"
+        "file": "src\\Intakes.cpp"
     }
 ]
