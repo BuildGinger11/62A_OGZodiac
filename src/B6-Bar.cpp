@@ -51,21 +51,39 @@ set_lift_position(int target, int speed) {
 ///
 void
 lift_control(void*) {
-  // Lift Up
+  // move lift value up
   while(1)
   {
   if (master.get_digital(DIGITAL_R1) && up_lock==0) {
-    // If lift is at max height, bring it down to 0
+    // If lift value is at max, bring it down to 0
     if(lift_state==num_of_pos-1)
       lift_state = 0;
-    // Otherwise, bring the lift up
+    // Otherwise, bring the lift value up
     else
       lift_state++;
+      
 
     up_lock = 1;
   }
   else if (!master.get_digital(DIGITAL_R1)) {
     up_lock = 0;
+    
+    
+  //actual motor moving stuff
+  if(lift_state == 0)
+  {
+    //actuate pneumatic
+    sixlock(false);
+    //move motor to pos
+    set_lift_position(lift_heights[lift_state], 100);
+  }
+  else
+  {
+    //deactuate pneumatic
+    sixlock(true);
+    //move motor to pos
+    set_lift_position(lift_heights[lift_state], 100);
+  }
   }
 
 
