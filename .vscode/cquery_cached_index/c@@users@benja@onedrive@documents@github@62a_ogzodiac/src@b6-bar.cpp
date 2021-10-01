@@ -48,7 +48,6 @@ set_lift_position(int target, int speed) {
 ///
 // Driver Control
 //  - when R1 is pressed, bring the lift up the position ladder
-//  - when R2 is pressed, bring the lift down the position ladder
 ///
 void
 lift_control(void*) {
