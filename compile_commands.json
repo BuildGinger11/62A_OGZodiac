@@ -326,10 +326,10 @@
             "-funwind-tables",
             "--std=gnu++17",
             "-o",
-            "bin/B4-Bar.cpp.o",
-            "src\\B4-Bar.cpp"
+            "bin/B6-Bar.cpp.o",
+            "src\\B6-Bar.cpp"
         ],
         "directory": "C:\\Users\\benja\\OneDrive\\Documents\\GitHub\\62A_OGZodiac",
-        "file": "src\\B4-Bar.cpp"
+        "file": "src\\B6-Bar.cpp"
     }
 ]

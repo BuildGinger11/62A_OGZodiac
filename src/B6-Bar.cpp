@@ -12,12 +12,26 @@ int lift_state = 0;
 
 
 pros::Motor lift(10, MOTOR_GEARSET_36, false, MOTOR_ENCODER_DEGREES);
+
+//bmogo lock
 pros::ADIDigitalOut sixLock(7);
+
 
 void sixlock(bool position)
 {
   sixLock.set_value(position);
 }
+
+//back claw (under conveyor)
+pros::ADIDigitalOut Claw (6);
+
+int claw_state = 0 ;
+
+void claw (bool position)
+{
+  Claw.set_value (position) ;
+}
+
 
 void set_lift(int input)  { lift = input; }
 
@@ -56,31 +70,18 @@ lift_control(void*) {
   }
 
 
-  // Lift Down
-  if (master.get_digital(DIGITAL_R2) && down_lock==0) {
-    // If the lift is down, bring the lift to max height
-    if (lift_state==0)
-      lift_state = num_of_pos-1;
-    // Otherwise, bring the lift down
-    else
-      lift_state--;
-
-    down_lock = 1;
-  }
-  else if (!master.get_digital(DIGITAL_R2)) {
-    down_lock = 0;
-  }
-  printf("Lift Position: %d \n", lift_state);
-  // Set the lift to the current position in the array
-  if(lift_state == 0)
+  // activate MogoClaw
+  if (master.get_digital(DIGITAL_R2) && claw_state == 0)
   {
-    sixlock(false);
-    set_lift_position(lift_heights[lift_state], 100);
+    //activate claw
+    claw_state = 1 ;
+    claw(true) ;
   }
-  else
+  else if (master.get_digital(DIGITAL_R2) && claw_state == 1)
   {
-    sixlock(true);
-    set_lift_position(lift_heights[lift_state], 100);
+    //deactivate claw
+    claw_state = 0 ;
+    claw(false) ;
   }
-  }
+}
 }
