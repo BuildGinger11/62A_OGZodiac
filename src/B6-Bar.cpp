@@ -81,7 +81,7 @@ lift_control(void*) {
   {
     set_lift_position(lift_heights[lift_state], 100) ;
     pros::delay (150) ;
-    sixlock (true) ;
+    sixlock (false) ;
   }
   else
   {
