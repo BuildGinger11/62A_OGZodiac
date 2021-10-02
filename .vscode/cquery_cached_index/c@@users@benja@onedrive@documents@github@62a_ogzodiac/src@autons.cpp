@@ -88,13 +88,27 @@ auto_2() {
 
   //mogo_outB(true);
   //block(true);
+//lift 6bar
+  set_lift_position(446, 100);
+  pros::delay(750) ;
+//drive forward
   set_drive_pid(drive, -10, DRIVE_SPEED);
   wait_drive();
   //block(false);
   pros::delay(100);
   //mogo_inB(true);
   pros::delay(400);
+//run intake
   intake(127);
+  pros::delay (3000) ;
+
+  //drive back?
+  //
+
+  //turns everything off like a sane person
+  intake (0) ;
+
+
 }
 
 

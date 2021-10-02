@@ -39,8 +39,8 @@ void zero_lift()    { lift.tare_position(); }
 int  get_lift()     { return lift.get_position(); }
 int  get_lift_vel() { return lift.get_actual_velocity(); }
 
-void
-set_lift_position(int target, int speed) {
+void set_lift_position(int target, int speed)
+{
   printf("Lift Position: %d \n", target);
   lift.move_absolute(target, speed);
 }
