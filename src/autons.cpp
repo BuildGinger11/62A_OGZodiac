@@ -101,6 +101,7 @@ auto_2() {
   intake(127);
   pros::delay (3000) ;
 
+//DRIVE BACK, DROP GOAL, RUSH MID
 //shut off intake
   //intake (0) ;
 //drop stuff
@@ -111,8 +112,14 @@ auto_2() {
 //turn
   //set_drive_pid(left, 30, DRIVE_SPEED) ; //make sure about angle and direction
   //wait_drive () ;
+//return B6Bar to norm
+  //set_lift_position (0, 100) ;
 //rush mid
   //set_drive_pid(drive, 240, DRIVE_SPEED) ; //ensure distance correct
+
+//DRIVE BACK, PLACE GOAL ON PLATFORM, RUSH MID
+
+//DRIVE BACK, TURN, COLLECT ROW OF RINGS
 
 
   //turns everything off like a sane person
