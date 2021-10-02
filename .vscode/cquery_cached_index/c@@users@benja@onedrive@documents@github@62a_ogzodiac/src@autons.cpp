@@ -60,19 +60,19 @@ two_mogo_constants() {
 // Drive Example
 ///
 void
-auto_1()
+auto_1() //dead does nothing
 {
-  flock(true);
-  set_drive_pid(drive, 50, 127);
-  for (int i=0; i<1000; i++) {
-    //mogo_out(false);
-    pros::delay(1);
-  }
-  pros::delay(200);
-  flock(false);
-  set_drive_pid(drive, -50, 127);
-  mogo_in(true);
-  wait_drive();
+  // flock(true);
+  // set_drive_pid(drive, 50, 127);
+  // for (int i=0; i<1000; i++) {
+  //   //mogo_out(false);
+  //   pros::delay(1);
+  // }
+  // pros::delay(200);
+  // flock(false);
+  // set_drive_pid(drive, -50, 127);
+  // mogo_in(true);
+  // wait_drive();
 
 }
 
@@ -119,8 +119,6 @@ auto_2() {
 
 //DRIVE BACK, PLACE GOAL ON PLATFORM, RUSH MID
 
-//DRIVE BACK, TURN, COLLECT ROW OF RINGS
-
 
   //turns everything off like a sane person
   intake (0) ;
@@ -129,26 +127,40 @@ auto_2() {
 }
 
 
-
-///
-// Combining Turn + Drive
-///
 void
-auto_3() {
-  set_drive_pid(drive, 24, DRIVE_SPEED, true);
-  wait_drive();
+auto_3() { //testing stuff here
+  //lift 6bar
+    claw (true) ;
+    set_lift_position(446, 100);
+    pros::delay(750) ;
+  //drive forward
+    set_drive_pid(drive, -10, DRIVE_SPEED);
+    wait_drive();
+    //block(false);
+    pros::delay(100);
+    //mogo_inB(true);
+    pros::delay(400);
+    claw (false);
+  //run intake
+    intake(127);
+    pros::delay (3000) ;
+    intake (0) ;
+  //drive back
+    set_drive_pid(drive, 10, DRIVE_SPEED);
+    wait_drive () ;
+  //turn
+    set_drive_pid(turn, -90, DRIVE_SPEED) ;
+    wait_drive () ;
+  //set down F4bar
+    
+  //rush time
+    set_drive_pid(drive, 240, DRIVE_SPEED) ; //check distance
+  //pick up
 
-  set_drive_pid(turn, 45, TURN_SPEED);
-  wait_drive();
 
-  set_drive_pid(turn, -45, TURN_SPEED);
-  wait_drive();
+    //turns everything off like a sane person
+    intake (0) ;
 
-  set_drive_pid(turn, 0, TURN_SPEED);
-  wait_drive();
-
-  set_drive_pid(drive, -24, DRIVE_SPEED, true);
-  wait_drive();
 }
 
 
