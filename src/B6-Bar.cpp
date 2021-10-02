@@ -1,8 +1,8 @@
 #include "main.h"
 
 
-const int num_of_pos = 5; // Number of lift positions
-const int lift_heights[num_of_pos] = {75, 0, 446, 321, 660}; // Lift Positions
+const int num_of_pos = 4; // Number of lift positions
+const int lift_heights[num_of_pos] = {50, 50, 446, 321}; // Lift Positions
 //                          {pick_up/ready , compact/drive, lift_above_platform, place_on_platform, max_height}
 
 // Driver Control Variables
@@ -70,7 +70,7 @@ lift_control(void*) {
     
     
   //actual motor moving stuff
-  if(lift_state == 0)
+  if(lift_state == 0 || lift_state == 3)
   {
     //actuate pneumatic
     sixlock(false);
