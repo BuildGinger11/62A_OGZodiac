@@ -92,7 +92,7 @@ mogo_in (bool hold)
  {
   if (get_mogo()<150)
   {
-    if (get_mogo_vel()==0 || get_mogo()<0)
+    if (get_mogo_vel()==0 || get_mogo()<50)
      {
       is_up = true;
       set_mogo(0);

@@ -81,22 +81,20 @@ auto_1() //now is tester auton
 
 
     //ALL ABOVE WORK
-//drive
+
     set_drive_pid (drive, 10, DRIVE_SPEED) ;
-    wait_drive () ;
-//turn
-    set_drive_pid (turn, 90, DRIVE_SPEED) ;
-    wait_drive () ;
-//drop mogo
-    mogo_out (false) ;
-//drive goal
-    set_drive_pid(drive, 60, DRIVE_SPEED) ;
-    wait_drive () ;
-//pick up goal
-    flock (true) ;
-    mogo_in (true) ;
-//retreat
-    set_drive_pid (drive, -60, DRIVE_SPEED) ;
+    wait_drive() ;
+    set_drive_pid(turn, 160, DRIVE_SPEED) ;
+    wait_drive() ;
+    intake (127) ;
+    set_drive_pid (drive, 20, DRIVE_SPEED/2) ;
+    wait_drive() ;
+    set_drive_pid(turn, 20, DRIVE_SPEED/2) ;
+    wait_drive() ;
+    set_drive_pid(drive, 40, DRIVE_SPEED/2) ;
+    wait_drive() ;
+    intake (0) ;
+
 
 }
 
@@ -126,6 +124,26 @@ auto_2() {
 
   //turns everything off like a sane person
   intake (0) ;
+
+//to be tested below
+
+  // //drive
+  //     set_drive_pid (drive, 10, DRIVE_SPEED) ;
+  //     wait_drive () ;
+  // //turn
+  //     set_drive_pid (turn, 90, DRIVE_SPEED) ;
+  //     wait_drive () ;
+  // //drop mogo
+  //     mogo_out (false) ;
+  // //drive goal
+  //     set_drive_pid(drive, 60, DRIVE_SPEED) ; //check distance
+  //     wait_drive () ;
+  // //pick up goal
+  //     flock (true) ;
+  //     mogo_in (true) ;
+  // //retreat
+  //     set_drive_pid (drive, -60, DRIVE_SPEED) ;
+
 
 
   // // to be tested
