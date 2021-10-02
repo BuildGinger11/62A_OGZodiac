@@ -1,8 +1,8 @@
 #include "main.h"
 
 
-const int num_of_pos = 5; // Number of lift positions
-const int lift_heights[num_of_pos] = {75, 0, 446, 321, 660}; // Lift Positions
+const int num_of_pos = 4; // Number of lift positions
+const int lift_heights[num_of_pos] = {0, 0, 446, 321}; // Lift Positions
 //                          {pick_up/ready , compact/drive, lift_above_platform, place_on_platform, max_height}
 
 // Driver Control Variables
@@ -61,14 +61,14 @@ lift_control(void*) {
     // Otherwise, bring the lift value up
     else
       lift_state++;
-      
+
 
     up_lock = 1;
   }
   else if (!master.get_digital(DIGITAL_R1)) {
     up_lock = 0;
-    
-    
+
+
   //actual motor moving stuff
   if(lift_state == 0)
   {
@@ -76,6 +76,12 @@ lift_control(void*) {
     sixlock(false);
     //move motor to pos
     set_lift_position(lift_heights[lift_state], 100);
+  }
+  else if (lift_state == 3)
+  {
+    set_lift_position(lift_heights[lift_state], 100) ;
+    pros::delay (150) ;
+    sixlock (true) ;
   }
   else
   {
