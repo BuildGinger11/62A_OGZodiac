@@ -78,13 +78,10 @@ auto_1()
 
 
 
-///
-// Turn Example
-///
+
 void
+//god auton
 auto_2() {
-  // The second parameter is target degrees
-  // The third parameter is max speed the robot will drive at
 
   //mogo_outB(true);
   //block(true);
@@ -104,8 +101,19 @@ auto_2() {
   intake(127);
   pros::delay (3000) ;
 
-  //drive back?
-  //
+//shut off intake
+  //intake (0) ;
+//drop stuff
+  //claw (true) ;
+//drive back
+  //set_drive_pid(drive, 20, DRIVE_SPEED) ;
+  //wait_drive () ;
+//turn
+  //set_drive_pid(left, 30, DRIVE_SPEED) ; //make sure about angle and direction
+  //wait_drive () ;
+//rush mid
+  //set_drive_pid(drive, 240, DRIVE_SPEED) ; //ensure distance correct
+
 
   //turns everything off like a sane person
   intake (0) ;
