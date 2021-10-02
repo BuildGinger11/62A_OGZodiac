@@ -89,6 +89,7 @@ auto_2() {
   //mogo_outB(true);
   //block(true);
 //lift 6bar
+  claw (true) ;
   set_lift_position(446, 100);
   pros::delay(750) ;
 //drive forward
@@ -98,6 +99,7 @@ auto_2() {
   pros::delay(100);
   //mogo_inB(true);
   pros::delay(400);
+  claw (false);
 //run intake
   intake(127);
   pros::delay (3000) ;

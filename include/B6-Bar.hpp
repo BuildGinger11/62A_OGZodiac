@@ -7,4 +7,6 @@ int get_lift_vel();
 
 void set_lift_position(int target, int speed);
 
+void claw (bool position) ;
+
 void lift_control(void*);
