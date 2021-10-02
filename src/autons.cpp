@@ -95,7 +95,10 @@ auto_1() //now is tester auton
   //rush time
     set_drive_pid(drive, 60, DRIVE_SPEED/2) ; //check distance & speed
     wait_drive () ;
-  //tactical re
+  //tactical retreat
+    set_drive_pid(drive, -60, DRIVE_SPEED) ; //adjust distance
+    wait_drive () ;
+
 
     //turns everything off like a sane person
     intake (0) ;
@@ -118,12 +121,9 @@ auto_2() {
   set_lift_position(446, 100);
   pros::delay(750) ;
 //drive forward
-  set_drive_pid(drive, -15, DRIVE_SPEED);
+  set_drive_pid(drive, -20, DRIVE_SPEED);
   wait_drive();
-  //block(false);
-  pros::delay(100);
-  //mogo_inB(true);
-  pros::delay(400);
+  pros::delay(700);
   claw (false);
 //run intake
   intake(127);
@@ -171,8 +171,6 @@ auto_3() {
   //turn
     set_drive_pid(turn, -160, DRIVE_SPEED) ;
     wait_drive () ;
-  //set down F4bar
-
   //rush time
     set_drive_pid(drive, 240, DRIVE_SPEED) ; //check distance
   //pick up
