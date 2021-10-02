@@ -118,7 +118,7 @@ auto_2() {
   set_lift_position(446, 100);
   pros::delay(750) ;
 //drive forward
-  set_drive_pid(drive, -10, DRIVE_SPEED);
+  set_drive_pid(drive, -15, DRIVE_SPEED);
   wait_drive();
   //block(false);
   pros::delay(100);
