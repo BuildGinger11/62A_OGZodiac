@@ -60,19 +60,41 @@ two_mogo_constants() {
 // Drive Example
 ///
 void
-auto_1() //dead does nothing
+auto_1() //now is tester auton
 {
-  // flock(true);
-  // set_drive_pid(drive, 50, 127);
-  // for (int i=0; i<1000; i++) {
-  //   //mogo_out(false);
-  //   pros::delay(1);
-  // }
-  // pros::delay(200);
-  // flock(false);
-  // set_drive_pid(drive, -50, 127);
-  // mogo_in(true);
-  // wait_drive();
+  //lift 6bar
+    claw (true) ;
+    set_lift_position(446, 100);
+    pros::delay(750) ;
+  //drive forward
+    set_drive_pid(drive, -10, DRIVE_SPEED);
+    wait_drive();
+    //block(false);
+    claw (false);
+  //run intake
+    intake(127);
+    pros::delay (3000) ;
+    intake (0) ;
+
+  //ALL ABOVE WORK
+
+  //loweer 6bar
+  set_lift_position(200, 100);
+  //drive back
+    set_drive_pid(drive, 10, DRIVE_SPEED);
+    wait_drive () ;
+  //turn
+    set_drive_pid(turn, 160, DRIVE_SPEED) ;
+    wait_drive () ;
+  //set down F4bar
+
+  //rush time
+    set_drive_pid(drive, 60, DRIVE_SPEED/2) ; //check distance
+  //pick up
+
+
+    //turns everything off like a sane person
+    intake (0) ;
 
 }
 
@@ -80,7 +102,7 @@ auto_1() //dead does nothing
 
 
 void
-//god auton
+//god
 auto_2() {
 
   //mogo_outB(true);
@@ -101,25 +123,6 @@ auto_2() {
   intake(127);
   pros::delay (3000) ;
 
-//DRIVE BACK, DROP GOAL, RUSH MID
-//shut off intake
-  //intake (0) ;
-//drop stuff
-  //claw (true) ;
-//drive back
-  //set_drive_pid(drive, 20, DRIVE_SPEED) ;
-  //wait_drive () ;
-//turn
-  //set_drive_pid(left, 30, DRIVE_SPEED) ; //make sure about angle and direction
-  //wait_drive () ;
-//return B6Bar to norm
-  //set_lift_position (0, 100) ;
-//rush mid
-  //set_drive_pid(drive, 240, DRIVE_SPEED) ; //ensure distance correct
-
-//DRIVE BACK, PLACE GOAL ON PLATFORM, RUSH MID
-
-
   //turns everything off like a sane person
   intake (0) ;
 
@@ -128,7 +131,7 @@ auto_2() {
 
 
 void
-auto_3() { //testing stuff here
+auto_3() {//auton right side
   //lift 6bar
     claw (true) ;
     set_lift_position(446, 100);
@@ -145,14 +148,19 @@ auto_3() { //testing stuff here
     intake(127);
     pros::delay (3000) ;
     intake (0) ;
+
+//ALL ABOVE WORK
+
+  //loweer 6bar
+  set_lift_position(200, 100);
   //drive back
     set_drive_pid(drive, 10, DRIVE_SPEED);
     wait_drive () ;
   //turn
-    set_drive_pid(turn, -90, DRIVE_SPEED) ;
+    set_drive_pid(turn, -160, DRIVE_SPEED) ;
     wait_drive () ;
   //set down F4bar
-    
+
   //rush time
     set_drive_pid(drive, 240, DRIVE_SPEED) ; //check distance
   //pick up
