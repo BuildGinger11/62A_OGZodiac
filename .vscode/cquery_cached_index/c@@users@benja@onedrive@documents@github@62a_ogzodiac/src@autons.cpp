@@ -56,9 +56,12 @@ two_mogo_constants() {
 // below are example codes using each type
 
 
+//
 ///
-// Drive Example
+// TESTER AUTON
 ///
+//
+
 void
 auto_1() //now is tester auton
 {
@@ -73,36 +76,39 @@ auto_1() //now is tester auton
     claw (false);
   //run intake
     intake(127);
-    pros::delay (3000) ;
+    pros::delay (2000) ; //check time
     intake (0) ;
-
-  //ALL ABOVE WORK
 
   //loweer 6bar
   set_lift_position(200, 100);
   //drive back
     set_drive_pid(drive, 10, DRIVE_SPEED);
     wait_drive () ;
+
+    //ALL ABOVE WORK
+
   //turn
-    set_drive_pid(turn, 160, DRIVE_SPEED) ;
+    set_drive_pid(turn, 160, DRIVE_SPEED) ; //check angle
     wait_drive () ;
-  //set down F4bar
-
+  //turn on intakes
+    intake (127) ;
   //rush time
-    set_drive_pid(drive, 60, DRIVE_SPEED/2) ; //check distance
-  //pick up
-
+    set_drive_pid(drive, 60, DRIVE_SPEED/2) ; //check distance & speed
+    wait_drive () ;
+  //tactical re
 
     //turns everything off like a sane person
     intake (0) ;
 
 }
 
-
-
+//
+//
+//FOR LEFT SIDE
+//
+//
 
 void
-//god
 auto_2() {
 
   //mogo_outB(true);
@@ -130,8 +136,14 @@ auto_2() {
 }
 
 
+//
+//
+//FOR RIGHT SIDE
+//
+//
+
 void
-auto_3() {//auton right side
+auto_3() {
   //lift 6bar
     claw (true) ;
     set_lift_position(446, 100);
