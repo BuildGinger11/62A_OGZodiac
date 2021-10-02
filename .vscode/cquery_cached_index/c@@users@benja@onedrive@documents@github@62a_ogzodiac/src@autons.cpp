@@ -76,32 +76,27 @@ auto_1() //now is tester auton
     claw (false);
   //run intake
     intake(127);
-    pros::delay (2000) ; //check time
+    pros::delay (3000) ; //check time
     intake (0) ;
 
-  //loweer 6bar
-  set_lift_position(200, 100);
-  //drive back
-    set_drive_pid(drive, 10, DRIVE_SPEED);
-    wait_drive () ;
 
     //ALL ABOVE WORK
-
-  //turn
-    set_drive_pid(turn, 160, DRIVE_SPEED) ; //check angle
+//drive
+    set_drive_pid (drive, 10, DRIVE_SPEED) ;
     wait_drive () ;
-  //turn on intakes
-    intake (127) ;
-  //rush time
-    set_drive_pid(drive, 60, DRIVE_SPEED/2) ; //check distance & speed
+//turn
+    set_drive_pid (turn, 90, DRIVE_SPEED) ;
     wait_drive () ;
-  //tactical retreat
-    set_drive_pid(drive, -60, DRIVE_SPEED) ; //adjust distance
+//drop mogo
+    mogo_out (false) ;
+//drive goal
+    set_drive_pid(drive, 60, DRIVE_SPEED) ;
     wait_drive () ;
-
-
-    //turns everything off like a sane person
-    intake (0) ;
+//pick up goal
+    flock (true) ;
+    mogo_in (true) ;
+//retreat
+    set_drive_pid (drive, -60, DRIVE_SPEED) ;
 
 }
 
@@ -133,6 +128,31 @@ auto_2() {
   intake (0) ;
 
 
+  // // to be tested
+  //
+  //   //loweer 6bar
+  //   set_lift_position(200, 100);
+  //   //drive back
+  //     set_drive_pid(drive, 10, DRIVE_SPEED);
+  //     wait_drive () ;
+  // //turn
+  //   set_drive_pid(turn, 160, DRIVE_SPEED) ; //check angle
+  //   wait_drive () ;
+  // //turn on intakes
+  //   intake (127) ;
+  // //rush time
+  //   set_drive_pid(drive, 60, DRIVE_SPEED/2) ; //check distance & speed
+  //   wait_drive () ;
+  // //tactical retreat
+  //   set_drive_pid(drive, -60, DRIVE_SPEED) ; //adjust distance
+  //   wait_drive () ;
+  //
+  //
+  //   //turns everything off like a sane person
+  //   intake (0) ;
+
+
+
 }
 
 
@@ -160,25 +180,6 @@ auto_3() {
     intake(127);
     pros::delay (3000) ;
     intake (0) ;
-
-//ALL ABOVE WORK
-
-  //loweer 6bar
-  set_lift_position(200, 100);
-  //drive back
-    set_drive_pid(drive, 10, DRIVE_SPEED);
-    wait_drive () ;
-  //turn
-    set_drive_pid(turn, -160, DRIVE_SPEED) ;
-    wait_drive () ;
-  //rush time
-    set_drive_pid(drive, 240, DRIVE_SPEED) ; //check distance
-  //pick up
-
-
-    //turns everything off like a sane person
-    intake (0) ;
-
 }
 
 
