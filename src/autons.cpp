@@ -65,111 +65,90 @@ two_mogo_constants() {
 void
 auto_1() //now is tester auton
 {
-  //lift 6bar
-    claw (true) ;
-    set_lift_position(446, 100);
-    pros::delay(750) ;
-  //drive forward
-    set_drive_pid(drive, -10, DRIVE_SPEED);
-    wait_drive();
-    //block(false);
-    claw (false);
-  //run intake
-    intake(127);
-    pros::delay (3000) ; //check time
-    intake (0) ;
+
+  //testing right side
+
+//lower FMogo
+  mogo_out (true) ;
+//rush
+  set_drive_pid(drive, 40, DRIVE_SPEED) ;
 
 
-    //ALL ABOVE WORK
 
-    set_drive_pid (drive, 10, DRIVE_SPEED) ;
-    wait_drive() ;
-    set_drive_pid(turn, 160, DRIVE_SPEED) ;
-    wait_drive() ;
-    intake (127) ;
-    set_drive_pid (drive, 20, DRIVE_SPEED/2) ;
-    wait_drive() ;
-    set_drive_pid(turn, 20, DRIVE_SPEED/2) ;
-    wait_drive() ;
-    set_drive_pid(drive, 40, DRIVE_SPEED/2) ;
-    wait_drive() ;
-    intake (0) ;
+  // //lift 6bar
+  //   claw (true) ;
+  //   set_lift_position(446, 100);
+  //   pros::delay(750) ;
+  // //drive forward
+  //   set_drive_pid(drive, -20, DRIVE_SPEED);
+  //   wait_drive();
+  //   //block(false);
+  //   claw (false);
+  // //run intake
+  //   intake(127);
+  //   pros::delay (50) ; //check time
+  //   //intake (0) ;
+  //
+  //   set_drive_pid (drive, 15, DRIVE_SPEED) ;
+  //   wait_drive() ;
+  //   set_drive_pid(turn, 140, DRIVE_SPEED) ;
+  //   wait_drive() ;
+  //   //intake (127) ;
+  //   set_drive_pid (drive, 10, DRIVE_SPEED) ;
+  //   wait_drive() ;
+  //   set_drive_pid(turn, 150, DRIVE_SPEED) ;
+  //   wait_drive() ;
+  //   set_drive_pid(drive, 32, DRIVE_SPEED/4) ;
+  //   wait_drive() ;
+  //   set_drive_pid(drive, -35, DRIVE_SPEED) ;
+  //
+  //
+  //   intake (0) ;
 
 
 }
 
 //
 //
-//FOR LEFT SIDE
+//FOR LEFT SIDE (odds)
 //
 //
 
 void
-auto_2() {
-
-  //mogo_outB(true);
-  //block(true);
-//lift 6bar
-  claw (true) ;
-  set_lift_position(446, 100);
-  pros::delay(750) ;
-//drive forward
-  set_drive_pid(drive, -20, DRIVE_SPEED);
-  wait_drive();
-  pros::delay(700);
-  claw (false);
-//run intake
-  intake(127);
-  pros::delay (3000) ;
-
-  //turns everything off like a sane person
-  intake (0) ;
-
-//to be tested below
-
-  // //drive
-  //     set_drive_pid (drive, 10, DRIVE_SPEED) ;
-  //     wait_drive () ;
-  // //turn
-  //     set_drive_pid (turn, 90, DRIVE_SPEED) ;
-  //     wait_drive () ;
-  // //drop mogo
-  //     mogo_out (false) ;
-  // //drive goal
-  //     set_drive_pid(drive, 60, DRIVE_SPEED) ; //check distance
-  //     wait_drive () ;
-  // //pick up goal
-  //     flock (true) ;
-  //     mogo_in (true) ;
-  // //retreat
-  //     set_drive_pid (drive, -60, DRIVE_SPEED) ;
+auto_2() { //ring row and AWP
 
 
+  //lift 6bar
+    claw (true) ;
+    set_lift_position(446, 100);
+    pros::delay(750) ;
+  //drive forward
+    set_drive_pid(drive, -20, DRIVE_SPEED);
+    wait_drive();
+  //block(false);
+    claw (false);
+  //run intake
+    intake(127);
+    pros::delay (50) ; //check time
+  //drive back
+    set_drive_pid (drive, 15, DRIVE_SPEED) ;
+    wait_drive() ;
+  //face toward ring row
+    set_drive_pid(turn, 140, DRIVE_SPEED) ;
+    wait_drive() ;
+  //drive
+    set_drive_pid (drive, 10, DRIVE_SPEED) ;
+    wait_drive() ;
+  //face ring row
+    set_drive_pid(turn, 150, DRIVE_SPEED) ;
+    wait_drive() ;
+  //drive forward and pick up
+    set_drive_pid(drive, 32, DRIVE_SPEED/4) ;
+    wait_drive() ;
+  //retreat
+    set_drive_pid(drive, -35, DRIVE_SPEED) ;
 
-  // // to be tested
-  //
-  //   //loweer 6bar
-  //   set_lift_position(200, 100);
-  //   //drive back
-  //     set_drive_pid(drive, 10, DRIVE_SPEED);
-  //     wait_drive () ;
-  // //turn
-  //   set_drive_pid(turn, 160, DRIVE_SPEED) ; //check angle
-  //   wait_drive () ;
-  // //turn on intakes
-  //   intake (127) ;
-  // //rush time
-  //   set_drive_pid(drive, 60, DRIVE_SPEED/2) ; //check distance & speed
-  //   wait_drive () ;
-  // //tactical retreat
-  //   set_drive_pid(drive, -60, DRIVE_SPEED) ; //adjust distance
-  //   wait_drive () ;
-  //
-  //
-  //   //turns everything off like a sane person
-  //   intake (0) ;
-
-
+    intake (0) ;
 
 }
 

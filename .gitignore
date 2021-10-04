@@ -9,7 +9,7 @@
 *.user
 *.userosscache
 *.sln.docstates
-*.vscode/
+*.vscode\cquery_cached_index\
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
 
