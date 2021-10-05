@@ -69,32 +69,57 @@ auto_1() //now is tester auton
 //testing right side
 
 //lower FMogo
-  mogo_out (true) ; //test
+  set_mogo_position(773, 127) ;
+  flock(true) ;
 //rush
-  set_drive_pid(drive, 40, DRIVE_SPEED) ;
+  set_drive_pid(drive, 40, DRIVE_SPEED) ; //was 45
   wait_drive() ;
 //retreat
+  flock(false) ;
+  pros::delay (500) ;
   mogo_in (false) ; //test
-  set_drive_pid(drive, 30, DRIVE_SPEED) ;
+  set_drive_pid(drive, -22.5, DRIVE_SPEED) ;
 //back lift up
   set_lift_position(446, 100);
   wait_drive() ;
 //turn to reverse face mogo
-  set_drive_pid(turn, 90, DRIVE_SPEED) ; //change to angle from AUTON 2
+  set_drive_pid(turn, -90, DRIVE_SPEED) ; //change to angle from AUTON 2
 //prepare claw
   claw(true) ;
   wait_drive() ;
 //drive into mogo
-  set_drive_pid(drive, 10, DRIVE_SPEED) ;
+  set_drive_pid(drive, -25, DRIVE_SPEED) ;
   wait_drive () ;
 //claw grab
   claw(false) ;
 //drop rings
   intake (127) ;
-//
+//back up
+  set_drive_pid (drive, 15, DRIVE_SPEED) ;
+  wait_drive() ;
+//turn
+  set_drive_pid(turn, 0, DRIVE_SPEED) ;
+  wait_drive() ;
+//drive and collect row
+  set_drive_pid(drive, 35, DRIVE_SPEED/4) ;
+  wait_drive() ;
+//retreat
+  set_drive_pid(drive, -45, DRIVE_SPEED) ;
+  wait_drive () ;
+
 
 
   intake (0) ;
+
+
+//kaito agenda
+//finish intakes
+//add screw to collar
+//add 3 flaps to front intake axle
+  //gear them together
+  //simple bearing and standoff
+  //high enough so coupler gear isn't flat (aka keep in size)
+
 
 
 //AUTON 2 - can be improved
