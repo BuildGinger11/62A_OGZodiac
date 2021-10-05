@@ -66,14 +66,38 @@ void
 auto_1() //now is tester auton
 {
 
-  //testing right side
+//testing right side
 
 //lower FMogo
-  mogo_out (true) ;
+  mogo_out (true) ; //test
 //rush
   set_drive_pid(drive, 40, DRIVE_SPEED) ;
+  wait_drive() ;
+//retreat
+  mogo_in (false) ; //test
+  set_drive_pid(drive, 30, DRIVE_SPEED) ;
+//back lift up
+  set_lift_position(446, 100);
+  wait_drive() ;
+//turn to reverse face mogo
+  set_drive_pid(turn, 90, DRIVE_SPEED) ; //change to angle from AUTON 2
+//prepare claw
+  claw(true) ;
+  wait_drive() ;
+//drive into mogo
+  set_drive_pid(drive, 10, DRIVE_SPEED) ;
+  wait_drive () ;
+//claw grab
+  claw(false) ;
+//drop rings
+  intake (127) ;
+//
 
 
+  intake (0) ;
+
+
+//AUTON 2 - can be improved
 
   // //lift 6bar
   //   claw (true) ;
