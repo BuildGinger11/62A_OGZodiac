@@ -200,12 +200,13 @@ mogo_control(void*)
   if (mogo_up)
   {
     flock(false);
-    pros::delay(100);
+    pros::delay(300);
     mogo_in();
   }
   else if (!mogo_up)
   {
     mogo_out();
+    pros::delay (500) ;
     flock(true);
   }
     pros::delay(20);
