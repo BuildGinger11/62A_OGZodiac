@@ -80,7 +80,8 @@ auto_1() //now is tester auton
   flock(false) ;
   pros::delay (500) ;
   mogo_in (false) ; //test
-  set_drive_pid(drive, -18.5, DRIVE_SPEED) ; //was 18.5
+  set_drive_pid(drive, -19.5, DRIVE_SPEED) ; //was 18.5
+
 //back lift up
   set_lift_position(446, 100);
   wait_drive() ;
