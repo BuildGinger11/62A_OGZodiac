@@ -81,7 +81,7 @@ auto_1() //now is tester auton
   pros::delay (500) ;
   //mogo_in (false) ; //test
   set_mogo_position (-780, 127) ;
-  set_drive_pid(drive, -17, DRIVE_SPEED) ; //was 19
+  set_drive_pid(drive, -18.5, DRIVE_SPEED) ; //was 19
 //back lift up
   set_lift_position(446, 100);
   wait_drive() ;
@@ -106,7 +106,7 @@ auto_1() //now is tester auton
   set_drive_pid(turn, 0, DRIVE_SPEED) ;
   wait_drive() ;
 //drive and collect row
-  set_drive_pid(drive, 35, DRIVE_SPEED/6) ;
+  set_drive_pid(drive, 35, DRIVE_SPEED/5) ;
   wait_drive() ;
 //retreat
   set_drive_pid(drive, -45, DRIVE_SPEED) ;
@@ -117,13 +117,6 @@ auto_1() //now is tester auton
   intake (0) ;
 
 
-//kaito agenda
-//finish intakes
-//add screw to collar
-//add 3 flaps to front intake axle
-  //gear them together
-  //simple bearing and standoff
-  //high enough so coupler gear isn't flat (aka keep in size)
 
 
 

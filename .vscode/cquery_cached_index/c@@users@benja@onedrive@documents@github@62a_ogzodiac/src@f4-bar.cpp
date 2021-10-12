@@ -19,12 +19,12 @@ pros::Motor mogo(6, MOTOR_GEARSET_36, false, MOTOR_ENCODER_DEGREES);
 pros::ADIDigitalOut FLock(8);
 
 //touch sensor
-pros::ADIDigitalOut touchSense (5) ;
-
-bool touch ()
-{
-  return touchSense () ; //need figure out how to use
-}
+// pros::ADIDigitalOut touchSense (5) ;
+//
+// bool touch ()
+// {
+//   return touchSense () ; //need figure out how to use
+// }
 
 
 void set_mogo(int input)
@@ -214,12 +214,18 @@ mogo_control(void*)
     flock(false);
     pros::delay(300);
     mogo_in();
+
+
+    printf ("up") ;
   }
   else if (!mogo_up)
   {
     mogo_out();
     pros::delay (500) ;
     flock(true);
+
+
+    printf("down") ;
   }
     pros::delay(20);
   }
