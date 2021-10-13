@@ -81,7 +81,7 @@ auto_1() //now is tester auton
   pros::delay (500) ;
   //mogo_in (false) ; //test
   set_mogo_position (-780, 127) ;
-  set_drive_pid(drive, -18.5, DRIVE_SPEED) ; //was 19
+  set_drive_pid(drive, -20, DRIVE_SPEED) ; //was 19
 //back lift up
   set_lift_position(446, 100);
   wait_drive() ;
@@ -100,7 +100,7 @@ auto_1() //now is tester auton
 //drop rings
   intake (115) ;
 //back up
-  set_drive_pid (drive, 8, DRIVE_SPEED) ;
+  set_drive_pid (drive, 10, DRIVE_SPEED) ;
   wait_drive() ;
 //turn
   set_drive_pid(turn, 0, DRIVE_SPEED) ;

@@ -19,12 +19,14 @@ pros::Motor mogo(6, MOTOR_GEARSET_36, false, MOTOR_ENCODER_DEGREES);
 pros::ADIDigitalOut FLock(8);
 
 //touch sensor
-// pros::ADIDigitalOut touchSense (5) ;
-//
-// bool touch ()
-// {
-//   return touchSense () ; //need figure out how to use
-// }
+pros::ADIDigitalIn touchSense (5) ;
+
+bool touch ()
+{
+  if (touchSense.get_value () == 1)
+    return true ;
+  return false ;
+}
 
 
 void set_mogo(int input)
@@ -179,31 +181,31 @@ mogo_control(void*)
   while(true)
   {
   // Toggle for mogo
-  // if (master.get_digital(DIGITAL_L2) && mogo_lock==0)
-  // {
-  //   if (is_at_neut)
-  //     mogo_up = false;
-  //   else
-  //     mogo_up = !mogo_up;
-  //
-  //   is_at_neut = false;
-  //   mogo_lock = 1;
-  // }
-  // // If mogo is held while the mogo lift is out, bring the mogo lift to neut position
-  // else if (master.get_digital(DIGITAL_L2))
-  // {
-  //   if (mogo_up) {
-  //     controller_mogo_timer+=DELAY_TIME;
-  //     if (controller_mogo_timer>=300)
-  //       is_at_neut = true;
-  //   }
-  // }
-  // // Reset when button is let go
-  // else if (!master.get_digital(DIGITAL_L2))
-  // {
-  //   mogo_lock  = 0;
-  //   controller_mogo_timer = 0;
-  // }
+  if (master.get_digital(DIGITAL_L2) && mogo_lock==0)
+  {
+    if (is_at_neut)
+      mogo_up = false;
+    else
+      mogo_up = !mogo_up;
+
+    is_at_neut = false;
+    mogo_lock = 1;
+  }
+  // If mogo is held while the mogo lift is out, bring the mogo lift to neut position
+  else if (master.get_digital(DIGITAL_L2))
+  {
+    if (mogo_up) {
+      controller_mogo_timer+=DELAY_TIME;
+      if (controller_mogo_timer>=300)
+        is_at_neut = true;
+    }
+  }
+  // Reset when button is let go
+  else if (!master.get_digital(DIGITAL_L2))
+  {
+    mogo_lock  = 0;
+    controller_mogo_timer = 0;
+  }
 
 
 
@@ -215,6 +217,8 @@ mogo_control(void*)
     pros::delay(300);
     mogo_in();
 
+    if (touch())
+      printf ("touch") ;
 
     printf ("up") ;
   }
@@ -224,6 +228,8 @@ mogo_control(void*)
     pros::delay (500) ;
     flock(true);
 
+    if (touch ())
+      printf ("not touch") ;
 
     printf("down") ;
   }
