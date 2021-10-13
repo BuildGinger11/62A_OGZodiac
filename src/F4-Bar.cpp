@@ -103,7 +103,7 @@ mogo_in (bool hold)
  {
   if (get_mogo()<200)
   {
-    if (get_mogo_vel()==0 || get_mogo()<200)
+    if (get_mogo_vel()==0 || get_mogo()<200 || touch())
      {
       is_up = true;
       set_mogo(0);
