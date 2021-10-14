@@ -5,13 +5,13 @@ const float MOGO_KP = 0.5;
 //const int DELAY_TIME = 10;
 // Driver Control Parameters
 bool mogo_up = true;
-bool is_at_neut = false;
+//bool is_at_neut = false;
 int mogo_lock   = 0;
 int controller_mogo_timer = 0;
 int mogo_out_timer = 0;
 
 bool is_up = false;
-bool is_neut = false;
+//bool is_neut = false;
 bool is_out = false;
 
 
@@ -99,11 +99,13 @@ bool timeout(int target, int vel, int current)
 
 // Mogo In
 void
-mogo_in (bool hold)
+mogo_in ()
  {
+   flock(false);
+   pros::delay(300);
   if (get_mogo()<200)
   {
-    if (get_mogo_vel()==0 || get_mogo()<200 || touch())
+    if (get_mogo_vel()==0 || touch()) // || get_mogo()<200
      {
       is_up = true;
       set_mogo(0);
@@ -118,20 +120,20 @@ mogo_in (bool hold)
     is_up = false;
     set_mogo(-127);
   }
-  if (hold)
-  {
-    mogo_up = true;
-    is_at_neut = false;
-    pros::delay(DELAY_TIME);
-    mogo_in(!is_up);
-  }
+  // if (hold)
+  // {
+  //   mogo_up = true;
+  //   is_at_neut = false;
+  //   pros::delay(DELAY_TIME);
+  //   mogo_in(!is_up);
+  //}
 }
 
 // Mogo Neut
 
 // Mogo Out
 void
-mogo_out(bool hold)
+mogo_out()
  {
   if (get_mogo() > (MOGO_OUT-100))
   {
@@ -161,12 +163,12 @@ mogo_out(bool hold)
     mogo_out_timer = 0;
     is_out = false;
   }
-  if (hold) {
-    mogo_up = false;
-    is_at_neut = false;
-    pros::delay(DELAY_TIME);
-    mogo_out(!is_out);
-  }
+  // if (hold) {
+  //   mogo_up = false;
+  //   is_at_neut = false;
+  //   pros::delay(DELAY_TIME);
+  //   mogo_out(!is_out);
+  //}
 }
 
 
@@ -181,58 +183,60 @@ mogo_control(void*)
   while(true)
   {
   // Toggle for mogo
-  if (master.get_digital(DIGITAL_L2) && mogo_lock==0)
-  {
-    if (is_at_neut)
-      mogo_up = false;
-    else
+    if (master.get_digital(DIGITAL_L2) && mogo_lock==0)
+    {
+    // if (is_at_neut)
+    //   mogo_up = false;
+    // else
       mogo_up = !mogo_up;
+    //
+    // is_at_neut = false;
+      mogo_lock = 1;
 
-    is_at_neut = false;
-    mogo_lock = 1;
-  }
-  // If mogo is held while the mogo lift is out, bring the mogo lift to neut position
-  else if (master.get_digital(DIGITAL_L2))
-  {
-    if (mogo_up) {
-      controller_mogo_timer+=DELAY_TIME;
-      if (controller_mogo_timer>=300)
-        is_at_neut = true;
+
     }
-  }
+  // If mogo is held while the mogo lift is out, bring the mogo lift to neut position
+  // else if (master.get_digital(DIGITAL_L2))
+  // {
+  //   if (mogo_up) {
+  //     controller_mogo_timer+=DELAY_TIME;
+  //     if (controller_mogo_timer>=300)
+  //       is_at_neut = true;
+  //   }
+  // }
   // Reset when button is let go
-  else if (!master.get_digital(DIGITAL_L2))
-  {
-    mogo_lock  = 0;
-    controller_mogo_timer = 0;
-  }
+    else if (!master.get_digital(DIGITAL_L2))
+    {
+      mogo_lock  = 0;
+      controller_mogo_timer = 0;
+    }
 
 
 
 
   // Bring mogo to position based on is_at_neut and mogo_up
-  if (mogo_up)
-  {
-    flock(false);
-    pros::delay(300);
-    mogo_in();
+    if (mogo_up)
+    {
+      flock(false);
+      pros::delay(300);
+      mogo_in();
 
-    if (touch())
-      printf ("touch") ;
+    // if (touch())
+    //   printf ("touch") ;
 
-    printf ("up") ;
-  }
-  else if (!mogo_up)
-  {
-    mogo_out();
-    pros::delay (500) ;
-    flock(true);
+      printf ("up") ;
+    }
+    else if (!mogo_up)
+    {
+      mogo_out();
+      pros::delay (500) ;
+      flock(true);
 
-    if (touch ())
-      printf ("not touch") ;
+    // if (touch ())
+    //   printf ("not touch") ;
 
-    printf("down") ;
-  }
+      printf("down") ;
+    }
     pros::delay(20);
   }
 }
