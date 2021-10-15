@@ -8,7 +8,7 @@ const int lift_heights[num_of_pos] = {0, 0, 446, 321, 446}; // Lift Positions
 // Driver Control Variables
 int up_lock = 0;
 int down_lock = 0;
-int lift_state = 3;
+int lift_state = 4; //<-- when switch to drive mode, start here
 
 
 pros::Motor lift(10, MOTOR_GEARSET_36, false, MOTOR_ENCODER_DEGREES);
@@ -83,6 +83,12 @@ lift_control(void*) {
     pros::delay (150) ;
     sixlock (false) ;
   }
+
+  //special position for intaking rings
+  else if (master.get_digital(DIGITAL_B)) {
+    set_lift_position(400, 100) ;
+  }
+
   else
   {
     //deactuate pneumatic
