@@ -1,15 +1,17 @@
 #include "main.h"
 
 
-const int num_of_pos = 5; // Number of lift positions
-const int lift_heights[num_of_pos] = {0, 0, 446, 321, 446}; // Lift Positions
+const int num_of_pos = 6; // Number of lift positions // was 5
+const int lift_heights[num_of_pos] = {0, 0, 500, 321, 500, 190}; // Lift Positions
 //                          {pick_up/ready , compact/drive, lift_above_platform, place_on_platform, max_height}
+const int b_height = 190 ;
 
 // Driver Control Variables
 int up_lock = 0;
 int down_lock = 0;
 int lift_state = 4; //<-- when switch to drive mode, start here
 
+bool b_lock = false ;
 
 pros::Motor lift(10, MOTOR_GEARSET_36, false, MOTOR_ENCODER_DEGREES);
 
@@ -54,9 +56,9 @@ lift_control(void*) {
   // move lift value up
   while(1)
   {
-  if (master.get_digital(DIGITAL_R1) && up_lock==0) {
+  if (master.get_digital(DIGITAL_R1) && up_lock==0 && b_lock == 0) {
     // If lift value is at max, bring it down to 0
-    if(lift_state==num_of_pos-1)
+    if(lift_state==num_of_pos-2 || lift_state==num_of_pos - 1)
       lift_state = 0;
     // Otherwise, bring the lift value up
     else
@@ -65,37 +67,45 @@ lift_control(void*) {
 
     up_lock = 1;
   }
-  else if (!master.get_digital(DIGITAL_R1)) {
+  //special position for intaking rings
+  else if (master.get_digital(DIGITAL_B)) {
+    //printf("b \n") ;
+    if (b_lock)
+      lift_state = num_of_pos - 1 ;
+    else
+      lift_state = num_of_pos - 2 ;
+
+    b_lock = !b_lock ;
+
+
+
+  }
+  else if (!master.get_digital(DIGITAL_R1) && !master.get_digital(DIGITAL_B)) {
     up_lock = 0;
 
 
   //actual motor moving stuff
-  if(lift_state == 0 || lift_state == 4)
-  {
-    //actuate pneumatic
-    sixlock(false);
-    //move motor to pos
-    set_lift_position(lift_heights[lift_state], 100);
-  }
-  else if (lift_state == 3)
-  {
-    set_lift_position(lift_heights[lift_state], 100) ;
-    pros::delay (150) ;
-    sixlock (false) ;
-  }
+    if(lift_state == 0 || lift_state == 4)
+    {
+      //actuate pneumatic
+      sixlock(false);
+      //move motor to pos
+      set_lift_position(lift_heights[lift_state], 100);
+    }
+    else if (lift_state == 3)
+    {
+      set_lift_position(lift_heights[lift_state], 100) ;
+      pros::delay (150) ;
+      sixlock (false) ;
+    }
 
-  //special position for intaking rings
-  else if (master.get_digital(DIGITAL_B)) {
-    set_lift_position(400, 100) ;
-  }
-
-  else
-  {
-    //deactuate pneumatic
-    sixlock(true);
-    //move motor to pos
-    set_lift_position(lift_heights[lift_state], 100);
-  }
+    else
+    {
+      //deactuate pneumatic
+      sixlock(true);
+      //move motor to pos
+      set_lift_position(lift_heights[lift_state], 100);
+    }
   }
 
 
@@ -115,6 +125,7 @@ lift_control(void*) {
     claw(false) ;
     pros::delay (500) ;
   }
+
   pros::delay (20) ;
 }
 }

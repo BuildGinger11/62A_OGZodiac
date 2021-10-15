@@ -143,6 +143,9 @@ mogo_control(void*)
     // if (is_at_neut)
     //   mogo_up = false;
     // else
+    printf("f1 \n") ;
+
+
     flock(false);
     pros::delay(300);
     mogo_in();
@@ -157,6 +160,8 @@ mogo_control(void*)
     // if (is_at_neut)
     //   mogo_up = false;
     // else
+    printf("f2 \n") ;
+
     mogo_out();
     pros::delay (600) ;
     //flock(true);
