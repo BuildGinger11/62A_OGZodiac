@@ -1,6 +1,6 @@
 #include "main.h"
 
-pros::Motor Intake(7);
+pros::Motor Intake(5);
 pros::Motor Conveyor(21);
 
 void intake(int power)

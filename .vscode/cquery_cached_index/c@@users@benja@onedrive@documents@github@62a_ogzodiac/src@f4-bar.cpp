@@ -119,6 +119,11 @@ mogo_out()
     mogo_out_timer = 0;
     is_out = false;
   }
+
+//test
+  pros::delay(500) ;
+  flock(true) ;
+
 }
 
 
@@ -133,7 +138,7 @@ mogo_control(void*)
   while(true)
   {
   // Toggle for mogo
-    if (master.get_digital(DIGITAL_L2) && mogo_lock==0)
+    if (master.get_digital(DIGITAL_R2) && mogo_lock==0)
     {
     // if (is_at_neut)
     //   mogo_up = false;
@@ -143,21 +148,21 @@ mogo_control(void*)
     mogo_in();
     //
     // is_at_neut = false;
-      mogo_lock = 1;
+    mogo_lock = 1;
 
 
     }
-    if (master.get_digital(DIGITAL_L2) && mogo_lock==1)
+    if (master.get_digital(DIGITAL_R2) && mogo_lock==1)
     {
     // if (is_at_neut)
     //   mogo_up = false;
     // else
     mogo_out();
-    pros::delay (500) ;
-    flock(true);
+    pros::delay (600) ;
+    //flock(true);
     //
     // is_at_neut = false;
-      mogo_lock = 0;
+    mogo_lock = 0;
 
 
     }

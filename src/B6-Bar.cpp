@@ -94,7 +94,7 @@ lift_control(void*) {
 
 
   // activate MogoClaw
-  if (master.get_digital(DIGITAL_R2) && claw_state == 0)
+  if (master.get_digital(DIGITAL_L2) && claw_state == 0)
   {
     //activate claw
     printf("open \n");
@@ -102,7 +102,7 @@ lift_control(void*) {
     claw(true) ;
     pros::delay (500) ;
   }
-  else if (master.get_digital(DIGITAL_R2) && claw_state == 1)
+  else if (master.get_digital(DIGITAL_L2) && claw_state == 1)
   {
     //deactivate claw
     claw_state = 0 ;

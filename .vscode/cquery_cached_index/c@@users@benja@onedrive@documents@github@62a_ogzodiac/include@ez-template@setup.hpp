@@ -52,6 +52,11 @@ const bool TANK_CONTROL = false;
 const bool TANK_CONTROL = true;
 #define LEFT_JOYSTICK  pros::E_CONTROLLER_ANALOG_LEFT_Y
 #define RIGHT_JOYSTICK pros::E_CONTROLLER_ANALOG_RIGHT_Y
+
+//#define all other buttons and stuff
+
+
+
 //*/
 
 // Do you want a button to toggle between arcade and tank?
