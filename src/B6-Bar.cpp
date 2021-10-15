@@ -2,16 +2,16 @@
 
 
 const int num_of_pos = 6; // Number of lift positions // was 5
-const int lift_heights[num_of_pos] = {0, 0, 500, 321, 500, 190}; // Lift Positions
+const int lift_heights[num_of_pos] = {0, 0, 575, 321, 575, 140}; // Lift Positions
 //                          {pick_up/ready , compact/drive, lift_above_platform, place_on_platform, max_height}
-const int b_height = 190 ;
 
 // Driver Control Variables
 int up_lock = 0;
 int down_lock = 0;
-int lift_state = 4; //<-- when switch to drive mode, start here
+int lift_state = 5; //<-- when switch to drive mode, start here
 
-bool b_lock = false ;
+int b_press = 0 ;
+bool b_lock = true ;
 
 pros::Motor lift(10, MOTOR_GEARSET_36, false, MOTOR_ENCODER_DEGREES);
 
@@ -34,6 +34,14 @@ void claw (bool position)
   Claw.set_value (position) ;
 }
 
+pros::ADIDigitalIn limiter (4) ;
+
+bool limit_switch ()
+{
+  if (limiter.get_value () == 0)
+    return false ;
+  return true ;
+}
 
 void set_lift(int input)  { lift = input; }
 
@@ -56,9 +64,15 @@ lift_control(void*) {
   // move lift value up
   while(1)
   {
-  if (master.get_digital(DIGITAL_R1) && up_lock==0 && b_lock == 0) {
+  if (master.get_digital(DIGITAL_R1) && up_lock==0) {
+    printf("R1") ;
     // If lift value is at max, bring it down to 0
-    if(lift_state==num_of_pos-2 || lift_state==num_of_pos - 1)
+    if(!b_lock)
+    {
+      lift_state = num_of_pos - 2;
+      b_lock = !b_lock ;
+    }
+    else if(lift_state==num_of_pos-2 || lift_state==num_of_pos - 1)
       lift_state = 0;
     // Otherwise, bring the lift value up
     else
@@ -68,20 +82,22 @@ lift_control(void*) {
     up_lock = 1;
   }
   //special position for intaking rings
-  else if (master.get_digital(DIGITAL_B)) {
-    //printf("b \n") ;
+  else if (master.get_digital(DIGITAL_B) && b_press == 0) {
+    printf("b \n") ;
     if (b_lock)
       lift_state = num_of_pos - 1 ;
-    else
+    else if (!b_lock)
       lift_state = num_of_pos - 2 ;
 
     b_lock = !b_lock ;
+    b_press ++ ;
 
 
 
   }
   else if (!master.get_digital(DIGITAL_R1) && !master.get_digital(DIGITAL_B)) {
     up_lock = 0;
+    b_press = 0 ;
 
 
   //actual motor moving stuff

@@ -1,17 +1,17 @@
 #include "main.h"
 
-const int DRIVE_SPEED = 110; // This is 110/127 (around 87% of max speed).  We don't suggest making this 127.
-                             // If this is 127 and the robot tries ot heading correct, it's only correcting by
-                             // making one side slower.  When this is 87%, it's correcting by making one side
-                             // faster and one side slower, giving better heading correction.
+const int DRIVE_SPEED = 110; //  This is 110/127 (around 87% of max speed).  We don't suggest making this 127.
+                             //  If this is 127 and the robot tries ot heading correct, it's only correcting by
+                             //  making one side slower.  When this is 87%, it's correcting by making one side
+                             //  faster and one side slower, giving better heading correction.
 const int TURN_SPEED  = 90;
 const int SWING_SPEED = 90;
 
-///
-// Constants
-///
+// /
+//  Constants
+// /
 
-// Reset all constants to default (what's in setup.hpp is default)
+//  Reset all constants to default (what's in setup.hpp is default)
 void
 reset_constants() {
   reset_slew_min_power();
@@ -23,8 +23,8 @@ reset_constants() {
   reset_swing_constants();
 }
 
-// Functions to change constants
-// (if the robot has different weight to it, sometimes we need to change constants)
+//  Functions to change constants
+//  (if the robot has different weight to it, sometimes we need to change constants)
 /*
 void
 one_mogo_constants() {
@@ -51,64 +51,75 @@ two_mogo_constants() {
 
 
 
-// All drive movements use the "set_drive_pid" function
-// the first parameter is the type of motion (drive, turn, r_swing, l_swing)
-// below are example codes using each type
+//  All drive movements use the "set_drive_pid" function
+//  the first parameter is the type of motion (drive, turn, r_swing, l_swing)
+//  below are example codes using each type
 
 
 //
-///
-// TESTER AUTON
-///
+// /
+//  TESTER AUTON
+// /
 //
+int timer = 0;
+
+
+
+
+
 
 void
-auto_1() //now is tester auton
+auto_1() // now is tester auton
 {
 
-//testing left side
+// testing left side
 
-//lower FMogo
+// lower FMogo
   set_mogo_position(780, 127) ;
   flock(true) ;
-//rush
+// rush
   set_drive_brake(MOTOR_BRAKE_COAST);
-  set_drive_pid(drive, 38, DRIVE_SPEED) ; //was 40
+  set_drive_pid(drive, 38, DRIVE_SPEED/1.5) ; // was 40
   wait_drive() ;
   set_drive_brake(MOTOR_BRAKE_BRAKE);
-//retreat
+// retreat
   flock(false) ;
   pros::delay (500) ;
-  mogo_in () ; //test
-  //set_mogo_position (-780, 127) ;
-  set_drive_pid(drive, -20, DRIVE_SPEED) ; //was 19
-//back lift up
+  mogo_in () ; // test
+  // set_mogo_position (-780, 127) ;
+  set_drive_pid(drive, -23, DRIVE_SPEED) ; // was 19
+// back lift up
   set_lift_position(446, 100);
   wait_drive() ;
-//set fmogo motor to 0
-  //set_mogo(0) ;
-//prepare claw
+// set fmogo motor to 0
+  // set_mogo(0) ;
+// prepare claw
   claw(true) ;
-//turn to reverse face mogo
-  set_drive_pid(turn, -90, DRIVE_SPEED) ; //change to angle from AUTON 2
+// turn to reverse face mogo
+  set_drive_pid(turn, -95, DRIVE_SPEED) ; // change to angle from AUTON 2
   wait_drive() ;
-//drive into mogo
-  set_drive_pid(drive, -24, DRIVE_SPEED) ;
-  wait_drive () ;
-//claw grab
+// drive into mogo
+  set_drive_pid(drive, -25, DRIVE_SPEED) ;
+  while (!limit_switch() || timer == 300) {
+    timer++;
+    pros::delay(10);}
+
+// claw grab
   claw(false) ;
-//drop rings
+  pros::delay (500) ;
+
+// drop rings
   intake (115) ;
-//back up
+// back up
   set_drive_pid (drive, 10, DRIVE_SPEED) ;
   wait_drive() ;
-//turn
-  set_drive_pid(turn, 0, DRIVE_SPEED) ;
+// turn
+  set_drive_pid(turn, 10, DRIVE_SPEED) ;
   wait_drive() ;
-//drive and collect row
+// drive and collect row
   set_drive_pid(drive, 35, DRIVE_SPEED/5) ;
   wait_drive() ;
-//retreat
+// retreat
   set_drive_pid(drive, -45, DRIVE_SPEED) ;
   wait_drive () ;
 
@@ -120,79 +131,79 @@ auto_1() //now is tester auton
 
 
 
-//AUTON 2 - can be improved
+// AUTON 2 - can be improved
 
-  // //lift 6bar
-  //   claw (true) ;
-  //   set_lift_position(446, 100);
-  //   pros::delay(750) ;
-  // //drive forward
-  //   set_drive_pid(drive, -20, DRIVE_SPEED);
-  //   wait_drive();
-  //   //block(false);
-  //   claw (false);
-  // //run intake
-  //   intake(127);
-  //   pros::delay (50) ; //check time
-  //   //intake (0) ;
+  //  // lift 6bar
+  //    claw (true) ;
+  //    set_lift_position(446, 100);
+  //    pros::delay(750) ;
+  //  // drive forward
+  //    set_drive_pid(drive, -20, DRIVE_SPEED);
+  //    wait_drive();
+  //    // block(false);
+  //    claw (false);
+  //  // run intake
+  //    intake(127);
+  //    pros::delay (50) ; // check time
+  //    // intake (0) ;
   //
-  //   set_drive_pid (drive, 15, DRIVE_SPEED) ;
-  //   wait_drive() ;
-  //   set_drive_pid(turn, 140, DRIVE_SPEED) ;
-  //   wait_drive() ;
-  //   //intake (127) ;
-  //   set_drive_pid (drive, 10, DRIVE_SPEED) ;
-  //   wait_drive() ;
-  //   set_drive_pid(turn, 150, DRIVE_SPEED) ;
-  //   wait_drive() ;
-  //   set_drive_pid(drive, 32, DRIVE_SPEED/4) ;
-  //   wait_drive() ;
-  //   set_drive_pid(drive, -35, DRIVE_SPEED) ;
+  //    set_drive_pid (drive, 15, DRIVE_SPEED) ;
+  //    wait_drive() ;
+  //    set_drive_pid(turn, 140, DRIVE_SPEED) ;
+  //    wait_drive() ;
+  //    // intake (127) ;
+  //    set_drive_pid (drive, 10, DRIVE_SPEED) ;
+  //    wait_drive() ;
+  //    set_drive_pid(turn, 150, DRIVE_SPEED) ;
+  //    wait_drive() ;
+  //    set_drive_pid(drive, 32, DRIVE_SPEED/4) ;
+  //    wait_drive() ;
+  //    set_drive_pid(drive, -35, DRIVE_SPEED) ;
   //
   //
-  //   intake (0) ;
+  //    intake (0) ;
 
 
 }
 
 //
 //
-//FOR LEFT SIDE (odds)
+// FOR LEFT SIDE (odds)
 //
 //
 
 void
-auto_2() { //ring row and AWP
+auto_2() { // ring row and AWP
 
 
-  //lift 6bar
+  // lift 6bar
     claw (true) ;
     set_lift_position(446, 100);
     pros::delay(750) ;
-  //drive forward
+  // drive forward
     set_drive_pid(drive, -20, DRIVE_SPEED);
     wait_drive();
-  //block(false);
+  // block(false);
     claw (false);
-  //run intake
+  // run intake
     intake(127);
-    pros::delay (50) ; //check time
-  //drive back
+    pros::delay (50) ; // check time
+  // drive back
     set_drive_pid (drive, 15, DRIVE_SPEED) ;
     wait_drive() ;
-  //face toward ring row
+  // face toward ring row
     set_drive_pid(turn, 140, DRIVE_SPEED) ;
     wait_drive() ;
-  //drive
+  // drive
     set_drive_pid (drive, 10, DRIVE_SPEED) ;
     wait_drive() ;
-  //face ring row
+  // face ring row
     set_drive_pid(turn, 150, DRIVE_SPEED) ;
     wait_drive() ;
-  //drive forward and pick up
+  // drive forward and pick up
     set_drive_pid(drive, 32, DRIVE_SPEED/4) ;
     wait_drive() ;
-  //retreat
+  // retreat
     set_drive_pid(drive, -35, DRIVE_SPEED) ;
 
     intake (0) ;
@@ -202,25 +213,25 @@ auto_2() { //ring row and AWP
 
 //
 //
-//FOR RIGHT SIDE
+// FOR RIGHT SIDE
 //
 //
 
 void
 auto_3() {
-  //lift 6bar
+  // lift 6bar
     claw (true) ;
     set_lift_position(446, 100);
     pros::delay(750) ;
-  //drive forward
+  // drive forward
     set_drive_pid(drive, -10, DRIVE_SPEED);
     wait_drive();
-    //block(false);
+    // block(false);
     pros::delay(100);
-    //mogo_inB(true);
+    // mogo_inB(true);
     pros::delay(400);
     claw (false);
-  //run intake
+  // run intake
     intake(127);
     pros::delay (3000) ;
     intake (0) ;
@@ -228,51 +239,51 @@ auto_3() {
 
 
 
-///
-// Wait Until and Changing Max Speed
-///
+// /
+//  Wait Until and Changing Max Speed
+// /
 void
 auto_4() {
 
-  //lower FMogo
+  // lower FMogo
     set_mogo_position(780, 127) ;
     flock(true) ;
-  //rush
+  // rush
     set_drive_brake(MOTOR_BRAKE_COAST);
-    set_drive_pid(drive, 37, DRIVE_SPEED) ; //was 40
+    set_drive_pid(drive, 37, DRIVE_SPEED) ; // was 40
     wait_drive() ;
     set_drive_brake(MOTOR_BRAKE_BRAKE);
-  //retreat
+  // retreat
     flock(false) ;
     pros::delay (500) ;
-    mogo_in () ; //test
-    set_drive_pid(drive, -19.5, DRIVE_SPEED) ; //was 18.5
+    mogo_in () ; // test
+    set_drive_pid(drive, -19.5, DRIVE_SPEED) ; // was 18.5
 
-  //back lift up
+  // back lift up
     set_lift_position(446, 100);
     wait_drive() ;
-  //prepare claw
+  // prepare claw
     claw(true) ;
-  //turn to reverse face mogo
-    set_drive_pid(turn, -90, DRIVE_SPEED) ; //change to angle from AUTON 2
+  // turn to reverse face mogo
+    set_drive_pid(turn, -90, DRIVE_SPEED) ; // change to angle from AUTON 2
     wait_drive() ;
-  //drive into mogo
+  // drive into mogo
     set_drive_pid(drive, -15, DRIVE_SPEED) ;
     wait_drive () ;
-  //claw grab
+  // claw grab
     claw(false) ;
-  //drop rings
+  // drop rings
     intake (127) ;
-  //back up
+  // back up
     set_drive_pid (drive, 8, DRIVE_SPEED) ;
     wait_drive() ;
-  //turn
+  // turn
     set_drive_pid(turn, 0, DRIVE_SPEED) ;
     wait_drive() ;
-  //drive and collect row
+  // drive and collect row
     set_drive_pid(drive, 35, DRIVE_SPEED/4) ;
     wait_drive() ;
-  //retreat
+  // retreat
     set_drive_pid(drive, -45, DRIVE_SPEED) ;
     wait_drive () ;
 
@@ -283,13 +294,13 @@ auto_4() {
 
 
 
-///
-// Swing Example
-///
+// /
+//  Swing Example
+// /
 void
 auto_5() {
-  // The second parameter is target degrees
-  // The third parameter is speed of the moving side of the drive
+  //  The second parameter is target degrees
+  //  The third parameter is speed of the moving side of the drive
 
   set_drive_pid(l_swing, 45, SWING_SPEED);
   wait_drive();
@@ -303,9 +314,9 @@ auto_5() {
 
 
 
-///
-// Auto that tests everything
-///
+// /
+//  Auto that tests everything
+// /
 void
 test_auton() {
   set_drive_pid(drive, 24, DRIVE_SPEED, true);
@@ -329,13 +340,13 @@ test_auton() {
 void
 auto_6()
   {
-  //mogo_outB(true);
-  //block(true);
+  // mogo_outB(true);
+  // block(true);
   set_drive_pid(drive, 10, DRIVE_SPEED);
   wait_drive();
-  //block(false);
+  // block(false);
   pros::delay(100);
-  //mogo_inB(true);
+  // mogo_inB(true);
   pros::delay(400);
   intake(127);
 

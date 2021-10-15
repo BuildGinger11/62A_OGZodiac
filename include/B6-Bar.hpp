@@ -10,3 +10,5 @@ void set_lift_position(int target, int speed);
 void claw (bool position) ;
 
 void lift_control(void*);
+
+bool limit_switch () ;
