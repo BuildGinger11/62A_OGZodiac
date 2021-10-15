@@ -79,7 +79,7 @@ auto_1() //now is tester auton
 //retreat
   flock(false) ;
   pros::delay (500) ;
-  mogo_in (false) ; //test
+  mogo_in () ; //test
   //set_mogo_position (-780, 127) ;
   set_drive_pid(drive, -20, DRIVE_SPEED) ; //was 19
 //back lift up
@@ -245,7 +245,7 @@ auto_4() {
   //retreat
     flock(false) ;
     pros::delay (500) ;
-    mogo_in (false) ; //test
+    mogo_in () ; //test
     set_drive_pid(drive, -19.5, DRIVE_SPEED) ; //was 18.5
 
   //back lift up
