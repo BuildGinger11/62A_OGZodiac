@@ -101,14 +101,14 @@ lift_control(void*) {
 
 
   //actual motor moving stuff
-    if(lift_state == 0 || lift_state == 4)
+    if(lift_state == 0 || lift_state == 3)
     {
       //actuate pneumatic
-      sixlock(false);
+      sixlock(true);
       //move motor to pos
       set_lift_position(lift_heights[lift_state], 100);
     }
-    else if (lift_state == 3)
+    else if (lift_state == 1)
     {
       set_lift_position(lift_heights[lift_state], 100) ;
       pros::delay (150) ;
@@ -118,7 +118,7 @@ lift_control(void*) {
     else
     {
       //deactuate pneumatic
-      sixlock(true);
+      sixlock(false);
       //move motor to pos
       set_lift_position(lift_heights[lift_state], 100);
     }

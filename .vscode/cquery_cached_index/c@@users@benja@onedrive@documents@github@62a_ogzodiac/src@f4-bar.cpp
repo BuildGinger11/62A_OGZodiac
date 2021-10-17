@@ -14,47 +14,49 @@ bool is_up = false;
 //bool is_neut = false;
 bool is_out = false;
 
+bool is_down = false ;
 
-pros::Motor mogo(6, MOTOR_GEARSET_36, false, MOTOR_ENCODER_DEGREES);
+// pros::Motor mogo(6, MOTOR_GEARSET_36, false, MOTOR_ENCODER_DEGREES);
 pros::ADIDigitalOut FLock(8);
 
-//touch sensor
-pros::ADIDigitalIn touchSense (5) ;
-
-bool touch ()
-{
-  if (touchSense.get_value () == 1)
-    return true ;
-  return false ;
-}
+pros::ADIDigitalOut RMogo (2) ;
+pros::ADIDigitalOut LMogo (5) ;
 
 
-void set_mogo(int input)
-{
-  mogo = input;
-}
+
+
+// void set_mogo(int input)
+// {
+//   mogo = input;
+// }
 void flock(bool position)
 {
   FLock.set_value(position);
 }
-void zero_mogo()
- {
-   mogo.tare_position();
- }
-int  get_mogo()
-{
-  return mogo.get_position();
-}
-int  get_mogo_vel()
-{
-  return mogo.get_actual_velocity();
-}
 
-void
-set_mogo_position(int target, int speed)
+void mogo_lift (bool position)
 {
-  mogo.move_absolute(target, speed);
+  RMogo.set_value(position) ;
+  LMogo.set_value(position) ;
 }
+// void zero_mogo()
+//  {
+//    mogo.tare_position();
+//  }
+// int  get_mogo()
+// {
+//   return mogo.get_position();
+// }
+// int  get_mogo_vel()
+// {
+//   return mogo.get_actual_velocity();
+// }
+//
+// void
+// set_mogo_position(int target, int speed)
+// {
+//   mogo.move_absolute(target, speed);
+// }
 
 ///
 // Mogo Control
@@ -66,23 +68,29 @@ mogo_in ()
  {
    flock(false);
    pros::delay(300);
-  if (get_mogo()<200)
-  {
-    if (get_mogo_vel()==0 || touch())
-     {
-      is_up = true;
-      set_mogo(0);
-    }
-    else
-    {
-      set_mogo(is_up?0:-60);
-    }
-  }
-  else
-  {
-    is_up = false;
-    set_mogo(-127);
-  }
+
+   mogo_lift(false) ; // test to make sure value
+
+
+
+  // if (get_mogo()<200)
+  // {
+  //   if (get_mogo_vel()==0 || touch())
+  //    {
+  //     is_up = true;
+  //     set_mogo(0);
+  //   }
+  //   else
+  //   {
+  //     set_mogo(is_up?0:-60);
+  //   }
+  // }
+  // else
+  // {
+  //   is_up = false;
+  //   set_mogo(-127);
+  // }
+
 }
 
 
@@ -91,36 +99,38 @@ mogo_in ()
 void
 mogo_out()
  {
-  if (get_mogo() > (MOGO_OUT-100))
-  {
-    if (get_mogo_vel()==0)
-    {
-      set_mogo(0);
-      is_out = true;
-    }
-    else
-     {
-      mogo_out_timer+=DELAY_TIME;
-      if (mogo_out_timer<500)
-      {
-        set_mogo(20);
-        is_out = false;
-      }
-      else
-      {
-        set_mogo(0);
-        is_out = true;
-      }
-    }
-  }
-  else
-  {
-    set_mogo(127);
-    mogo_out_timer = 0;
-    is_out = false;
-  }
+  // if (get_mogo() > (MOGO_OUT-100))
+  // {
+  //   if (get_mogo_vel()==0)
+  //   {
+  //     set_mogo(0);
+  //     is_out = true;
+  //   }
+  //   else
+  //    {
+  //     mogo_out_timer+=DELAY_TIME;
+  //     if (mogo_out_timer<500)
+  //     {
+  //       set_mogo(20);
+  //       is_out = false;
+  //     }
+  //     else
+  //     {
+  //       set_mogo(0);
+  //       is_out = true;
+  //     }
+  //   }
+  // }
+  // else
+  // {
+  //   set_mogo(127);
+  //   mogo_out_timer = 0;
+  //   is_out = false;
+  // }
 
-//test
+  mogo_lift (true) ; // test make sure correct
+
+
   pros::delay(500) ;
   flock(true) ;
 
@@ -140,36 +150,24 @@ mogo_control(void*)
   // Toggle for mogo
     if (master.get_digital(DIGITAL_R2) && mogo_lock==0)
     {
-    // if (is_at_neut)
-    //   mogo_up = false;
-    // else
     printf("f1 \n") ;
 
-
-    flock(false);
-    pros::delay(300);
-    mogo_in();
-    //
-    // is_at_neut = false;
-    mogo_lock = 1;
-
+      if (!is_down)
+      {
+        mogo_in();
+      }
+      else if (is_down)
+      {
+        mogo_out();
+      }
+      is_down = !is_down ;
+      mogo_lock = 1;
 
     }
-    if (master.get_digital(DIGITAL_R2) && mogo_lock==1)
+
+    else if (!master.get_digital(DIGITAL_R2))
     {
-    // if (is_at_neut)
-    //   mogo_up = false;
-    // else
-    printf("f2 \n") ;
-
-    mogo_out();
-    pros::delay (600) ;
-    //flock(true);
-    //
-    // is_at_neut = false;
-    mogo_lock = 0;
-
-
+      mogo_lock = 0 ;
     }
 
     pros::delay(20);

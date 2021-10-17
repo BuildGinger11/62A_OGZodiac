@@ -75,7 +75,8 @@ auto_1() // now is tester auton
 // testing left side
 
 // lower FMogo
-  set_mogo_position(780, 127) ;
+  //set_mogo_position(780, 127) ;
+  mogo_out () ;
   flock(true) ;
 // rush
   set_drive_brake(MOTOR_BRAKE_COAST);
@@ -246,7 +247,8 @@ void
 auto_4() {
 
   // lower FMogo
-    set_mogo_position(780, 127) ;
+    //set_mogo_position(780, 127) ;
+    mogo_out() ;
     flock(true) ;
   // rush
     set_drive_brake(MOTOR_BRAKE_COAST);
@@ -260,7 +262,8 @@ auto_4() {
     set_drive_pid(drive, -19.5, DRIVE_SPEED) ; // was 18.5
 
   // back lift up
-    set_lift_position(446, 100);
+    //set_lift_position(446, 100);
+    mogo_in () ;
     wait_drive() ;
   // prepare claw
     claw(true) ;
