@@ -66,10 +66,10 @@ void mogo_lift (bool position)
 void
 mogo_in ()
  {
-   flock(false);
+   mogo_lift(false) ;
    pros::delay(300);
 
-   mogo_lift(false) ; // test to make sure value
+   flock(false);// test to make sure value
 
 
 
@@ -128,11 +128,11 @@ mogo_out()
   //   is_out = false;
   // }
 
-  mogo_lift (true) ; // test make sure correct
+  flock(true) ; // test make sure correct
 
 
   pros::delay(500) ;
-  flock(true) ;
+  mogo_lift (true) ;
 
 }
 
