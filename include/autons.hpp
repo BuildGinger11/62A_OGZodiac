@@ -2,7 +2,7 @@
 
 void reset_constants();
 
-void auto_1();
+void auto_test();
 void auto_2();
 void auto_3();
 void auto_4();

@@ -69,13 +69,12 @@ int timer = 0;
 
 
 void
-auto_1() // now is tester auton
+auto_test() // now is tester auton
 {
 
 // testing left side
 
 // lower FMogo
-  //set_mogo_position(780, 127) ;
   mogo_out () ;
   flock(true) ;
 // rush

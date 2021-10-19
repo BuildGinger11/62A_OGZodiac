@@ -30,7 +30,7 @@ auto_select(bool is_auton) {
   switch (current_page) {
     case 0: // Auto 1
       pros::lcd::set_text(1, "Test Auton");
-      if (is_auton) auto_1();
+      if (is_auton) auto_test();
       break;
     case 1: // Auto 2
       pros::lcd::set_text(1, "Auton 1");
