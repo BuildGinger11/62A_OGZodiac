@@ -3,8 +3,8 @@
 void reset_constants();
 
 void auto_test();
-void auto_2();
-void auto_3();
+void auto_winPoint();
+void auto_basic();
 void auto_4();
 void auto_5();
 void auto_6();

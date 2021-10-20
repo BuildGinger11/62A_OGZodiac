@@ -36,8 +36,8 @@ void flock(bool position)
 
 void mogo_lift (bool position)
 {
-  RMogo.set_value(position) ;
-  LMogo.set_value(position) ;
+  RMogo.set_value(!position) ;
+  LMogo.set_value(!position) ;
 }
 // void zero_mogo()
 //  {
@@ -65,33 +65,10 @@ void mogo_lift (bool position)
 // Mogo In
 void
 mogo_in ()
- {
-  mogo_lift(false);
+{
+  flock(true);
   pros::delay(500);
-  flock(false);
-
-
-// test to make sure value
-
-
-
-  // if (get_mogo()<200)
-  // {
-  //   if (get_mogo_vel()==0 || touch())
-  //    {
-  //     is_up = true;
-  //     set_mogo(0);
-  //   }
-  //   else
-  //   {
-  //     set_mogo(is_up?0:-60);
-  //   }
-  // }
-  // else
-  // {
-  //   is_up = false;
-  //   set_mogo(-127);
-  // }
+  mogo_lift(false);
 
 }
 
@@ -100,43 +77,11 @@ mogo_in ()
 // Mogo Out
 void
 mogo_out()
- {
-  // if (get_mogo() > (MOGO_OUT-100))
-  // {
-  //   if (get_mogo_vel()==0)
-  //   {
-  //     set_mogo(0);
-  //     is_out = true;
-  //   }
-  //   else
-  //    {
-  //     mogo_out_timer+=DELAY_TIME;
-  //     if (mogo_out_timer<500)
-  //     {
-  //       set_mogo(20);
-  //       is_out = false;
-  //     }
-  //     else
-  //     {
-  //       set_mogo(0);
-  //       is_out = true;
-  //     }
-  //   }
-  // }
-  // else
-  // {
-  //   set_mogo(127);
-  //   mogo_out_timer = 0;
-  //   is_out = false;
-  // }
-
-
-
-
-  flock(true) ; // test make sure correct
-  pros::delay(500) ;
-  mogo_lift (true) ;
-
+{
+   // test make sure correct
+   mogo_lift (true) ;
+   pros::delay(500) ;
+   flock(false) ;
 
 }
 

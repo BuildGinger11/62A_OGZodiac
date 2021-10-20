@@ -33,16 +33,16 @@ auto_select(bool is_auton) {
       if (is_auton) auto_test();
       break;
     case 1: // Auto 2
-      pros::lcd::set_text(1, "Auton 1");
+      pros::lcd::set_text(1, "Auton Tester");
       if (is_auton) test_auton();
       break;
     case 2: // Auto 3
-      pros::lcd::set_text(1, "Auton 2");
-      if (is_auton) auto_2();
+      pros::lcd::set_text(1, "Auton winPoint");
+      if (is_auton) auto_winPoint();
       break;
     case 3: // Auto 4
-      pros::lcd::set_text(1, "Auton 3");
-      if (is_auton) auto_3();
+      pros::lcd::set_text(1, "Auton Basic");
+      if (is_auton) auto_basic();
       break;
     case 4: // Auto 5
       pros::lcd::set_text(1, "Auton 4");
@@ -89,7 +89,11 @@ page_down() {
 void
 initialize() {
   print_ez_template();
+
+  claw (true) ;
   mogo_in();
+  sixlock (true) ;
+  flock (true) ;
   pros::delay(500);
 
   disable_all_tasks();
