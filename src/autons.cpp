@@ -75,17 +75,14 @@ auto_test() // now is tester auton
 // testing left side
 
 // lower FMogo
-  mogo_out () ;
-  flock(true) ;
+  mogo_in () ;
 // rush
   set_drive_brake(MOTOR_BRAKE_COAST);
   set_drive_pid(drive, 38, DRIVE_SPEED/1.5) ; // was 40
   wait_drive() ;
   set_drive_brake(MOTOR_BRAKE_BRAKE);
 // retreat
-  flock(false) ;
-  pros::delay (500) ;
-  mogo_in () ; // test
+  mogo_out () ; // test
   // set_mogo_position (-780, 127) ;
   set_drive_pid(drive, -23, DRIVE_SPEED) ; // was 19
 // back lift up

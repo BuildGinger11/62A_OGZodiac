@@ -89,6 +89,7 @@ page_down() {
 void
 initialize() {
   print_ez_template();
+  mogo_in();
   pros::delay(500);
 
   disable_all_tasks();
