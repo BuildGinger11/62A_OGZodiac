@@ -77,7 +77,7 @@ bin/autons.cpp.o: src/autons.cpp include/main.h include/api.h \
  include/EZ-Template/setup.hpp include/EZ-Template/util.hpp \
  include/EZ-Template/joystick_control.hpp \
  include/EZ-Template/auton_drive_functions.hpp include/Intakes.hpp \
- include/F4-Bar.hpp include/B4-Bar.hpp include/autons.hpp
+ include/F4-Bar.hpp include/B6-Bar.hpp include/autons.hpp
 include/main.h:
 include/api.h:
 include/pros/adi.h:
@@ -232,5 +232,5 @@ include/EZ-Template/joystick_control.hpp:
 include/EZ-Template/auton_drive_functions.hpp:
 include/Intakes.hpp:
 include/F4-Bar.hpp:
-include/B4-Bar.hpp:
+include/B6-Bar.hpp:
 include/autons.hpp:
