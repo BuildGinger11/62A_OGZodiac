@@ -132,11 +132,11 @@ lift_control(void*) {
     }
 
   }
-  else if (!master.get_digital(DIGITAL_B))
+  if (!master.get_digital(DIGITAL_B))
   {
     b_press = 0 ;
   }
-  else if (!master.get_digital(DIGITAL_R1))
+  if (!master.get_digital(DIGITAL_R1))
   {
     up_lock = 0 ;
   }
