@@ -16,7 +16,7 @@ bool b_lock = true ;
 pros::Motor lift(10, MOTOR_GEARSET_36, false, MOTOR_ENCODER_DEGREES);
 
 //bmogo lock
-pros::ADIDigitalOut sixLock(7);
+pros::ADIDigitalOut sixLock(7, true);
 
 
 void sixlock(bool position)
