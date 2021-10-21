@@ -8,7 +8,7 @@ const int lift_heights[num_of_pos] = {0, 0, 575, 321, 575, 140}; // Lift Positio
 // Driver Control Variables
 int up_lock = 0;
 int down_lock = 0;
-int lift_state = 5; //<-- when switch to drive mode, start here
+int lift_state = 0 ; //<-- when switch to drive mode, start here
 
 int b_press = 0 ;
 bool b_lock = true ;
@@ -22,6 +22,11 @@ pros::ADIDigitalOut sixLock(7);
 void sixlock(bool position)
 {
   sixLock.set_value(position);
+}
+
+void setLiftStart (int position)
+{
+  lift_state = position ;
 }
 
 //back claw (under conveyor)
@@ -65,7 +70,7 @@ lift_control(void*) {
   while(1)
   {
   if (master.get_digital(DIGITAL_R1) && up_lock==0) {
-    printf("R1") ;
+    printf("R1 \n") ;
     // If lift value is at max, bring it down to 0
     if(!b_lock)
     {
@@ -90,21 +95,18 @@ lift_control(void*) {
       lift_state = num_of_pos - 2 ;
 
     b_lock = !b_lock ;
-    b_press ++ ;
+    b_press = 1 ;
 
 
 
   }
   else if (!master.get_digital(DIGITAL_R1) && !master.get_digital(DIGITAL_B)) {
-    up_lock = 0;
-    b_press = 0 ;
-
 
   //actual motor moving stuff
-    if(lift_state == 0 || lift_state == 3)
+    if(lift_state == 0)
     {
       //actuate pneumatic
-      sixlock(true);
+      sixlock(false);
       //move motor to pos
       set_lift_position(lift_heights[lift_state], 100);
     }
@@ -112,16 +114,31 @@ lift_control(void*) {
     {
       set_lift_position(lift_heights[lift_state], 100) ;
       pros::delay (150) ;
-      sixlock (false) ;
+      sixlock (true) ;
+    }
+    else if (lift_state == 3)
+    {
+      set_lift_position(lift_heights[lift_state], 100);
+      pros::delay(500) ;
+      sixlock(false) ;
     }
 
     else
     {
       //deactuate pneumatic
-      sixlock(false);
+      sixlock(true);
       //move motor to pos
       set_lift_position(lift_heights[lift_state], 100);
     }
+
+  }
+  else if (!master.get_digital(DIGITAL_B))
+  {
+    b_press = 0 ;
+  }
+  else if (!master.get_digital(DIGITAL_R1))
+  {
+    up_lock = 0 ;
   }
 
 
@@ -132,14 +149,12 @@ lift_control(void*) {
     printf("open \n");
     claw_state = 1 ;
     claw(true) ;
-    pros::delay (500) ;
   }
   else if (master.get_digital(DIGITAL_L2) && claw_state == 1)
   {
     //deactivate claw
     claw_state = 0 ;
     claw(false) ;
-    pros::delay (500) ;
   }
 
   pros::delay (20) ;
