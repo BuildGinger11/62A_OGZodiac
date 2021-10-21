@@ -168,7 +168,7 @@ autonomous() {
  * task, not resume it from where it left off.
  */
 void opcontrol() {
-  drive_pid.suspend(); 
+  drive_pid.suspend();
   reset_drive_sensor();
   set_drive_brake(MOTOR_BRAKE_COAST); // This is preference to what you like to drive on
   pros::Task Intakes(Intake_Control);
@@ -176,7 +176,7 @@ void opcontrol() {
   pros::Task F4Bar(mogo_control);
   while (true) {
     chassis_joystick_control();
-
+ 
     pros::delay(DELAY_TIME);
   }
 }
