@@ -72,46 +72,11 @@ void
 auto_test() // now is tester auton
 {
 
-// testing left side
-
-
-
-
-
-
-
-// AUTON 2 - can be improved
-
-  //  // lift 6bar
-  //    claw (true) ;
-  //    set_lift_position(446, 100);
-  //    pros::delay(750) ;
-  //  // drive forward
-  //    set_drive_pid(drive, -20, DRIVE_SPEED);
-  //    wait_drive();
-  //    // block(false);
-  //    claw (false);
-  //  // run intake
-  //    intake(127);
-  //    pros::delay (50) ; // check time
-  //    // intake (0) ;
-  //
-  //    set_drive_pid (drive, 15, DRIVE_SPEED) ;
-  //    wait_drive() ;
-  //    set_drive_pid(turn, 140, DRIVE_SPEED) ;
-  //    wait_drive() ;
-  //    // intake (127) ;
-  //    set_drive_pid (drive, 10, DRIVE_SPEED) ;
-  //    wait_drive() ;
-  //    set_drive_pid(turn, 150, DRIVE_SPEED) ;
-  //    wait_drive() ;
-  //    set_drive_pid(drive, 32, DRIVE_SPEED/4) ;
-  //    wait_drive() ;
-  //    set_drive_pid(drive, -35, DRIVE_SPEED) ;
-  //
-  //
-  //    intake (0) ;
-
+  // blursed ring score technique
+  flock (false) ;
+  pros::delay(500) ;
+  flock (true) ;
+  set_drive_pid(r_swing, 90, DRIVE_SPEED) ;
 
 }
 
