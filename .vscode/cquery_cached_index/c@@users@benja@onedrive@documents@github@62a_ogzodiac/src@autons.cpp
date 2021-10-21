@@ -71,13 +71,31 @@ int timer = 0;
 void
 auto_test() // now is tester auton
 {
-
+  //set_drive_brake(MOTOR_BRAKE_BRAKE);
   // blursed ring score technique
   flock (false) ;
   pros::delay(500) ;
   flock (true) ;
-  set_drive_pid(r_swing, 90, DRIVE_SPEED) ;
-
+  set_drive_pid(drive, -8, DRIVE_SPEED) ;
+  wait_drive() ;
+  set_drive_pid(l_swing, -35, DRIVE_SPEED) ;
+  wait_drive() ;
+  set_drive_pid(drive, 40, DRIVE_SPEED) ;
+  wait_drive() ;
+  set_drive_pid(turn, -180, DRIVE_SPEED) ;
+  wait_drive() ;
+  set_drive_pid(drive, -90, DRIVE_SPEED) ;
+  set_lift_position(446, 100);
+  claw (false) ;
+  int timer = 0 ;
+  while (!limit_switch()) {
+    timer++;
+    pros::delay(10);}
+  claw (true) ;
+  pros::delay(500) ;
+  intake (127) ;
+  set_drive_pid(drive, 20, DRIVE_SPEED) ;
+  wait_drive() ;
 }
 
 //
