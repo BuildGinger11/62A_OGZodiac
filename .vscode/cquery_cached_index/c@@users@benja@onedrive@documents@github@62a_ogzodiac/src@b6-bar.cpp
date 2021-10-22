@@ -13,7 +13,7 @@ int lift_state = 0 ; //<-- when switch to drive mode, start here
 int b_press = 0 ;
 bool b_lock = true ;
 
-int Timer = 0  ;
+int clawLock = 0 ;
 
 pros::Motor lift(10, MOTOR_GEARSET_36, false, MOTOR_ENCODER_DEGREES);
 
@@ -30,6 +30,10 @@ void setLiftStart (int position)
 {
   lift_state = position ;
 }
+
+
+
+
 
 //back claw (under conveyor)
 pros::ADIDigitalOut Claw (6);
@@ -122,6 +126,10 @@ lift_control(void*) {
       set_lift_position(lift_heights[lift_state], 100) ;
       sixlock(false) ;
     }
+    else if (lift_state == 5)
+    {
+      set_lift_position(lift_heights[lift_state], 100) ;
+    }
 
     else
     {
@@ -146,22 +154,25 @@ lift_control(void*) {
 
 
   // activate MogoClaw
-  if (master.get_digital(DIGITAL_L2) && claw_state == 0)
+  if (master.get_digital(DIGITAL_L2) && claw_state == 0 && clawLock == 0)
   {
     //activate claw
     printf("open \n");
     claw_state = 1 ;
     claw(true) ;
+    clawLock = 1 ;
   }
-  else if (master.get_digital(DIGITAL_L2) && claw_state == 1)
+  else if (master.get_digital(DIGITAL_L2) && claw_state == 1 && clawLock == 0)
   {
     //deactivate claw
     claw_state = 0 ;
     claw(false) ;
+    clawLock = 1 ;
   }
-
-  // the cooler delay?
-  Timer ++ ;
+  else if (!master.get_digital(DIGITAL_L2))
+  {
+    clawLock = 0 ;
+  }
 
   pros::delay (20) ;
 }
