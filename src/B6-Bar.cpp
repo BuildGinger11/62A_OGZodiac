@@ -13,6 +13,8 @@ int lift_state = 0 ; //<-- when switch to drive mode, start here
 int b_press = 0 ;
 bool b_lock = true ;
 
+int Timer = 0  ;
+
 pros::Motor lift(10, MOTOR_GEARSET_36, false, MOTOR_ENCODER_DEGREES);
 
 //bmogo lock
@@ -114,12 +116,22 @@ lift_control(void*) {
     {
       set_lift_position(lift_heights[lift_state], 100) ;
       //pros::delay (150) ;
+      Timer = 0 ;
+      while (!(Timer == 7))
+      {
+        sixlock (false) ;
+      }
       sixlock (true) ;
     }
     else if (lift_state == 3)
     {
       set_lift_position(lift_heights[lift_state], 100);
       //pros::delay(250) ;
+      Timer = 0 ;
+      while (!(Timer == 12))
+      {
+        sixlock (true) ;
+      }
       sixlock(false) ;
     }
 
@@ -159,6 +171,9 @@ lift_control(void*) {
     claw_state = 0 ;
     claw(false) ;
   }
+
+  // the cooler delay?
+  Timer ++ ;
 
   pros::delay (20) ;
 }
