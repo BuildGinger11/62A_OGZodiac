@@ -1,8 +1,8 @@
 #include "main.h"
 
 
-const int num_of_pos = 6; // Number of lift positions // was 5
-const int lift_heights[num_of_pos] = {0, 0, 575, 321, 575, 140}; // Lift Positions
+const int num_of_pos = 7; // Number of lift positions // was 5
+const int lift_heights[num_of_pos] = {0, 0, 575, 321, 321, 575, 140}; // Lift Positions
 //                          {pick_up/ready , compact/drive, lift_above_platform, place_on_platform, max_height}
 
 // Driver Control Variables
@@ -115,23 +115,11 @@ lift_control(void*) {
     else if (lift_state == 1)
     {
       set_lift_position(lift_heights[lift_state], 100) ;
-      //pros::delay (150) ;
-      Timer = 0 ;
-      while (!(Timer == 7))
-      {
-        sixlock (false) ;
-      }
       sixlock (true) ;
     }
-    else if (lift_state == 3)
+    else if (lift_state == 4)
     {
-      set_lift_position(lift_heights[lift_state], 100);
-      //pros::delay(250) ;
-      Timer = 0 ;
-      while (!(Timer == 12))
-      {
-        sixlock (true) ;
-      }
+      set_lift_position(lift_heights[lift_state], 100) ;
       sixlock(false) ;
     }
 
