@@ -113,13 +113,13 @@ lift_control(void*) {
     else if (lift_state == 1)
     {
       set_lift_position(lift_heights[lift_state], 100) ;
-      pros::delay (150) ;
+      //pros::delay (150) ;
       sixlock (true) ;
     }
     else if (lift_state == 3)
     {
       set_lift_position(lift_heights[lift_state], 100);
-      pros::delay(250) ;
+      //pros::delay(250) ;
       sixlock(false) ;
     }
 
