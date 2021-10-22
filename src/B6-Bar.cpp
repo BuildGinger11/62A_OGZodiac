@@ -86,6 +86,7 @@ lift_control(void*) {
 
     up_lock = 1;
   }
+
   //special position for intaking rings
   else if (master.get_digital(DIGITAL_B) && b_press == 0) {
     printf("b \n") ;
@@ -97,9 +98,8 @@ lift_control(void*) {
     b_lock = !b_lock ;
     b_press = 1 ;
 
-
-
   }
+
   else if (!master.get_digital(DIGITAL_R1) && !master.get_digital(DIGITAL_B)) {
 
   //actual motor moving stuff
@@ -119,7 +119,7 @@ lift_control(void*) {
     else if (lift_state == 3)
     {
       set_lift_position(lift_heights[lift_state], 100);
-      pros::delay(500) ;
+      pros::delay(250) ;
       sixlock(false) ;
     }
 
@@ -132,6 +132,9 @@ lift_control(void*) {
     }
 
   }
+
+
+
   if (!master.get_digital(DIGITAL_B))
   {
     b_press = 0 ;
