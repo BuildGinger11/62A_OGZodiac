@@ -41,8 +41,8 @@ auto_select(bool is_auton) {
       if (is_auton) auto_winPoint();
       break;
     case 3: // Auto 4
-      pros::lcd::set_text(1, "Auton Basic");
-      if (is_auton) auto_basic();
+      pros::lcd::set_text(1, "Auton homeRow");
+      if (is_auton) auto_AWPcarry();
       break;
     case 4: // Auto 5
       pros::lcd::set_text(1, "Auton 4");
@@ -53,8 +53,8 @@ auto_select(bool is_auton) {
       if (is_auton) auto_5();
       break;
     case 6: // Auto 6
-      pros::lcd::set_text(1, "Auton 6");
-      if (is_auton) auto_6();
+      pros::lcd::set_text(1, "Auton Basic");
+      if (is_auton) auto_basic() ;
       break;
 
     default:

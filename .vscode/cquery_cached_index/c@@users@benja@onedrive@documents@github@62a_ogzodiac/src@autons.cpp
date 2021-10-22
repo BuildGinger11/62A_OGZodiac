@@ -71,31 +71,21 @@ int timer = 0;
 void
 auto_test() // now is tester auton
 {
-  //set_drive_brake(MOTOR_BRAKE_BRAKE);
-  // blursed ring score technique
-  flock (false) ;
-  pros::delay(500) ;
-  flock (true) ;
-  set_drive_pid(drive, -8, DRIVE_SPEED) ;
-  wait_drive() ;
-  set_drive_pid(l_swing, -35, DRIVE_SPEED) ;
-  wait_drive() ;
-  set_drive_pid(drive, 40, DRIVE_SPEED) ;
-  wait_drive() ;
-  set_drive_pid(turn, -180, DRIVE_SPEED) ;
-  wait_drive() ;
-  set_drive_pid(drive, -90, DRIVE_SPEED) ;
-  set_lift_position(446, 100);
-  claw (false) ;
-  int timer = 0 ;
-  while (!limit_switch()) {
-    timer++;
-    pros::delay(10);}
-  claw (true) ;
-  pros::delay(500) ;
-  intake (127) ;
-  set_drive_pid(drive, 20, DRIVE_SPEED) ;
-  wait_drive() ;
+  // lower FMogo
+    mogo_out () ;
+  // rush
+    set_drive_brake(MOTOR_BRAKE_COAST);
+    set_drive_pid(drive, 40, DRIVE_SPEED) ; // was 40
+    wait_drive() ;
+    set_drive_brake(MOTOR_BRAKE_BRAKE);
+  // retreat
+    mogo_in () ; // test
+  // set_mogo_position (-780, 127) ;
+    set_drive_pid(drive, -38, DRIVE_SPEED) ;
+  // back lift up
+    set_lift_position(446, 100);
+    wait_drive() ;
+
 }
 
 //
@@ -107,7 +97,6 @@ auto_test() // now is tester auton
 void
 auto_winPoint() { // ring row and AWP
 
-
   // lower FMogo
     mogo_out () ;
   // rush
@@ -118,7 +107,7 @@ auto_winPoint() { // ring row and AWP
   // retreat
     mogo_in () ; // test
     // set_mogo_position (-780, 127) ;
-    set_drive_pid(drive, -21, DRIVE_SPEED) ; // was 19
+    set_drive_pid(drive, -21, DRIVE_SPEED) ;
   // back lift up
     set_lift_position(446, 100);
     wait_drive() ;
@@ -168,23 +157,33 @@ auto_winPoint() { // ring row and AWP
 //
 
 void
-auto_basic() { //can't go wrong
-  // lift 6bar
+auto_AWPcarry() {
+  //set_drive_brake(MOTOR_BRAKE_BRAKE);
+  // blursed ring score technique
+  flock (false) ;
+  pros::delay(500) ;
+  flock (true) ;
+  set_drive_pid(drive, -8, DRIVE_SPEED) ;
+  wait_drive() ;
+  set_drive_pid(l_swing, -35, DRIVE_SPEED) ;
+  wait_drive() ;
+  set_drive_pid(drive, 40, DRIVE_SPEED) ;
+  wait_drive() ;
+  set_drive_pid(turn, -180, DRIVE_SPEED) ;
+  wait_drive() ;
+  set_drive_pid(drive, -90, DRIVE_SPEED) ;
+  set_lift_position(446, 100);
+  claw (false) ;
+  int timer = 0 ;
+  while (!limit_switch()) {
+    timer++;
+    pros::delay(10);}
     claw (true) ;
-    set_lift_position(446, 100);
-    pros::delay(750) ;
-  // drive forward
-    set_drive_pid(drive, -10, DRIVE_SPEED);
-    wait_drive();
-    // block(false);
-    pros::delay(100);
-    // mogo_inB(true);
-    pros::delay(400);
-    claw (false);
-  // run intake
-    intake(127);
-    pros::delay (3000) ;
-    intake (0) ;
+    pros::delay(500) ;
+    intake (100) ;
+    set_drive_pid(drive, 20, DRIVE_SPEED) ;
+    wait_drive() ;
+
 }
 
 
@@ -309,6 +308,21 @@ auto_9() {
 
 
 void
-auto_10() {
-
+auto_basic() { //can't go wrong
+  // lift 6bar
+    claw (true) ;
+    set_lift_position(446, 100);
+    pros::delay(750) ;
+  // drive forward
+    set_drive_pid(drive, -10, DRIVE_SPEED);
+    wait_drive();
+    // block(false);
+    pros::delay(100);
+    // mogo_inB(true);
+    pros::delay(400);
+    claw (false);
+  // run intake
+    intake(127);
+    pros::delay (3000) ;
+    intake (0) ;
 }

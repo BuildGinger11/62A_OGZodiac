@@ -159,14 +159,14 @@ lift_control(void*) {
     //activate claw
     printf("open \n");
     claw_state = 1 ;
-    claw(true) ;
+    claw(false) ;
     clawLock = 1 ;
   }
   else if (master.get_digital(DIGITAL_L2) && claw_state == 1 && clawLock == 0)
   {
     //deactivate claw
     claw_state = 0 ;
-    claw(false) ;
+    claw(true) ;
     clawLock = 1 ;
   }
   else if (!master.get_digital(DIGITAL_L2))
