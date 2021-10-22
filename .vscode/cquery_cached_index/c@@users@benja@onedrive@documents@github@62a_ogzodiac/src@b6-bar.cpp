@@ -87,20 +87,20 @@ lift_control(void*) {
     up_lock = 1;
   }
 
-  //special position for intaking rings
-  else if (master.get_digital(DIGITAL_B) && b_press == 0) {
-    printf("b \n") ;
-    if (b_lock)
-      lift_state = num_of_pos - 1 ;
-    else if (!b_lock)
-      lift_state = num_of_pos - 2 ;
+  // //special position for intaking rings
+  // else if (master.get_digital(DIGITAL_B) && b_press == 0) {
+  //   printf("b \n") ;
+  //   if (b_lock)
+  //     lift_state = num_of_pos - 1 ;
+  //   else if (!b_lock)
+  //     lift_state = num_of_pos - 2 ;
+  //
+  //   b_lock = !b_lock ;
+  //   b_press = 1 ;
+  //
+  // }
 
-    b_lock = !b_lock ;
-    b_press = 1 ;
-
-  }
-
-  else if (!master.get_digital(DIGITAL_R1) && !master.get_digital(DIGITAL_B)) {
+  // else if (!master.get_digital(DIGITAL_R1) && !master.get_digital(DIGITAL_B)) {
 
   //actual motor moving stuff
     if(lift_state == 0)
@@ -131,14 +131,14 @@ lift_control(void*) {
       set_lift_position(lift_heights[lift_state], 100);
     }
 
-  }
+  // }
 
 
 
-  if (!master.get_digital(DIGITAL_B))
-  {
-    b_press = 0 ;
-  }
+  // if (!master.get_digital(DIGITAL_B))
+  // {
+  //   b_press = 0 ;
+  // }
   if (!master.get_digital(DIGITAL_R1))
   {
     up_lock = 0 ;
