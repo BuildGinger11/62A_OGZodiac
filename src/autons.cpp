@@ -95,8 +95,10 @@ auto_test() // now is tester auton
   //turn 90 left
     set_drive_pid(turn, -105, DRIVE_SPEED) ;
     wait_drive() ;
+  //drive into mogo
     set_drive_pid(drive, -15, DRIVE_SPEED) ;
     wait_drive() ;
+  //shoot rings onto mogo
     intake(100) ;
 
 }
