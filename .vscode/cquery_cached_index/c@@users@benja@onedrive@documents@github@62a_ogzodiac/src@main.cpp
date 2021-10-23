@@ -49,8 +49,8 @@ auto_select(bool is_auton) {
       if (is_auton) auto_4();
       break;
     case 5: // Auto 6
-      pros::lcd::set_text(1, "Auton 5");
-      if (is_auton) auto_5();
+      pros::lcd::set_text(1, "Auton Skills");
+      if (is_auton) auto_skillz();
       break;
     case 6: // Auto 6
       pros::lcd::set_text(1, "Auton Basic");

@@ -316,8 +316,49 @@ auto_8() {
 
 
 void
-auto_9() {
+auto_skillz() {
+  // lower FMogo
+    mogo_out () ;
+  // rush
+    set_drive_brake(MOTOR_BRAKE_COAST);
+    set_drive_pid(drive, 43, DRIVE_SPEED) ; // was 38
+    wait_drive() ;
+    set_drive_brake(MOTOR_BRAKE_BRAKE);
+  // retreat
+    mogo_in () ; // test
+    // set_mogo_position (-780, 127) ;
+    set_drive_pid(drive, -21, DRIVE_SPEED) ;
+  // back lift up
+    set_lift_position(446, 100);
+    wait_drive() ;
+  // set fmogo motor to 0
+    // set_mogo(0) ;
+  // prepare claw
+    claw(false) ;
+  // turn to reverse face mogo
+    set_drive_pid(turn, -95, DRIVE_SPEED) ; // change to angle from AUTON 2
+    wait_drive() ;
+  // drive into mogo
+    set_drive_pid(drive, -25, DRIVE_SPEED) ;
+    while (!limit_switch() || timer == 300) {
+      timer++;
+      pros::delay(10);}
 
+  // claw grab
+    claw(true) ;
+    pros::delay (500) ;
+
+  // drop rings
+    intake (115) ;
+  // back up
+    set_drive_pid (drive, 12, DRIVE_SPEED) ;
+    wait_drive() ;
+  // turn
+    set_drive_pid(turn, 0, DRIVE_SPEED) ;
+    wait_drive() ;
+  //rush other side
+    set_drive_pid(turn, 150, DRIVE_SPEED/5) ;
+    wait_drive() ;
 }
 
 

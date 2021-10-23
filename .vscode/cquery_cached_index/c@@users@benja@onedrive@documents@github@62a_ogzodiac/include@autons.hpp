@@ -10,7 +10,7 @@ void auto_5();
 void auto_6();
 void auto_7();
 void auto_8();
-void auto_9();
+void auto_skillz();
 void auto_basic();
 
 void test_auton();
