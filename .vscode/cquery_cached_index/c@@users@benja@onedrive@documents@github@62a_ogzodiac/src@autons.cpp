@@ -116,7 +116,7 @@ auto_winPointRight() { // ring row and AWP
     set_drive_brake(MOTOR_BRAKE_COAST);
     set_drive_pid(drive, 43, DRIVE_SPEED/1.25) ; // was 38
     // lower FMogo
-    mogo_out () ;
+    Auton_mogo_out () ;
     wait_drive() ;
     set_drive_brake(MOTOR_BRAKE_BRAKE);
   // retreat
@@ -135,7 +135,7 @@ auto_winPointRight() { // ring row and AWP
     wait_drive() ;
   // drive into mogo
     set_drive_pid(drive, -25, DRIVE_SPEED) ;
-    while (!limit_switch() || timer == 1300) {
+    while (!limit_switch() || timer == 130) {
       timer++;
       pros::delay(10);
     }

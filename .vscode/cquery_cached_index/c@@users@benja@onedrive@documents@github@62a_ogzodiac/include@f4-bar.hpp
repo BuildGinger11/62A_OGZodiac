@@ -14,3 +14,4 @@ void mogo_in  ();
 void mogo_out ();
 
 void mogo_control(void*);
+void Auton_mogo_out() ;

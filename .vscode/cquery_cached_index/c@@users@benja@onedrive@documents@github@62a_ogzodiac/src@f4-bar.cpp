@@ -84,7 +84,14 @@ mogo_out()
    flock(false) ;
 
 }
+void
+Auton_mogo_out()
+{
+   // test make sure correct
+   mogo_lift (true) ;
+   flock(false) ;
 
+}
 
 ///
 // Driver Control
