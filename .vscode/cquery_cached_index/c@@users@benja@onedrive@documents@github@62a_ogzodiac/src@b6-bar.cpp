@@ -71,6 +71,11 @@ void set_lift_position(int target, int speed)
   lift.move_absolute(target, speed);
 }
 
+void tareLift ()
+{
+  lift.tare_position() ;
+}
+
 ///
 // Driver Control
 //  - when R1 is pressed, bring the lift up the position ladder

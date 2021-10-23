@@ -112,17 +112,17 @@ auto_test() // now is tester auton
 void
 auto_winPointRight() { // ring row and AWP
 
-  // lower FMogo
-    mogo_out () ;
   // rush
     set_drive_brake(MOTOR_BRAKE_COAST);
-    set_drive_pid(drive, 43, DRIVE_SPEED) ; // was 38
+    set_drive_pid(drive, 43, DRIVE_SPEED/1.25) ; // was 38
+    // lower FMogo
+    mogo_out () ;
     wait_drive() ;
     set_drive_brake(MOTOR_BRAKE_BRAKE);
   // retreat
     mogo_in () ; // test
     // set_mogo_position (-780, 127) ;
-    set_drive_pid(drive, -21, DRIVE_SPEED) ;
+    set_drive_pid(drive, -24, DRIVE_SPEED) ;
   // back lift up
     set_lift_position(446, 100);
     wait_drive() ;
@@ -135,13 +135,15 @@ auto_winPointRight() { // ring row and AWP
     wait_drive() ;
   // drive into mogo
     set_drive_pid(drive, -25, DRIVE_SPEED) ;
-    while (!limit_switch() || timer == 300) {
+    while (!limit_switch() || timer == 1300) {
       timer++;
-      pros::delay(10);}
+      pros::delay(10);
+    }
 
+    pros::delay (500) ;
   // claw grab
     claw(true) ;
-    pros::delay (500) ;
+    pros::delay (300) ;
 
   // drop rings
     intake (115) ;
@@ -152,7 +154,7 @@ auto_winPointRight() { // ring row and AWP
     set_drive_pid(turn, 9, DRIVE_SPEED) ;
     wait_drive() ;
   // drive and collect row
-    set_drive_pid(drive, 35, DRIVE_SPEED/5) ;
+    set_drive_pid(drive, 27, DRIVE_SPEED/5) ;
     wait_drive() ;
   // retreat
     set_drive_pid(drive, -45, DRIVE_SPEED) ;

@@ -15,3 +15,5 @@ void claw (bool position) ;
 void lift_control(void*);
 
 bool limit_switch () ;
+
+void tareLift () ;

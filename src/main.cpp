@@ -130,6 +130,7 @@ disabled() {
  */
 void
 competition_initialize() {
+  tareLift () ;
   disable_all_tasks();
 }
 
