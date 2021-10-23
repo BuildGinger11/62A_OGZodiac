@@ -71,20 +71,33 @@ int timer = 0;
 void
 auto_test() // now is tester auton
 {
+
+  ////
+  //Position: left-middle of corner tile
+  ////
+
   // lower FMogo
     mogo_out () ;
   // rush
     set_drive_brake(MOTOR_BRAKE_COAST);
-    set_drive_pid(drive, 40, DRIVE_SPEED) ; // was 40
+    set_drive_pid(drive, 49, DRIVE_SPEED) ; // was 40
     wait_drive() ;
     set_drive_brake(MOTOR_BRAKE_BRAKE);
   // retreat
-    mogo_in () ; // test
-  // set_mogo_position (-780, 127) ;
-    set_drive_pid(drive, -38, DRIVE_SPEED) ;
+    mogo_in () ;
   // back lift up
     set_lift_position(446, 100);
+  // set_mogo_position (-780, 127) ;
+    set_drive_pid(drive, -47, DRIVE_SPEED) ;
     wait_drive() ;
+  //prep claw
+    claw (false) ;
+  //turn 90 left
+    set_drive_pid(turn, -105, DRIVE_SPEED) ;
+    wait_drive() ;
+    set_drive_pid(drive, -15, DRIVE_SPEED) ;
+    wait_drive() ;
+    intake(100) ;
 
 }
 
