@@ -158,17 +158,17 @@ lift_control(void*) {
   }
 
 
-// //reset lift if we are dumb
-//
-//   if (master.get_digital(DIGITAL_X))
-//   {
-//     while (!limit_switch)
-//     {
-//       lift.moveLift (-100) ;
-//     }
-//     lift.moveLift (0) ;
-//     lift.tare_position() ;
-//   }
+//reset lift if we are dumb
+
+  if (master.get_digital(DIGITAL_X))
+  {
+    while (!limit_switch ())
+    {
+      moveLift (-100) ;
+    }
+    moveLift (0) ;
+    lift.tare_position() ;
+  }
 
 
 
