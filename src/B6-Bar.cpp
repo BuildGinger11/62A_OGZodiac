@@ -175,5 +175,5 @@ lift_control(void*) {
   }
 
   pros::delay (20) ;
-}
+  }
 }

@@ -108,13 +108,13 @@ auto_test() // now is tester auton
 //
 
 void
-auto_winPoint() { // ring row and AWP
+auto_winPointRight() { // ring row and AWP
 
   // lower FMogo
     mogo_out () ;
   // rush
     set_drive_brake(MOTOR_BRAKE_COAST);
-    set_drive_pid(drive, 38, DRIVE_SPEED/1.5) ; // was 40
+    set_drive_pid(drive, 43, DRIVE_SPEED) ; // was 38
     wait_drive() ;
     set_drive_brake(MOTOR_BRAKE_BRAKE);
   // retreat

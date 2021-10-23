@@ -3,7 +3,7 @@
 void reset_constants();
 
 void auto_test();
-void auto_winPoint();
+void auto_winPointRight();
 void auto_AWPcarry();
 void auto_4();
 void auto_5();

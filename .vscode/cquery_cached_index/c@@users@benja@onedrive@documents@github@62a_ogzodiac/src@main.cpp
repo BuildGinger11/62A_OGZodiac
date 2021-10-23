@@ -37,8 +37,8 @@ auto_select(bool is_auton) {
       if (is_auton) test_auton();
       break;
     case 2: // Auto 3
-      pros::lcd::set_text(1, "Auton winPoint");
-      if (is_auton) auto_winPoint();
+      pros::lcd::set_text(1, "Auton winPoint Right Side");
+      if (is_auton) auto_winPointRight();
       break;
     case 3: // Auto 4
       pros::lcd::set_text(1, "Auton homeRow");
