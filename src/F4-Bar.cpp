@@ -98,6 +98,9 @@ Auton_mogo_out()
 //  - when L1 is pressed, toggle between in and out.
 //  - when L1 is held and the mogo lift is out, bring the mogo lift to neutral position
 ///
+int TTimer = 0;
+int ITimer = 0;
+bool pressed = false;
 void
 mogo_control(void*)
 {
@@ -106,15 +109,30 @@ mogo_control(void*)
   // Toggle for mogo
     if (master.get_digital(DIGITAL_R2) && mogo_lock==0)
     {
+      pressed = true;
     printf("f1 \n") ;
 
       if (!is_down)
       {
-        mogo_in();
+        mogo_lift (false);
+        
+        if(ITimer >= 25)
+        {
+             flock(true) ;
+             ITimer = 0 ;
+        }
       }
       else if (is_down)
       {
-        mogo_out();
+
+        flock(false) ;
+
+        if(TTimer >= 25)
+        {
+             mogo_lift (true) ;
+             TTimer = 0 ;
+        }
+
       }
       is_down = !is_down ;
       mogo_lock = 1;
@@ -125,7 +143,15 @@ mogo_control(void*)
     {
       mogo_lock = 0 ;
     }
-
+    if(pressed)
+    {
+        ITimer++;
+        TTimer++;
+    }
+    else
+    {
+      pressed = false;
+    }
     pros::delay(20);
   }
 }

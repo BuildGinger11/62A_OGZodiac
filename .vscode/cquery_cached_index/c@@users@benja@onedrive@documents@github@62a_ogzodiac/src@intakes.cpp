@@ -15,11 +15,11 @@ void Intake_Control(void*)
     //printf("master: %d\n", master.get_digital(DIGITAL_L1));
   if(master.get_digital(DIGITAL_L1))
   {
-     intake(100);
+     intake(127);
   }
   else if(master.get_digital(DIGITAL_DOWN))
   {
-    intake(-100);
+    intake(-127);
   }
   else
   {
