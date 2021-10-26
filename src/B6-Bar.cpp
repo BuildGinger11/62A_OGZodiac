@@ -103,18 +103,14 @@ lift_control(void*) {
     up_lock = 1;
   }
 
-  // //special position for intaking rings
-  // else if (master.get_digital(DIGITAL_B) && b_press == 0) {
-  //   printf("b \n") ;
-  //   if (b_lock)
-  //     lift_state = num_of_pos - 1 ;
-  //   else if (!b_lock)
-  //     lift_state = num_of_pos - 2 ;
-  //
-  //   b_lock = !b_lock ;
-  //   b_press = 1 ;
-  //
-  // }
+//  special position for intaking rings
+  else if (master.get_digital(DIGITAL_B) && b_press == 0) {
+     printf("b \n") ;
+     lift_state = 1;
+
+    b_press = 1 ;
+
+  }
 
   // else if (!master.get_digital(DIGITAL_R1) && !master.get_digital(DIGITAL_B)) {
 
@@ -153,10 +149,10 @@ lift_control(void*) {
 
 
 
-  // if (!master.get_digital(DIGITAL_B))
-  // {
-  //   b_press = 0 ;
-  // }
+  if (!master.get_digital(DIGITAL_B))
+  {
+    b_press = 0 ;
+  }
   if (!master.get_digital(DIGITAL_R1))
   {
     up_lock = 0 ;
