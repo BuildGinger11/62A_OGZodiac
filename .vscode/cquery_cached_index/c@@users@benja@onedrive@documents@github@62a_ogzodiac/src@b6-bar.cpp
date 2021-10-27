@@ -15,6 +15,10 @@ bool b_lock = true ;
 
 int clawLock = 0 ;
 
+
+int x_lock = 0 ;
+int XTimer = 0 ;
+
 pros::Motor lift(10, MOTOR_GEARSET_36, false, MOTOR_ENCODER_DEGREES);
 
 //bmogo lock
@@ -112,7 +116,7 @@ lift_control(void*) {
 
   }
 
-  // else if (!master.get_digital(DIGITAL_R1) && !master.get_digital(DIGITAL_B)) {
+  else if (!master.get_digital(DIGITAL_X)) {
 
   //actual motor moving stuff
     if(lift_state == 0)
@@ -145,7 +149,7 @@ lift_control(void*) {
       set_lift_position(lift_heights[lift_state], 100);
     }
 
-  // }
+  }
 
 
 
@@ -163,14 +167,19 @@ lift_control(void*) {
 
   if (master.get_digital(DIGITAL_X))
   {
-    while (!limit_switch ())
+    while (limit_switch () == false)
     {
       moveLift (-100) ;
     }
     moveLift (0) ;
+    printf("tared \n") ;
     lift.tare_position() ;
+    lift_state = 0 ;
   }
-
+  if (!(master.get_digital(DIGITAL_X)))
+  {
+    x_lock = 0 ;
+  }
 
 
 
