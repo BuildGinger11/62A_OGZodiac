@@ -393,7 +393,9 @@ auto_skillz() {
     set_drive_pid(drive, -30, DRIVE_SPEED) ;
     wait_drive() ;
   //lower and place goal
-
+    set_lift_position(321, 100) ;
+    pros::delay(100) ;
+    sixlock(false) ;
 }
 
 
