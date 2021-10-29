@@ -336,16 +336,18 @@ auto_skillz() {
   // back lift up
     set_lift_position(446, 100);
     wait_drive() ;
-  // set fmogo motor to 0
-    // set_mogo(0) ;
   // prepare claw
     claw(false) ;
   // turn to reverse face mogo
     set_drive_pid(turn, -95, DRIVE_SPEED) ; // change to angle from AUTON 2
+
+  //drop neut mogo
+    mogo_out() ;
+
     wait_drive() ;
   // drive into mogo
-    set_drive_pid(drive, -25, DRIVE_SPEED) ;
-    while (!limit_switch() || timer == 300) {
+    set_drive_pid(drive, -30, DRIVE_SPEED) ;
+    while (!limit_switch() || timer == 500) {
       timer++;
       pros::delay(10);}
 
@@ -362,8 +364,22 @@ auto_skillz() {
     set_drive_pid(turn, 0, DRIVE_SPEED) ;
     wait_drive() ;
   //rush other side
-    set_drive_pid(turn, 150, DRIVE_SPEED/5) ;
+    set_drive_pid(drive, 70, DRIVE_SPEED/5) ;
     wait_drive() ;
+  //face mid goal
+    set_drive_pid(turn, -90, DRIVE_SPEED) ;
+    wait_drive() ;
+  //drive forward & grab rings
+    set_drive_pid(drive, 50, DRIVE_SPEED/3) ;
+    mogo_out() ;
+    wait_drive() ;
+  //pick up mid
+    mogo_in () ;
+  //drop ally mogo and swap to b6bar
+    claw(false) ;
+    set_drive_pid(drive, 10, DRIVE_SPEED) ;
+    wait_drive() ;
+    set_lift_position(0, 100) ;
 }
 
 
