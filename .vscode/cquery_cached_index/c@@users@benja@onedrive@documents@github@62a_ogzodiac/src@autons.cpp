@@ -376,10 +376,24 @@ auto_skillz() {
   //pick up mid
     mogo_in () ;
   //drop ally mogo and swap to b6bar
+    intake(0) ;
     claw(false) ;
     set_drive_pid(drive, 10, DRIVE_SPEED) ;
     wait_drive() ;
     set_lift_position(0, 100) ;
+    sixlock(false) ;
+  //pick up goal
+    set_drive_pid(drive, 5, DRIVE_SPEED) ;
+    wait_drive() ;
+    sixlock(true) ;
+  //platform
+    set_drive_pid(turn, -180, DRIVE_SPEED) ;
+    wait_drive() ;
+    set_lift_position(575, 100) ;
+    set_drive_pid(drive, -30, DRIVE_SPEED) ;
+    wait_drive() ;
+  //lower and place goal
+
 }
 
 
