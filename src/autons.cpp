@@ -194,13 +194,14 @@ auto_AWPcarry() {
   set_lift_position(446, 100);
   claw (false) ;
   int timer = 0 ;
-  while (!limit_switch()) {
+  while (!limit_switch() && timer < 400) {
     timer++;
     pros::delay(10);
   }
   claw (true) ;
-  pros::delay(500) ;
+  pros::delay(250) ;
   intake (100) ;
+  pros::delay(1000) ;
   set_drive_pid(drive, 20, DRIVE_SPEED) ;
   wait_drive() ;
 
