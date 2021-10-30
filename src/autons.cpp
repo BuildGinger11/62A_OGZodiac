@@ -210,39 +210,30 @@ auto_AWPcarry() {
 
 
 void
-auto_4() {
+auto_allianceRight() {
+  // rush
+    set_drive_brake(MOTOR_BRAKE_COAST);
+    set_drive_pid(drive, 43, DRIVE_SPEED/1.25) ; // was 38
+    // lower FMogo
+    Auton_mogo_out () ;
+    wait_drive() ;
+    set_drive_brake(MOTOR_BRAKE_BRAKE);
+  // rush middle
+    mogo_in () ;
+    set_drive_pid(turn, 90, DRIVE_SPEED) ;
+    //ready b6bar
+    sixlock(false) ;
+    wait_drive() ;
+    //move to mid
+    set_drive_pid(drive, -24, DRIVE_SPEED/1.25) ;
+    //grab
+    sixlock(true) ;
+    //turn for home
+    set_drive_pid(turn, 135, DRIVE_SPEED) ;
+    //retreat
+    set_drive_pid(drive, 40, DRIVE_SPEED) ;
 
-  // lift 6bar
-    claw (true) ;
-    set_lift_position(446, 100);
-    pros::delay(750) ;
-  // drive forward
-    set_drive_pid(drive, -20, DRIVE_SPEED);
-    wait_drive();
-  // block(false);
-    claw (false);
-  // run intake
-    intake(127);
-    pros::delay (50) ; // check time
-  // drive back
-    set_drive_pid (drive, 15, DRIVE_SPEED) ;
-    wait_drive() ;
-  // face toward ring row
-    set_drive_pid(turn, 140, DRIVE_SPEED) ;
-    wait_drive() ;
-  // drive
-    set_drive_pid (drive, 10, DRIVE_SPEED) ;
-    wait_drive() ;
-  // face ring row
-    set_drive_pid(turn, 150, DRIVE_SPEED) ;
-    wait_drive() ;
-  // drive forward and pick up
-    set_drive_pid(drive, 32, DRIVE_SPEED/4) ;
-    wait_drive() ;
-  // retreat
-    set_drive_pid(drive, -35, DRIVE_SPEED) ;
 
-    intake (0) ;
 }
 
 

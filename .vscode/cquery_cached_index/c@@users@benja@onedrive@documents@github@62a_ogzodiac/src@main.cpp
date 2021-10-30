@@ -45,8 +45,8 @@ auto_select(bool is_auton) {
       if (is_auton) auto_AWPcarry();
       break;
     case 4: // Auto 5
-      pros::lcd::set_text(1, "Auton 4");
-      if (is_auton) auto_4();
+      pros::lcd::set_text(1, "Auton Right Side Alliance");
+      if (is_auton) auto_allianceRight();
       break;
     case 5: // Auto 6
       pros::lcd::set_text(1, "Auton Skills");
