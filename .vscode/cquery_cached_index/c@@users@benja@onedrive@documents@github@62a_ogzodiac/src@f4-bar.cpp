@@ -80,7 +80,7 @@ mogo_out()
 {
    // test make sure correct
    mogo_lift (true) ;
-   pros::delay(500) ;
+   pros::delay(750) ;
    flock(false) ;
 
 }
@@ -116,7 +116,7 @@ mogo_control(void*)
       {
         mogo_lift (false);
         
-        if(ITimer >= 25)
+        if(ITimer >= 50)
         {
              flock(true) ;
              ITimer = 0 ;
