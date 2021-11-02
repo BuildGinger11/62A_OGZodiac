@@ -72,34 +72,82 @@ void
 auto_test() // now is tester auton
 {
 
-  ////
-  //Position: left-middle of corner tile
-  ////
-
   // lower FMogo
     mogo_out () ;
   // rush
     set_drive_brake(MOTOR_BRAKE_COAST);
-    set_drive_pid(drive, 49, DRIVE_SPEED) ; // was 40
+    set_drive_pid(drive, 41, DRIVE_SPEED/1.25) ; // was 38
     wait_drive() ;
     set_drive_brake(MOTOR_BRAKE_BRAKE);
   // retreat
     mogo_in () ;
+    set_drive_pid(drive, -21, DRIVE_SPEED) ;
   // back lift up
     set_lift_position(446, 100);
-  // set_mogo_position (-780, 127) ;
-    set_drive_pid(drive, -47, DRIVE_SPEED) ;
     wait_drive() ;
-  //prep claw
-    claw (false) ;
-  //turn 90 left
-    set_drive_pid(turn, -105, DRIVE_SPEED) ;
+  // prepare claw
+    claw(false) ;
+  // turn to reverse face mogo
+    set_drive_pid(turn, -95, DRIVE_SPEED) ; // change to angle from AUTON 2
+
+  //drop neut mogo
+    mogo_out() ;
+
     wait_drive() ;
-  //drive into mogo
+  // drive into mogo
+    set_drive_pid(drive, -30, DRIVE_SPEED) ;
+    while (!limit_switch() || timer == 500) {
+      timer++;
+      pros::delay(10);}
+
+  // claw grab
+    claw(true) ;
+    pros::delay (500) ;
+
+  // drop rings
+    intake (115) ;
+  // back up
+    set_drive_pid (drive, 12, DRIVE_SPEED) ;
+    wait_drive() ;
+  // turn
+    set_drive_pid(turn, 0, DRIVE_SPEED) ;
+    wait_drive() ;
+  //rush mid
+    set_drive_pid(drive, 38, DRIVE_SPEED/3) ;
+    wait_drive() ;
+  //face mid goal
+    set_drive_pid(turn, -90, DRIVE_SPEED) ;
+    wait_drive() ;
+  //drive forward & grab rings
+    set_drive_pid(drive, 34, DRIVE_SPEED/3) ;
+    mogo_out() ;
+    wait_drive() ;
+  //pick up mid
+    mogo_in () ;
+  //drop ally mogo and swap to b6bar
+    intake(0) ;
+    claw(false) ;
+    set_drive_pid(drive, 15, DRIVE_SPEED) ;
+    wait_drive() ;
+    set_lift_position(0, 100) ;
+    sixlock(false) ;
+    pros::delay(500) ;
+  //pick up goal
     set_drive_pid(drive, -15, DRIVE_SPEED) ;
     wait_drive() ;
-  //shoot rings onto mogo
-    intake(100) ;
+    sixlock(true) ;
+  //platform
+    set_drive_pid(turn, -180, DRIVE_SPEED) ;
+    wait_drive() ;
+    set_lift_position(575, 100) ;
+    set_drive_pid(drive, -42, DRIVE_SPEED) ;
+    wait_drive() ;
+  //lower and place goal
+    set_lift_position(321, 100) ;
+    pros::delay(100) ;
+    sixlock(false) ;
+    set_drive_pid(drive, 12, DRIVE_SPEED) ;
+
 
 }
 
@@ -318,12 +366,11 @@ auto_skillz() {
     mogo_out () ;
   // rush
     set_drive_brake(MOTOR_BRAKE_COAST);
-    set_drive_pid(drive, 43, DRIVE_SPEED) ; // was 38
+    set_drive_pid(drive, 43, DRIVE_SPEED/1.25) ; // was 38
     wait_drive() ;
     set_drive_brake(MOTOR_BRAKE_BRAKE);
   // retreat
-    mogo_in () ; // test
-    // set_mogo_position (-780, 127) ;
+    mogo_in () ;
     set_drive_pid(drive, -21, DRIVE_SPEED) ;
   // back lift up
     set_lift_position(446, 100);
@@ -355,14 +402,14 @@ auto_skillz() {
   // turn
     set_drive_pid(turn, 0, DRIVE_SPEED) ;
     wait_drive() ;
-  //rush other side
-    set_drive_pid(drive, 70, DRIVE_SPEED/5) ;
+  //rush mid
+    set_drive_pid(drive, 38, DRIVE_SPEED/3) ;
     wait_drive() ;
   //face mid goal
     set_drive_pid(turn, -90, DRIVE_SPEED) ;
     wait_drive() ;
   //drive forward & grab rings
-    set_drive_pid(drive, 50, DRIVE_SPEED/3) ;
+    set_drive_pid(drive, 34, DRIVE_SPEED/3) ;
     mogo_out() ;
     wait_drive() ;
   //pick up mid
@@ -370,24 +417,26 @@ auto_skillz() {
   //drop ally mogo and swap to b6bar
     intake(0) ;
     claw(false) ;
-    set_drive_pid(drive, 10, DRIVE_SPEED) ;
+    set_drive_pid(drive, 15, DRIVE_SPEED) ;
     wait_drive() ;
     set_lift_position(0, 100) ;
     sixlock(false) ;
+    pros::delay(500) ;
   //pick up goal
-    set_drive_pid(drive, 5, DRIVE_SPEED) ;
+    set_drive_pid(drive, -15, DRIVE_SPEED) ;
     wait_drive() ;
     sixlock(true) ;
   //platform
     set_drive_pid(turn, -180, DRIVE_SPEED) ;
     wait_drive() ;
     set_lift_position(575, 100) ;
-    set_drive_pid(drive, -30, DRIVE_SPEED) ;
+    set_drive_pid(drive, -42, DRIVE_SPEED) ;
     wait_drive() ;
   //lower and place goal
     set_lift_position(321, 100) ;
     pros::delay(100) ;
     sixlock(false) ;
+    set_drive_pid(drive, 12, DRIVE_SPEED) ;
 }
 
 
