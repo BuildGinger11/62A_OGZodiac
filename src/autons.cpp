@@ -119,7 +119,7 @@ auto_test() // now is tester auton
     set_drive_pid(turn, -90, DRIVE_SPEED) ;
     wait_drive() ;
   //drive forward & grab rings
-    set_drive_pid(drive, 34, DRIVE_SPEED/3) ;
+    set_drive_pid(drive, 46, DRIVE_SPEED/3) ;
     mogo_out() ;
     wait_drive() ;
   //pick up mid
@@ -137,16 +137,39 @@ auto_test() // now is tester auton
     wait_drive() ;
     sixlock(true) ;
   //platform
+
+    set_lift_position(575, 100) ;
+    pros::delay(250) ;
+    set_drive_pid(turn, -210, DRIVE_SPEED) ;
+    wait_drive() ;
+    set_drive_pid(drive, -30, DRIVE_SPEED) ;
+    wait_drive() ;
     set_drive_pid(turn, -180, DRIVE_SPEED) ;
     wait_drive() ;
-    set_lift_position(575, 100) ;
-    set_drive_pid(drive, -42, DRIVE_SPEED) ;
-    wait_drive() ;
+    set_drive_pid(drive, -24, DRIVE_SPEED) ;
   //lower and place goal
     set_lift_position(321, 100) ;
     pros::delay(100) ;
     sixlock(false) ;
-    set_drive_pid(drive, 12, DRIVE_SPEED) ;
+    set_drive_pid(drive, 6, DRIVE_SPEED) ;
+    wait_drive () ;
+    //face mogo
+    set_drive_pid(turn, 90, DRIVE_SPEED) ;
+    mogo_out() ;
+    set_lift_position(575, 100) ;
+    wait_drive() ;
+    claw(false) ;
+    set_drive_pid(drive, -30, DRIVE_SPEED) ;
+    while (!limit_switch() || timer == 500) {
+      timer++;
+      pros::delay(10);}
+
+  // claw grab
+    claw(true) ;
+    pros::delay (500) ;
+
+
+    set_drive_pid(drive, 0, 0) ;
 
 
 }
