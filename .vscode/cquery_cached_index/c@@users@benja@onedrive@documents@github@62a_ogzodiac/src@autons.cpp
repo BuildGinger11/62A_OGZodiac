@@ -138,29 +138,32 @@ auto_test() // now is tester auton
     sixlock(true) ;
   //platform
 
-    set_lift_position(575, 100) ;
-    pros::delay(250) ;
     set_drive_pid(turn, -210, DRIVE_SPEED) ;
     wait_drive() ;
-    set_drive_pid(drive, -30, DRIVE_SPEED) ;
+    set_drive_pid(drive, -25, DRIVE_SPEED) ;
+
+    set_lift_position(575, 100) ;
+
     wait_drive() ;
     set_drive_pid(turn, -180, DRIVE_SPEED) ;
     wait_drive() ;
-    set_drive_pid(drive, -24, DRIVE_SPEED) ;
+    set_drive_pid(drive, -25, DRIVE_SPEED) ;
+    wait_drive() ;
   //lower and place goal
     set_lift_position(321, 100) ;
-    pros::delay(100) ;
+    pros::delay(150) ;
     sixlock(false) ;
-    set_drive_pid(drive, 6, DRIVE_SPEED) ;
+    pros::delay(100) ;
+    set_drive_pid(drive, 10, DRIVE_SPEED) ;
     wait_drive () ;
     //face mogo
-    set_drive_pid(turn, 90, DRIVE_SPEED) ;
+    set_drive_pid(turn, -270, DRIVE_SPEED) ;
     mogo_out() ;
     set_lift_position(575, 100) ;
     wait_drive() ;
     claw(false) ;
-    set_drive_pid(drive, -30, DRIVE_SPEED) ;
-    while (!limit_switch() || timer == 500) {
+    set_drive_pid(drive, -54, DRIVE_SPEED) ;
+    while (!limit_switch() || timer == 1000) {
       timer++;
       pros::delay(10);}
 
