@@ -72,7 +72,8 @@ void
 auto_test() // now is tester auton
 {
 
-
+    set_drive_brake (MOTOR_BRAKE_COAST) ;
+    set_drive_pid(drive, 30, DRIVE_SPEED) ; // half-platform is 26.5
 
 
 }
