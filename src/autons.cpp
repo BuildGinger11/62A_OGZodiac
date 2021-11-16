@@ -71,10 +71,38 @@ int timer = 0;
 void
 auto_test() // now is tester auton
 {
-
+    flock(false) ;
     set_drive_brake (MOTOR_BRAKE_COAST) ;
-    set_drive_pid(drive, 30, DRIVE_SPEED) ; // half-platform is 26.5
-
+    set_drive_pid(drive, -30, DRIVE_SPEED) ; // half-platform is 26.5
+    int pitch = get_gyroPitch () ;
+    timer = 0 ;
+    pros::delay(100) ;
+    flock(true) ;
+    while (!limit_switch() || timer == 250) {
+      timer++;
+      pros::delay(10);}
+    pros::delay(200) ;
+    set_drive_pid(turn, 150, DRIVE_SPEED) ;
+    wait_drive() ;
+    mogo_out() ;
+    set_drive_pid(drive, 36, DRIVE_SPEED) ;
+    wait_drive() ;
+    mogo_in() ;
+    pros::delay(150) ;
+    set_drive_pid(turn, -150, DRIVE_SPEED) ;
+    wait_drive() ;
+    set_drive_pid(drive, 72, DRIVE_SPEED) ;
+    wait_drive() ;
+    // drop mogo and prepare platform
+    set_drive_pid(drive, -20, DRIVE_SPEED) ;
+    wait_drive() ;
+    set_drive_pid(turn, -180, DRIVE_SPEED) ;
+    wait_drive() ;
+    set_drive_pid(drive, 20, DRIVE_SPEED) ;
+    wait_drive() ;
+    mogo_out() ;
+    set_drive_pid(drive, -60, DRIVE_SPEED) ;
+    wait_drive() ;
 
 }
 
