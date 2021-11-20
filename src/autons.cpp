@@ -64,45 +64,76 @@ two_mogo_constants() {
 int timer = 0;
 
 
+void autonSkillzP1 () // over the platform
+{
+  tareLift() ;
+  sixlock(false) ;
+  set_lift_position(0, 100) ;
+  pros::delay(500) ;
+  //drive into mogo
+  set_drive_pid(drive, -7, DRIVE_SPEED/2) ;
+  wait_drive() ;
+  pros::delay(200) ;
+  sixlock(true) ;
+  pros::delay(300) ;
+  //lift up
+  set_lift_position(575, 100) ;
+  pros::delay(750) ;
+  //turn
+  set_drive_pid(turn, 90, DRIVE_SPEED/1.5) ;
+  wait_drive() ;
+}
+void autonSkillzP2 () // get ally2
+{
+  //rush neutral
+  set_drive_pid(drive, 80, DRIVE_SPEED) ;
+  pros::delay(250) ;
+  set_lift_position(50, DRIVE_SPEED) ;
+  wait_drive() ;
+  //place neutral
+  set_drive_pid(turn, -15, DRIVE_SPEED/1.5) ;
+  wait_drive() ;
+  //back into position
+  set_drive_pid(drive, -34, DRIVE_SPEED/1.5) ;
+  set_lift_position(575, 100) ;
+  wait_drive() ;
+//place ally mogo
+  set_drive_pid(turn, -92, DRIVE_SPEED/1.5) ;
+  wait_drive() ;
+  //reverse into platform
+  set_drive_pid(drive, -23, DRIVE_SPEED) ;
+  wait_drive() ;
+  set_lift_position(280, 100) ;
+  pros::delay(250) ;
+  sixlock(false) ;
+  pros::delay(500) ;
+}
+void autonSkillzP3 () // move neutral
+{
+  //take tall neut
+  mogo_out() ;
+  set_drive_pid(drive, 40, DRIVE_SPEED/1.25) ;
+  wait_drive() ;
+  mogo_in() ;
 
+}
+void autonSkillzP4 () // drop mogos
+{
 
+}
+void autonSkillzP5 () // get ramp mogo
+{
 
+}
 
 void
 auto_test() // now is tester auton
 {
-    flock(false) ;
-    set_drive_brake (MOTOR_BRAKE_COAST) ;
-    set_drive_pid(drive, -30, DRIVE_SPEED) ; // half-platform is 26.5
-    int pitch = get_gyroPitch () ;
-    timer = 0 ;
-    pros::delay(100) ;
-    flock(true) ;
-    while (!limit_switch() || timer == 250) {
-      timer++;
-      pros::delay(10);}
-    pros::delay(200) ;
-    set_drive_pid(turn, 150, DRIVE_SPEED) ;
-    wait_drive() ;
-    mogo_out() ;
-    set_drive_pid(drive, 36, DRIVE_SPEED) ;
-    wait_drive() ;
-    mogo_in() ;
-    pros::delay(150) ;
-    set_drive_pid(turn, -150, DRIVE_SPEED) ;
-    wait_drive() ;
-    set_drive_pid(drive, 72, DRIVE_SPEED) ;
-    wait_drive() ;
-    // drop mogo and prepare platform
-    set_drive_pid(drive, -20, DRIVE_SPEED) ;
-    wait_drive() ;
-    set_drive_pid(turn, -180, DRIVE_SPEED) ;
-    wait_drive() ;
-    set_drive_pid(drive, 20, DRIVE_SPEED) ;
-    wait_drive() ;
-    mogo_out() ;
-    set_drive_pid(drive, -60, DRIVE_SPEED) ;
-    wait_drive() ;
+    autonSkillzP1 () ;
+    autonSkillzP2 () ;
+    autonSkillzP3 () ;
+    autonSkillzP4 () ;
+    autonSkillzP5() ;
 
 }
 

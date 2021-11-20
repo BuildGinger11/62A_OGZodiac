@@ -15,7 +15,7 @@
             "-isystemc:\\program files\\pros\\toolchain\\usr\\bin\\../lib/gcc/arm-none-eabi/10.2.1/include-fixed",
             "-isystemc:\\program files\\pros\\toolchain\\usr\\bin\\../lib/gcc/arm-none-eabi/10.2.1/../../../../arm-none-eabi/include",
             "-iquote./include",
-            "-iquote./include/./",
+            "-iquote./include/EZ-Template/",
             "-mcpu=cortex-a9",
             "-mfpu=neon-fp16",
             "-mfloat-abi=softfp",
@@ -30,11 +30,11 @@
             "-funwind-tables",
             "--std=gnu++17",
             "-o",
-            "bin/main.cpp.o",
-            "src\\main.cpp"
+            "bin/EZ-Template/util.cpp.o",
+            "src\\EZ-Template\\util.cpp"
         ],
         "directory": "C:\\Users\\benja\\OneDrive\\Documents\\GitHub\\62A_OGZodiac",
-        "file": "src\\main.cpp"
+        "file": "src\\EZ-Template\\util.cpp"
     },
     {
         "arguments": [
@@ -104,11 +104,11 @@
             "-funwind-tables",
             "--std=gnu++17",
             "-o",
-            "bin/B6-Bar.cpp.o",
-            "src\\B6-Bar.cpp"
+            "bin/Intakes.cpp.o",
+            "src\\Intakes.cpp"
         ],
         "directory": "C:\\Users\\benja\\OneDrive\\Documents\\GitHub\\62A_OGZodiac",
-        "file": "src\\B6-Bar.cpp"
+        "file": "src\\Intakes.cpp"
     },
     {
         "arguments": [
@@ -178,11 +178,11 @@
             "-funwind-tables",
             "--std=gnu++17",
             "-o",
-            "bin/Intakes.cpp.o",
-            "src\\Intakes.cpp"
+            "bin/B6-Bar.cpp.o",
+            "src\\B6-Bar.cpp"
         ],
         "directory": "C:\\Users\\benja\\OneDrive\\Documents\\GitHub\\62A_OGZodiac",
-        "file": "src\\Intakes.cpp"
+        "file": "src\\B6-Bar.cpp"
     },
     {
         "arguments": [
@@ -289,11 +289,11 @@
             "-funwind-tables",
             "--std=gnu++17",
             "-o",
-            "bin/autons.cpp.o",
-            "src\\autons.cpp"
+            "bin/main.cpp.o",
+            "src\\main.cpp"
         ],
         "directory": "C:\\Users\\benja\\OneDrive\\Documents\\GitHub\\62A_OGZodiac",
-        "file": "src\\autons.cpp"
+        "file": "src\\main.cpp"
     },
     {
         "arguments": [
@@ -311,7 +311,7 @@
             "-isystemc:\\program files\\pros\\toolchain\\usr\\bin\\../lib/gcc/arm-none-eabi/10.2.1/include-fixed",
             "-isystemc:\\program files\\pros\\toolchain\\usr\\bin\\../lib/gcc/arm-none-eabi/10.2.1/../../../../arm-none-eabi/include",
             "-iquote./include",
-            "-iquote./include/EZ-Template/",
+            "-iquote./include/./",
             "-mcpu=cortex-a9",
             "-mfpu=neon-fp16",
             "-mfloat-abi=softfp",
@@ -326,10 +326,10 @@
             "-funwind-tables",
             "--std=gnu++17",
             "-o",
-            "bin/EZ-Template/util.cpp.o",
-            "src\\EZ-Template\\util.cpp"
+            "bin/autons.cpp.o",
+            "src\\autons.cpp"
         ],
         "directory": "C:\\Users\\benja\\OneDrive\\Documents\\GitHub\\62A_OGZodiac",
-        "file": "src\\EZ-Template\\util.cpp"
+        "file": "src\\autons.cpp"
     }
 ]

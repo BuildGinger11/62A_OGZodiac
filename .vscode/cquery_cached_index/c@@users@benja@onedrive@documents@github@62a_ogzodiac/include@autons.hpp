@@ -2,6 +2,12 @@
 
 void reset_constants();
 
+void autonSkillzP1 () ;
+void autonSkillzP2 () ;
+void autonSkillzP3 () ;
+void autonSkillzP4 () ;
+void autonSkillzP5 () ;
+
 void auto_test();
 void auto_winPointRight();
 void auto_AWPcarry();
