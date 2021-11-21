@@ -64,7 +64,7 @@ two_mogo_constants() {
 int timer = 0;
 
 
-void autonSkillzP1 () // over the platform
+void autonSkillzP1 () //get ally
 {
   tareLift() ;
   sixlock(false) ;
@@ -76,52 +76,129 @@ void autonSkillzP1 () // over the platform
   pros::delay(200) ;
   sixlock(true) ;
   pros::delay(300) ;
+  set_drive_pid(drive, 3, DRIVE_SPEED) ;
   //lift up
   set_lift_position(575, 100) ;
   pros::delay(750) ;
+  wait_drive() ;
   //turn
   set_drive_pid(turn, 90, DRIVE_SPEED/1.5) ;
   wait_drive() ;
 }
-void autonSkillzP2 () // get ally2
+
+void autonSkillzP2 () // get neutral
 {
   //rush neutral
-  set_drive_pid(drive, 80, DRIVE_SPEED) ;
+  mogo_out() ;
+  set_drive_pid(drive, 50, DRIVE_SPEED/1.5) ;
   pros::delay(250) ;
-  set_lift_position(50, DRIVE_SPEED) ;
+  set_lift_position(100, DRIVE_SPEED) ;
   wait_drive() ;
-  //place neutral
-  set_drive_pid(turn, -15, DRIVE_SPEED/1.5) ;
+  //grab neutral
+  mogo_in() ;
+}
+
+void autonSkillzP3 () // score neutral and ally
+{
+//move to position
+  set_drive_pid(turn, -46, DRIVE_SPEED) ;
   wait_drive() ;
-  //back into position
-  set_drive_pid(drive, -34, DRIVE_SPEED/1.5) ;
-  set_lift_position(575, 100) ;
+  //drive in front of platform
+  set_drive_pid(drive, -44, DRIVE_SPEED) ;
   wait_drive() ;
 //place ally mogo
   set_drive_pid(turn, -92, DRIVE_SPEED/1.5) ;
+  set_lift_position(625, 100) ;
   wait_drive() ;
   //reverse into platform
-  set_drive_pid(drive, -23, DRIVE_SPEED) ;
+  set_drive_pid(drive, -18, DRIVE_SPEED) ;
   wait_drive() ;
-  set_lift_position(280, 100) ;
+  set_lift_position(321, 100) ;
   pros::delay(250) ;
   sixlock(false) ;
   pros::delay(500) ;
-}
-void autonSkillzP3 () // move neutral
-{
-  //take tall neut
+  set_lift_position(500, 100) ;
+  pros::delay(500) ;
+//platform neutral
+  //drop
   mogo_out() ;
-  set_drive_pid(drive, 40, DRIVE_SPEED/1.25) ;
+  set_drive_pid(drive, 15, DRIVE_SPEED) ;
+  wait_drive() ;
+  set_drive_pid(drive, -10, DRIVE_SPEED) ;
   wait_drive() ;
   mogo_in() ;
-
+  pros::delay(250) ;
+  //face neutral
+  set_drive_pid(drive, 8, DRIVE_SPEED) ;
+  wait_drive() ;
+  set_drive_pid(turn, 92, DRIVE_SPEED) ;
+  pros::delay(150) ;
+  set_lift_position(0, 100) ;
+  wait_drive() ;
+  //grab
+  sixlock(false) ;
+  set_drive_pid(drive, -18, DRIVE_SPEED) ;
+  wait_drive() ;
+  pros::delay(200) ;
+  sixlock(true) ;
+  pros::delay(300) ;
+  //actual platformy stuff
+  set_lift_position(575, 100) ;
+    //avoid hit tall neut when turn
+  set_drive_pid(drive, 10, DRIVE_SPEED) ;
+  wait_drive() ;
+  //face drive to platform
+  set_drive_pid(turn, -77.5, DRIVE_SPEED/1.75) ;
+  wait_drive() ;
+  set_drive_pid(drive, -20, DRIVE_SPEED/1.5) ;
+  wait_drive() ;
+  set_lift_position(321, 100) ;
+  //place
+  pros::delay(500) ;
+  sixlock(false) ;
+  pros::delay(250) ;
+  //escape
+  set_lift_position(500, 100) ;
+  pros::delay(500) ;
+  set_drive_pid(drive, 22, DRIVE_SPEED) ;
+  wait_drive() ;
 }
-void autonSkillzP4 () // drop mogos
+
+void autonSkillzP4 () // score tall neut
 {
+//platform tall neutral
+  //face tall neutral
+  set_drive_pid(turn, 90, DRIVE_SPEED) ;
+  set_lift_position(0, 100) ;
+  wait_drive() ;
+  //drive tal neut
+  set_drive_pid(drive, -16, DRIVE_SPEED) ;
+  sixlock(false) ;
+  wait_drive() ;
+  //grab
+  pros::delay(500) ;
+  sixlock(true) ;
+  pros::delay(750) ;
+  //face drive to platform
+  set_drive_pid(turn, 257.5, DRIVE_SPEED/1.75) ;
+  wait_drive() ;
+  set_drive_pid(drive, -38, DRIVE_SPEED/1.5) ;
+  set_lift_position(575, 100) ;
+  wait_drive() ;
 
+  //place
+  set_lift_position(330, 100) ;
+  pros::delay(750) ;
+  sixlock(false) ;
+  pros::delay(250) ;
+  //escape
+  set_lift_position(500, 100) ;
+  pros::delay(500) ;
+  set_drive_pid(drive, 12, DRIVE_SPEED) ;
+  wait_drive() ;
 }
-void autonSkillzP5 () // get ramp mogo
+
+void autonSkillzP5 () // get tall mogo
 {
 
 }
