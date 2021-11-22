@@ -6,6 +6,8 @@ int get_lift();
 int get_lift_vel();
 
 void sixlock (bool position) ;
+
+void setLiftStart (int position) ;
 void set_lift_position(int target, int speed);
 
 void claw (bool position) ;
@@ -13,3 +15,5 @@ void claw (bool position) ;
 void lift_control(void*);
 
 bool limit_switch () ;
+
+void tareLift () ;

@@ -94,6 +94,7 @@ int left_velocity()  { return l_motor.get_actual_velocity(); }
 
 void  tare_gyro() { gyro.set_rotation(0); }
 float get_gyro()  { return gyro.get_rotation(); }
+float get_gyroPitch () {return gyro.get_pitch () ;}
 
 
 bool

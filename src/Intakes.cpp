@@ -1,11 +1,9 @@
 #include "main.h"
 
-pros::Motor Intake(5);
 pros::Motor Conveyor(21);
 
 void intake(int power)
 {
-  Intake.move(power);
   Conveyor.move(power);
 }
 void Intake_Control(void*)
@@ -15,11 +13,11 @@ void Intake_Control(void*)
     //printf("master: %d\n", master.get_digital(DIGITAL_L1));
   if(master.get_digital(DIGITAL_L1))
   {
-     intake(100);
+     intake(127);
   }
   else if(master.get_digital(DIGITAL_DOWN))
   {
-    intake(-100);
+    intake(-127);
   }
   else
   {
