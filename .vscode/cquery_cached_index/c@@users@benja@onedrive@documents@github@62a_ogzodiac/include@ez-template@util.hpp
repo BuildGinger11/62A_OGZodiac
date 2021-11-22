@@ -29,6 +29,7 @@ void reset_drive_sensor();
 
 void tare_gyro();
 float get_gyro();
+float get_gyroPitch () ;
 bool imu_calibrate();
 
 int sgn(int input);

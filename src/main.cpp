@@ -37,24 +37,24 @@ auto_select(bool is_auton) {
       if (is_auton) test_auton();
       break;
     case 2: // Auto 3
-      pros::lcd::set_text(1, "Auton winPoint");
-      if (is_auton) auto_winPoint();
+      pros::lcd::set_text(1, "Auton winPoint Right Side");
+      if (is_auton) auto_winPointRight();
       break;
     case 3: // Auto 4
-      pros::lcd::set_text(1, "Auton Basic");
-      if (is_auton) auto_basic();
+      pros::lcd::set_text(1, "Auton homeRow");
+      if (is_auton) auto_AWPcarry();
       break;
     case 4: // Auto 5
-      pros::lcd::set_text(1, "Auton 4");
-      if (is_auton) auto_4();
+      pros::lcd::set_text(1, "Auton Right Side Alliance");
+      if (is_auton) auto_allianceRight();
       break;
     case 5: // Auto 6
-      pros::lcd::set_text(1, "Auton 5");
-      if (is_auton) auto_5();
+      pros::lcd::set_text(1, "Auton Skills");
+      if (is_auton) auto_skillz();
       break;
     case 6: // Auto 6
-      pros::lcd::set_text(1, "Auton 6");
-      if (is_auton) auto_6();
+      pros::lcd::set_text(1, "Auton Basic");
+      if (is_auton) auto_basic() ;
       break;
 
     default:
@@ -130,6 +130,7 @@ disabled() {
  */
 void
 competition_initialize() {
+  tareLift () ;
   disable_all_tasks();
 }
 
@@ -167,7 +168,10 @@ autonomous() {
  * operator control task will be stopped. Re-enabling the robot will restart the
  * task, not resume it from where it left off.
  */
+
+
 void opcontrol() {
+
   drive_pid.suspend();
   reset_drive_sensor();
   set_drive_brake(MOTOR_BRAKE_COAST); // This is preference to what you like to drive on
