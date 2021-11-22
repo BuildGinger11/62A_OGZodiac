@@ -7,6 +7,7 @@ void autonSkillzP2 () ;
 void autonSkillzP3 () ;
 void autonSkillzP4 () ;
 void autonSkillzP5 () ;
+void autonSkillzP6 () ;
 
 void auto_test();
 void auto_winPointRight();

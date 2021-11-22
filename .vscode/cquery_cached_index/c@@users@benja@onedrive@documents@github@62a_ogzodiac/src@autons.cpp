@@ -109,7 +109,7 @@ void autonSkillzP3 () // score neutral and ally
 //place ally mogo
   set_lift_position(625, 100) ;
   pros::delay(400) ;
-  set_drive_pid(turn, -112, DRIVE_SPEED/1.5) ; // was -92
+  set_drive_pid(turn, -112.5, DRIVE_SPEED/1.5) ; // was -112
   wait_drive() ;
   //reverse into platform
   set_drive_pid(drive, -18, DRIVE_SPEED) ;
@@ -148,7 +148,7 @@ void autonSkillzP3 () // score neutral and ally
   pros::delay(200) ;
   sixlock(true) ;
   pros::delay(300) ;
-//actual platformy stuff
+  //actual platformy stuff
 
   set_drive_pid(drive, 23, DRIVE_SPEED) ;
 
@@ -182,8 +182,8 @@ void autonSkillzP4 () // score tall neut
   wait_drive() ;
 //platform tall neutral
   //face tall neutral
-  set_drive_pid(turn, 95, DRIVE_SPEED) ;
   set_lift_position(0, 100) ;
+  set_drive_pid(turn, 95, DRIVE_SPEED) ;
   wait_drive() ;
   //drive tall neut
   set_drive_pid(drive, -25, DRIVE_SPEED/1.5) ;
@@ -194,15 +194,29 @@ void autonSkillzP4 () // score tall neut
   sixlock(true) ;
   pros::delay(750) ;
   //face drive to platform
-  set_drive_pid(turn, 270, DRIVE_SPEED/1.75) ;
-  wait_drive() ;
-  set_drive_pid(drive, -47, DRIVE_SPEED/2) ;
-  set_lift_position(525, 100) ;
+  set_drive_pid(turn, 268, DRIVE_SPEED/1.75) ;
   wait_drive() ;
 
+  // ben method
+  //lift up
+  set_lift_position(700, 100) ;
+  pros::delay(2000);
+  //drive into
+  set_drive_pid(drive, -47, DRIVE_SPEED/1.5) ;
+  pros::delay (800) ;
+  set_lift_position(230, 30) ;
+  wait_drive() ;
+
+  // // dru method
+  // //lift up
+  // set_lift_position(525, 100) ;
+  // //drive into
+  // set_drive_pid(drive, -47, DRIVE_SPEED/2) ;
+  // pros::delay(1750);
+  // set_lift_position(230, 100) ;
+  // wait_drive() ;
+
   //place
-    //ease into the push
-  set_lift_position(230, 100) ;
   pros::delay(500) ;
   sixlock(false) ;
   pros::delay(500) ;
@@ -216,7 +230,7 @@ void autonSkillzP4 () // score tall neut
 void autonSkillzP5 () // get opposite ally1 and last neut
 {
   //face ally1
-  set_drive_pid(turn, 175, DRIVE_SPEED) ;
+  set_drive_pid(turn, 176, DRIVE_SPEED) ;
   wait_drive() ;
   set_lift_position(0, 100) ;
   set_drive_pid(drive, -59, DRIVE_SPEED) ;
@@ -230,12 +244,42 @@ void autonSkillzP5 () // get opposite ally1 and last neut
   wait_drive() ;
   //get last neut
   mogo_out() ;
-  set_drive_pid(drive, 77, DRIVE_SPEED/1.5) ;
+  set_drive_pid(drive, 98, DRIVE_SPEED/1.5) ;
   wait_drive() ;
   mogo_in() ;
   pros::delay(500) ;
-  set_drive_pid(turn, -90, DRIVE_SPEED) ;
+  //face platform
+  set_drive_pid(turn, 90, DRIVE_SPEED) ;
+  wait_drive() ;
+  //drive platform
+  set_drive_pid(drive, -55, DRIVE_SPEED) ;
+  //raise lift
+  set_lift_position(575, 100) ;
+  wait_drive() ;
 }
+
+void autonSkillzP6 () //platforming process
+{
+  //face platform
+  set_drive_pid(turn, 179, DRIVE_SPEED) ;
+  wait_drive() ;
+  //lower platfomr
+  set_lift_position(0, 100) ;
+  pros::delay(1500) ;
+//platforming Drive
+  set_drive_pid(drive, -20, DRIVE_SPEED);
+  wait_drive();
+  while (get_gyroPitch() >= 10)
+  {
+    if (get_gyroPitch() > 20)
+      set_tank(-127, -127);
+    else
+      set_tank(-100, -100);
+  }
+  set_tank(0, 0);
+
+}
+
 
 void
 auto_test() // now is tester auton
@@ -245,6 +289,7 @@ auto_test() // now is tester auton
     autonSkillzP3 () ;
     autonSkillzP4 () ;
     autonSkillzP5() ;
+    autonSkillzP6 () ;
 
 }
 
