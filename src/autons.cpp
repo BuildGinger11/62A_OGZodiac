@@ -104,75 +104,89 @@ void autonSkillzP3 () // score neutral and ally
   set_drive_pid(turn, -46, DRIVE_SPEED) ;
   wait_drive() ;
   //drive in front of platform
-  set_drive_pid(drive, -44, DRIVE_SPEED) ;
+  set_drive_pid(drive, -46, DRIVE_SPEED) ; // was -44
   wait_drive() ;
 //place ally mogo
-  set_drive_pid(turn, -92, DRIVE_SPEED/1.5) ;
   set_lift_position(625, 100) ;
+  pros::delay(400) ;
+  set_drive_pid(turn, -112, DRIVE_SPEED/1.5) ; // was -92
   wait_drive() ;
   //reverse into platform
   set_drive_pid(drive, -18, DRIVE_SPEED) ;
   wait_drive() ;
+  //drop lift
   set_lift_position(321, 100) ;
-  pros::delay(250) ;
+  pros::delay(500) ;
+  //set_drive_pid(turn, -105, DRIVE_SPEED) ;
+  wait_drive() ;
   sixlock(false) ;
   pros::delay(500) ;
+  set_drive_pid(drive, 10, DRIVE_SPEED) ;
+  pros::delay (200) ;
   set_lift_position(500, 100) ;
-  pros::delay(500) ;
+  wait_drive() ;
+
 //platform neutral
+  set_drive_pid(turn, -180, DRIVE_SPEED) ;
   //drop
   mogo_out() ;
-  set_drive_pid(drive, 15, DRIVE_SPEED) ;
+  set_drive_pid(drive, 15, DRIVE_SPEED/1.5) ;
   wait_drive() ;
   set_drive_pid(drive, -10, DRIVE_SPEED) ;
   wait_drive() ;
   mogo_in() ;
   pros::delay(250) ;
   //face neutral
-  set_drive_pid(drive, 8, DRIVE_SPEED) ;
-  wait_drive() ;
-  set_drive_pid(turn, 92, DRIVE_SPEED) ;
+  set_drive_pid(turn, 0, DRIVE_SPEED) ;
   pros::delay(150) ;
   set_lift_position(0, 100) ;
   wait_drive() ;
   //grab
   sixlock(false) ;
-  set_drive_pid(drive, -18, DRIVE_SPEED) ;
+  set_drive_pid(drive, -30, DRIVE_SPEED/1.5) ;
   wait_drive() ;
   pros::delay(200) ;
   sixlock(true) ;
   pros::delay(300) ;
-  //actual platformy stuff
+//actual platformy stuff
+
+  set_drive_pid(drive, 23, DRIVE_SPEED) ;
+
   set_lift_position(575, 100) ;
-    //avoid hit tall neut when turn
-  set_drive_pid(drive, 10, DRIVE_SPEED) ;
   wait_drive() ;
-  //face drive to platform
-  set_drive_pid(turn, -77.5, DRIVE_SPEED/1.75) ;
+  //face to platform
+  set_drive_pid(turn, -85, DRIVE_SPEED/1.75) ;
   wait_drive() ;
-  set_drive_pid(drive, -20, DRIVE_SPEED/1.5) ;
+  set_drive_pid(drive, -17, DRIVE_SPEED/1.5) ;
   wait_drive() ;
   set_lift_position(321, 100) ;
   //place
-  pros::delay(500) ;
+  pros::delay(750) ;
   sixlock(false) ;
   pros::delay(250) ;
   //escape
+  set_drive_pid(drive, 15, DRIVE_SPEED) ;
+  pros::delay(200) ;
   set_lift_position(500, 100) ;
-  pros::delay(500) ;
-  set_drive_pid(drive, 22, DRIVE_SPEED) ;
   wait_drive() ;
+
+
 }
 
 void autonSkillzP4 () // score tall neut
 {
+  // get position for tall neut
+  set_drive_pid(turn, 0, DRIVE_SPEED) ;
+  wait_drive() ;
+  set_drive_pid(drive, 8, DRIVE_SPEED) ;
+  wait_drive() ;
 //platform tall neutral
   //face tall neutral
-  set_drive_pid(turn, 90, DRIVE_SPEED) ;
+  set_drive_pid(turn, 95, DRIVE_SPEED) ;
   set_lift_position(0, 100) ;
   wait_drive() ;
-  //drive tal neut
-  set_drive_pid(drive, -16, DRIVE_SPEED) ;
+  //drive tall neut
+  set_drive_pid(drive, -25, DRIVE_SPEED/1.5) ;
   sixlock(false) ;
   wait_drive() ;
   //grab
@@ -180,27 +194,47 @@ void autonSkillzP4 () // score tall neut
   sixlock(true) ;
   pros::delay(750) ;
   //face drive to platform
-  set_drive_pid(turn, 257.5, DRIVE_SPEED/1.75) ;
+  set_drive_pid(turn, 270, DRIVE_SPEED/1.75) ;
   wait_drive() ;
-  set_drive_pid(drive, -38, DRIVE_SPEED/1.5) ;
-  set_lift_position(575, 100) ;
+  set_drive_pid(drive, -47, DRIVE_SPEED/2) ;
+  set_lift_position(525, 100) ;
   wait_drive() ;
 
   //place
-  set_lift_position(330, 100) ;
-  pros::delay(750) ;
-  sixlock(false) ;
-  pros::delay(250) ;
-  //escape
-  set_lift_position(500, 100) ;
+    //ease into the push
+  set_lift_position(230, 100) ;
   pros::delay(500) ;
-  set_drive_pid(drive, 12, DRIVE_SPEED) ;
+  sixlock(false) ;
+  pros::delay(500) ;
+  //escape
+  set_drive_pid(drive, 6, DRIVE_SPEED) ;
+  pros::delay(150) ;
+  set_lift_position(500, DRIVE_SPEED) ;
   wait_drive() ;
 }
 
-void autonSkillzP5 () // get tall mogo
+void autonSkillzP5 () // get opposite ally1 and last neut
 {
-
+  //face ally1
+  set_drive_pid(turn, 175, DRIVE_SPEED) ;
+  wait_drive() ;
+  set_lift_position(0, 100) ;
+  set_drive_pid(drive, -59, DRIVE_SPEED) ;
+  wait_drive() ;
+  //get ally1
+  sixlock(true) ;
+  pros::delay(250) ;
+  set_lift_position(100, 100) ;
+  //face other neut
+  set_drive_pid(turn, 202, DRIVE_SPEED/1.25) ;
+  wait_drive() ;
+  //get last neut
+  mogo_out() ;
+  set_drive_pid(drive, 77, DRIVE_SPEED/1.5) ;
+  wait_drive() ;
+  mogo_in() ;
+  pros::delay(500) ;
+  set_drive_pid(turn, -90, DRIVE_SPEED) ;
 }
 
 void
