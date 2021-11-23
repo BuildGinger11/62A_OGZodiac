@@ -94,10 +94,10 @@ auto_test() // now is tester auton
   pros::delay(200) ;
   sixlock(true) ;
   pros::delay(300) ;
-  set_drive_pid(drive, 3, DRIVE_SPEED) ;
   //lift up
-  set_lift_position(575, 100) ;
-  pros::delay(750) ;
+  set_lift_position(700, 100) ;
+  pros::delay(500) ;
+  set_drive_pid(drive, 3, DRIVE_SPEED) ;
   wait_drive() ;
   //turn
   set_drive_pid(turn, 90, DRIVE_SPEED/1.5) ;
@@ -107,7 +107,7 @@ auto_test() // now is tester auton
   mogo_out() ;
   set_drive_pid(drive, 50, DRIVE_SPEED/1.5) ;
   pros::delay(250) ;
-  set_lift_position(100, DRIVE_SPEED) ;
+  set_lift_position(120, DRIVE_SPEED) ;
   wait_drive() ;
   //grab neutral
   mogo_in() ;
@@ -119,23 +119,23 @@ auto_test() // now is tester auton
     set_drive_pid(drive, -46, DRIVE_SPEED) ; // was -44
     wait_drive() ;
   //place ally mogo
-    set_lift_position(625, 100) ;
+    set_lift_position(700, 100) ;
     pros::delay(400) ;
-    set_drive_pid(turn, -107, DRIVE_SPEED/1.5) ; // was -112
+    set_drive_pid(turn, -100, DRIVE_SPEED/1.5) ; // was -112
     wait_drive() ;
     //reverse into platform
     set_drive_pid(drive, -18, DRIVE_SPEED) ;
     wait_drive() ;
     //drop lift
-    set_lift_position(321, 60) ;
+    set_lift_position(400, 90) ;
     //set_drive_pid(turn, -105, DRIVE_SPEED) ;
     wait_drive() ;
-    pros::delay(500) ;
+    pros::delay(1000) ;
     sixlock(false) ;
-    pros::delay(500) ;
+    pros::delay(750) ;
     set_drive_pid(drive, 10, DRIVE_SPEED) ;
     pros::delay (200) ;
-    set_lift_position(500, 100) ;
+    set_lift_position(650, 100) ;
     wait_drive() ;
 
   //platform neutral
@@ -155,42 +155,42 @@ auto_test() // now is tester auton
     wait_drive() ;
     //grab
     sixlock(false) ;
-    set_drive_pid(drive, -30, DRIVE_SPEED/1.5) ;
+    set_drive_pid(drive, -32, DRIVE_SPEED/1.5) ;
     wait_drive() ;
     pros::delay(200) ;
     sixlock(true) ;
     pros::delay(300) ;
-    //actual platformy stuff
+    //platform neut
 
-    set_drive_pid(drive, 24, DRIVE_SPEED) ;
+    set_drive_pid(drive, 22, DRIVE_SPEED) ;
 
-    set_lift_position(575, 100) ;
+    set_lift_position(700, 100) ;
     wait_drive() ;
     //face to platform
     set_drive_pid(turn, -85, DRIVE_SPEED/1.75) ;
     wait_drive() ;
     set_drive_pid(drive, -19, DRIVE_SPEED/1.5) ;
     wait_drive() ;
-    set_lift_position(321, 100) ;
+    set_lift_position(400, 100) ;
     //place
     pros::delay(750) ;
     sixlock(false) ;
-    pros::delay(250) ;
+    pros::delay(500) ;
     //escape
     set_drive_pid(drive, 15, DRIVE_SPEED) ;
     pros::delay(200) ;
-    set_lift_position(500, 100) ;
+    set_lift_position(650, 100) ;
     wait_drive() ;
 
     // get position for tall neut
     set_drive_pid(turn, 0, DRIVE_SPEED) ;
     wait_drive() ;
-    set_drive_pid(drive, 6, DRIVE_SPEED) ;
+    set_drive_pid(drive, 10, DRIVE_SPEED) ;
     wait_drive() ;
   //platform tall neutral
     //face tall neutral
     set_lift_position(0, 100) ;
-    set_drive_pid(turn, 95, DRIVE_SPEED) ;
+    set_drive_pid(turn, 90, DRIVE_SPEED) ;
     wait_drive() ;
     //drive tall neut
     set_drive_pid(drive, -25, DRIVE_SPEED/1.5) ;
@@ -211,67 +211,54 @@ auto_test() // now is tester auton
     //drive into
     set_drive_pid(drive, -47, DRIVE_SPEED/1.5) ;
     pros::delay (800) ;
-    set_lift_position(230, 30) ;
+    set_lift_position(390, 60) ;
     wait_drive() ;
 
     // // dru method <-- F
     // //lift up
-    // set_lift_position(525, 100) ;
+    // set_lift_position(800, 100) ;
     // //drive into
     // set_drive_pid(drive, -47, DRIVE_SPEED/2) ;
     // pros::delay(1750);
-    // set_lift_position(230, 100) ;
+    // set_lift_position(390, 100) ;
     // wait_drive() ;
 
     //place
-    pros::delay(500) ;
+    pros::delay(750) ;
     sixlock(false) ;
-    pros::delay(500) ;
+    pros::delay(750) ;
     //escape
     set_drive_pid(drive, 7, DRIVE_SPEED) ;
     pros::delay(150) ;
-    set_lift_position(500, DRIVE_SPEED) ;
+    set_lift_position(650, DRIVE_SPEED) ;
     wait_drive() ;
 
     //face ally1
-    set_drive_pid(turn, 180, DRIVE_SPEED) ;
+    set_drive_pid(turn, 179, DRIVE_SPEED) ;
     wait_drive() ;
     set_lift_position(0, 100) ;
-    set_drive_pid(drive, -59, DRIVE_SPEED) ;
+    set_drive_pid(drive, -57, DRIVE_SPEED) ;
     wait_drive() ;
     //get ally1
     sixlock(true) ;
     pros::delay(250) ;
-    set_lift_position(100, 100) ;
-    //get ally2
-    set_drive_pid(turn, 188, DRIVE_SPEED) ;
+    set_drive_pid(turn, 0, DRIVE_SPEED) ;
     wait_drive() ;
-    set_drive_pid(drive, 89, DRIVE_SPEED/1.5) ;
+    set_drive_pid(drive, -43, DRIVE_SPEED) ;
     wait_drive() ;
-    //face ally2
     set_drive_pid(turn, 90, DRIVE_SPEED) ;
     wait_drive() ;
-    mogo_out() ;
-    pros::delay(500) ;
-    set_drive_pid(drive, 20, DRIVE_SPEED/1.5) ;
+    //drive platform
+    set_drive_pid(drive, -87, DRIVE_SPEED) ;
+    set_lift_position(650, 100) ;
     wait_drive() ;
-    //grab
-    flock(true) ;
-    pros::delay(500) ;
-    //exit then intake
-    set_drive_pid(drive, -20, DRIVE_SPEED) ;
-    wait_drive() ;
-    mogo_in() ;
+    set_lift_position(400, 100) ;
     pros::delay(750) ;
-
-    //platform ally1
-    set_drive_pid(turn, 115, DRIVE_SPEED) ;
-    wait_drive() ;
-    set_drive_pid(drive, -70, DRIVE_SPEED) ;
-    wait_drive() ;
-    set_lift_position(625, 100) ;
-    pros::delay(400) ;
-    set_drive_pid(turn, 90, DRIVE_SPEED) ;
+    sixlock(false) ;
+    pros::delay(500) ;
+    set_drive_pid(drive, 10, DRIVE_SPEED) ;
+    pros::delay (200) ;
+    set_lift_position(650, 100) ;
     wait_drive() ;
 
 
@@ -315,7 +302,7 @@ auto_winPointRight() { // ring row and AWP
     // set_mogo_position (-780, 127) ;
     set_drive_pid(drive, -24, DRIVE_SPEED) ;
   // back lift up
-    set_lift_position(446, 100);
+    set_lift_position(625, 100);
     wait_drive() ;
   // set fmogo motor to 0
     // set_mogo(0) ;
@@ -382,7 +369,7 @@ auto_AWPcarry() {
   wait_drive() ;
   set_drive_pid(drive, -90, DRIVE_SPEED) ;
   //raise lift
-  set_lift_position(446, 100);
+  set_lift_position(625, 100);
   claw (false) ;
   int timer = 0 ;
   while (!limit_switch() && timer < 400) {
@@ -625,7 +612,7 @@ void
 auto_basic() { //can't go wrong
   // lift 6bar
     claw (true) ;
-    set_lift_position(446, 100);
+    set_lift_position(625, 100);
     pros::delay(750) ;
   // drive forward
     set_drive_pid(drive, -10, DRIVE_SPEED);
@@ -859,3 +846,40 @@ auto_basic() { //can't go wrong
 // {
 //
 // }
+//
+//
+//
+// //get ally2
+// set_drive_pid(turn, 185, DRIVE_SPEED) ;
+// wait_drive() ;
+// set_drive_pid(drive, 87, DRIVE_SPEED/1.5) ;
+// wait_drive() ;
+// //face ally2
+// set_drive_pid(turn, 91, DRIVE_SPEED) ;
+// wait_drive() ;
+// mogo_out() ;
+// pros::delay(500) ;
+// set_drive_pid(drive, 13, DRIVE_SPEED/1.5) ;
+// wait_drive() ;
+// //grab
+// flock(true) ;
+// pros::delay(500) ;
+// //exit then intake
+// set_drive_pid(drive, -20, DRIVE_SPEED) ;
+// wait_drive() ;
+//
+// //platform ally1
+// set_drive_pid(turn, 120, DRIVE_SPEED) ;
+// wait_drive() ;
+// //lift up
+// set_lift_position(700, 100) ;
+// set_drive_pid(drive, -73, DRIVE_SPEED) ;
+// mogo_in() ;
+// wait_drive() ;
+// set_drive_pid(turn, 90, DRIVE_SPEED) ;
+// wait_drive() ;
+// set_drive_pid(drive, -15, DRIVE_SPEED) ;
+// set_lift_position(400, 90) ;
+// pros::delay(1000) ;
+// sixlock(false) ;
+// pros::delay(750) ;

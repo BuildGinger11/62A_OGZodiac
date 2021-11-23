@@ -2,7 +2,7 @@
 
 
 const int num_of_pos = 7; // Number of lift positions // was 5
-const int lift_heights[num_of_pos] = {0, 0, 575, 321, 321, 575, 140}; // Lift Positions
+const int lift_heights[num_of_pos] = {0, 0, 650, 400, 400, 650, 196}; // Lift Positions
 //                          {pick_up/ready , compact/drive, lift_above_platform, place_on_platform, max_height}
 
 // Driver Control Variables
@@ -19,7 +19,7 @@ int clawLock = 0 ;
 int x_lock = 0 ;
 int XTimer = 0 ;
 
-pros::Motor lift(10, MOTOR_GEARSET_36, false, MOTOR_ENCODER_DEGREES);
+pros::Motor lift(10, MOTOR_GEARSET_36, true, MOTOR_ENCODER_DEGREES);
 
 //bmogo lock
 pros::ADIDigitalOut sixLock(7);
