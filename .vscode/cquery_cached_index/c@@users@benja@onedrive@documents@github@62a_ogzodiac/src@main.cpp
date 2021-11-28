@@ -17,12 +17,12 @@ disable_all_tasks() {
  * When is_auton is true, the autonomous mode will run.  Otherwise, it will only
  * print to brain.
  */
-const int num_of_pages = 7; // Number of pages
+const int num_of_pages = 10; // Number of pages
 int current_page = 0;
 
 void
 auto_select(bool is_auton) {
-  for (int i=0; i<7; i++)
+  for (int i=0; i<10; i++)
     pros::lcd::clear_line(i);
 
   pros::lcd::set_text(0, "Autonomous "+std::to_string(current_page+1));
@@ -34,29 +34,40 @@ auto_select(bool is_auton) {
       break;
     case 1: // Auto 2
       pros::lcd::set_text(1, "Auton Tester");
-      if (is_auton) test_auton();
+      if (is_auton) auto_test();
       break;
     case 2: // Auto 3
       pros::lcd::set_text(1, "Auton winPoint Right Side");
       if (is_auton) auto_winPointRight();
       break;
     case 3: // Auto 4
-      pros::lcd::set_text(1, "Auton homeRow");
+      pros::lcd::set_text(1, "Auton homeRowBasic");
       if (is_auton) auto_AWPcarry();
       break;
     case 4: // Auto 5
-      pros::lcd::set_text(1, "Auton Right Side Alliance");
-      if (is_auton) auto_allianceRight();
+      pros::lcd::set_text(1, "Auton homeRowRightNeut");
+      if (is_auton) auto_AWPRightNeut();
       break;
     case 5: // Auto 6
+      pros::lcd::set_text(1, "Auton homeRowLeftNeut");
+      if (is_auton) auto_AWPLeftNeut();
+      break;
+    case 6: // Auto 7
+      pros::lcd::set_text(1, "Auton homeRowCenterNeut");
+      if (is_auton) auto_AWPCenterNeut();
+      break;
+    case 7: // Auto 8
+      pros::lcd::set_text(1, "empty");
+      if (is_auton) auto_basic();
+      break;
+    case 8: //Auto 8
       pros::lcd::set_text(1, "Auton Skills");
       if (is_auton) auto_skillz();
-      break;
-    case 6: // Auto 6
+      break ;
+    case 9: // Auto 10
       pros::lcd::set_text(1, "Auton Basic");
       if (is_auton) auto_basic() ;
-      break;
-
+      break ;
     default:
       break;
   }
