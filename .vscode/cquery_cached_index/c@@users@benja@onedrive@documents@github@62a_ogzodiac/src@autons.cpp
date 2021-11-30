@@ -382,8 +382,8 @@ auto_AWPCenterNeut()
   }
   pros::delay(250) ;
   claw (true) ;
-  pros::delay(500) ;
   intake (100) ;
+  pros::delay(500) ;
   set_drive_pid(drive, 30, DRIVE_SPEED) ;
 }
 
