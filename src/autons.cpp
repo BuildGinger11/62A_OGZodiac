@@ -445,7 +445,8 @@ auto_skillz() {
     set_drive_pid(turn, -108, DRIVE_SPEED/1.5) ; // was -108
     wait_drive() ;
     //reverse into platform
-    set_drive_pid(drive, -18, DRIVE_SPEED) ;
+    set_drive_pid(drive, -19
+      , DRIVE_SPEED) ;
     wait_drive() ;
     //drop lift
     set_lift_position(400, 90) ;
@@ -564,7 +565,8 @@ auto_skillz() {
     wait_drive() ;
 
     //get last neut
-    set_drive_pid(turn, 39, DRIVE_SPEED) ;
+    //set_drive_pid(turn, 39, DRIVE_SPEED) ;
+    set_drive_pid(turn, -321, DRIVE_SPEED) ;
     wait_drive() ;
     set_lift_position(0, 115) ;
     sixlock(false) ;
