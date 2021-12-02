@@ -84,61 +84,7 @@ int timer = 0;
 void
 auto_test() // now is tester auton
 {
-  //grab ally1 with 6bar
-  tareLift() ;
-  sixlock(false) ;
-  set_lift_position(0, 100) ;
-  pros::delay(250) ;
-  set_drive_pid(drive, -7, DRIVE_SPEED/1.25) ;
-  wait_drive() ;
-  intake(100) ;
-  pros::delay(200) ;
-  sixlock(true) ;
-  pros::delay(300) ;
-  set_drive_pid(drive, 13, DRIVE_SPEED) ;
-  wait_drive() ;
-  //stop intakes
-  intake(0) ;
-  set_drive_pid(r_swing, -35, DRIVE_SPEED) ;
-  wait_drive() ;
-  //further out to avoid platform
-  set_drive_pid(drive, -50, DRIVE_SPEED) ;
-  wait_drive() ;
-  //rush
-  set_drive_pid(turn, 0, DRIVE_SPEED) ;
-  wait_drive() ;
-  set_drive_pid(drive, -16, DRIVE_SPEED) ;
-  wait_drive() ;
   set_drive_pid(turn, 90, DRIVE_SPEED) ;
-  //get neut
-  mogo_lift(true) ;
-  flock(false) ;
-  wait_drive() ;
-  set_drive_pid(drive, 13, DRIVE_SPEED) ;
-  wait_drive() ;
-  pros::delay(250) ;
-  mogo_in() ;
-  // grab ally2
-  set_drive_pid(drive, -20, DRIVE_SPEED) ;
-  wait_drive() ;
-  set_lift_position(625, 100);
-  //face ally2
-  set_drive_pid(turn, 0, DRIVE_SPEED) ;
-  wait_drive() ;
-  set_drive_pid(drive, -90, DRIVE_SPEED) ;
-  //raise lift
-  int timer = 0 ;
-  pros::delay(500) ;
-  claw (false) ;
-  while (!limit_switch() && timer < 400) {
-    timer++;
-    pros::delay(10);
-  }
-  pros::delay(250) ;
-  claw (true) ;
-  intake (100) ;
-  pros::delay(500) ;
-  set_drive_pid(drive, 30, DRIVE_SPEED) ;
 }
 
 
