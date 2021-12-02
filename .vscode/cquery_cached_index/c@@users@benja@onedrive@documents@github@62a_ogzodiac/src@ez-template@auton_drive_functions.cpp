@@ -372,7 +372,9 @@ set_drive_pid(int type, float target, int speed, bool slew_on, bool toggle_headi
   // If turn, set targets to angle
   else if (type == turn) {
     printf("Turn Started... Target Value: %f\n", target);
-    gyro_target = target;
+
+    gyro_target = target ; //<-- doifaewfbwrbfiowferfoerbefbwaofbeb           /// BE SURE TO FIX THIS FOR  COMP --> no " + 90"
+    
     gyro_sign = sgn(target - get_gyro());
   }
 
