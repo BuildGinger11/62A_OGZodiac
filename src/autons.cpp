@@ -428,27 +428,6 @@ auto_allianceRight() {
 }
 
 
-
-// /
-//  Swing Example
-// /
-void
-auto_5() {
-  //  The second parameter is target degrees
-  //  The third parameter is speed of the moving side of the drive
-
-  set_drive_pid(l_swing, 45, SWING_SPEED);
-  wait_drive();
-
-  set_drive_pid(drive, 24, DRIVE_SPEED, true);
-  wait_until(12);
-
-  set_drive_pid(r_swing, 0, SWING_SPEED);
-  wait_drive();
-}
-
-
-
 // /
 //  Auto that tests everything
 // /
@@ -470,7 +449,60 @@ test_auton() {
   wait_drive();
 }
 
+void
+auto_AWPRightNeut() {
+  //grab ally1 with 6bar
+  tareLift() ;
+  sixlock(false) ;
+  set_lift_position(0, 100) ;
+  pros::delay(250) ;
+  set_drive_pid(drive, -7, DRIVE_SPEED) ;
+  wait_drive() ;
+  pros::delay(200) ;
+  sixlock(true) ;
+  intake(100) ;
+  pros::delay(300) ;
+  // turn for ally2
+  set_drive_pid(drive, 15, DRIVE_SPEED) ;
+  wait_drive() ;
+  //stop intakes
+  intake(0) ;
+  set_drive_pid(r_swing, -35, DRIVE_SPEED) ;
+  wait_drive() ;
+  set_drive_pid(drive, -40, DRIVE_SPEED) ;
+  wait_drive() ;
+  //rush
+  set_drive_pid(turn, 0, DRIVE_SPEED) ;
+  wait_drive() ;
+  set_drive_pid(drive, -90, DRIVE_SPEED/1.5) ;
+  //raise lift
+  set_lift_position(625, 50);
+  claw (false) ;
+  int timer = 0 ;
+  pros::delay(500) ; // make sure drive doesnt die
+  while (!limit_switch() && timer < 400) {
+    timer++;
+    pros::delay(10);
+  }
+  claw (true) ;
+  pros::delay(250) ;
+  intake (100) ;
+  pros::delay(500) ;
+  //allign iwht right neut
+  set_drive_pid(drive, 26, DRIVE_SPEED) ; // check to alligh
+  wait_drive() ;
+  intake(0) ;
+  set_drive_pid(turn, 90, DRIVE_SPEED) ;
+  wait_drive() ;
+  mogo_out() ;
+  set_drive_pid(drive, 15, DRIVE_SPEED/1.25) ;
+  wait_drive() ;
+  mogo_in() ;
+  //retret
+  set_drive_pid(drive, -35, DRIVE_SPEED) ;
+  wait_drive() ;
 
+}
 
 void
 auto_6()

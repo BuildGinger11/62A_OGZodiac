@@ -7,7 +7,7 @@ void auto_test();
 void auto_winPointRight();
 void auto_AWPcarry();
 void auto_allianceRight();
-void auto_5();
+void auto_AWPRightNeut();
 void auto_6();
 void auto_7();
 void auto_8();
