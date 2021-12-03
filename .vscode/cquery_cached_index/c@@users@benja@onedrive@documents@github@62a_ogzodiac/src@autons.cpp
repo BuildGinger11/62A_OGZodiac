@@ -84,7 +84,57 @@ int timer = 0;
 void
 auto_test() // now is tester auton
 {
+  // rush rightside neut
+  tareLift() ;
+  sixlock(false) ;
+  set_lift_position(0, 100) ;
+  set_drive_brake(MOTOR_BRAKE_COAST);
+  set_drive_pid(drive, -44, DRIVE_SPEED/1) ; // was 38
+
+// grab with sixLock
+
+  wait_drive() ;
+  set_drive_brake(MOTOR_BRAKE_BRAKE);
+// get right neut
+  sixlock(true) ;
+  pros::delay(50) ;
+  set_lift_position(50, DRIVE_SPEED) ;
+  mogo_out() ;
+  set_drive_pid(l_swing, 130, DRIVE_SPEED) ;
+  wait_drive() ;
+  set_drive_pid(drive, 5, DRIVE_SPEED) ;
+  wait_drive() ;
+  mogo_in() ;
+  set_lift_position(600, 100) ;
+  set_drive_pid(drive, -33, DRIVE_SPEED) ;
+  wait_drive() ;
+  claw(false) ;
   set_drive_pid(turn, 90, DRIVE_SPEED) ;
+  wait_drive() ;
+  set_drive_pid(drive, -40, DRIVE_SPEED) ;
+  timer = 0 ;
+  while (!limit_switch() && timer < 300) {
+    timer++;
+    pros::delay(10);
+  }
+  claw (true) ;
+  pros::delay(250) ;
+  intake (115) ;
+
+// back up
+  set_drive_pid (drive, 12, DRIVE_SPEED) ;
+  wait_drive() ;
+// turn
+  set_drive_pid(turn, 189, DRIVE_SPEED) ;
+  wait_drive() ;
+// drive and collect row
+  set_drive_pid(drive, 13.5, DRIVE_SPEED/2) ;
+  wait_drive() ;
+// retreat
+  set_drive_pid(drive, -45, DRIVE_SPEED) ;
+  wait_drive () ;
+
+  intake (0) ;
 }
 
 
@@ -215,7 +265,7 @@ auto_AWPRightNeut() {
   intake(100) ;
   pros::delay(300) ;
   // turn for ally2
-  set_drive_pid(drive, 15, DRIVE_SPEED) ;
+  set_drive_pid(drive, 13, DRIVE_SPEED) ;
   wait_drive() ;
   //stop intakes
   intake(0) ;
@@ -355,8 +405,8 @@ auto_AWPCenterNeut()
   pros::delay(250) ;
   mogo_in() ;
   // grab ally2
-  set_drive_pid(drive, -20, DRIVE_SPEED) ;
-  wait_drive() ;
+//  set_drive_pid(drive, -20, DRIVE_SPEED) ;
+//  wait_drive() ;
   set_lift_position(625, 100);
   //face ally2
   set_drive_pid(turn, 0, DRIVE_SPEED) ;
@@ -377,20 +427,43 @@ auto_AWPCenterNeut()
   set_drive_pid(drive, 30, DRIVE_SPEED) ;
 }
 
-
-
 void
-auto_7() {
+auto_allianceRight ()
+{
+  // rush rightside neut
+  tareLift() ;
+  sixlock(false) ;
+  set_lift_position(0, 100) ;
+  set_drive_brake(MOTOR_BRAKE_COAST);
+  set_drive_pid(drive, -43, DRIVE_SPEED/1.25) ; // was 38
 
+// grab with sixLock
+
+  wait_drive() ;
+  set_drive_brake(MOTOR_BRAKE_BRAKE);
+// get center
+  pros::delay(250) ; // test
+  sixlock(true) ;
+  pros::delay(250) ;
+  mogo_out() ;
+  set_drive_pid(l_swing, 150, DRIVE_SPEED) ;
+  wait_drive() ;
+  mogo_in() ;
+  set_lift_position(600, 100) ;
+  set_drive_pid(drive, -30, DRIVE_SPEED) ;
+  claw(false) ;
+  pros::delay(500) ;
+  while (!limit_switch() && timer < 500) {
+    timer++;
+    pros::delay(10);
+  }
+  claw (true) ;
+  pros::delay(250) ;
+  intake (100) ;
+  set_drive_pid(turn, 90, DRIVE_SPEED) ;
+  wait_drive() ;
+  set_drive_pid(drive, 30, DRIVE_SPEED) ;
 }
-
-
-
-void
-auto_8() {
-
-}
-
 
 
 void
@@ -451,6 +524,7 @@ auto_skillz() {
 
   //platform neutral
     set_drive_pid(turn, -180, DRIVE_SPEED) ;
+    wait_drive() ;
     //drop
     mogo_out() ;
     set_drive_pid(drive, 15, DRIVE_SPEED/1.5) ;
@@ -471,7 +545,7 @@ auto_skillz() {
     pros::delay(300) ;
     //platform neut
 
-    set_drive_pid(drive, 19, DRIVE_SPEED) ; //was 22
+    set_drive_pid(drive, 20, DRIVE_SPEED) ; //was 22
 
     set_lift_position(700, 100) ;
     wait_drive() ;
@@ -510,7 +584,7 @@ auto_skillz() {
 
     wait_drive() ;
     //drive tall neut
-    set_drive_pid(drive, -27, DRIVE_SPEED/1.5) ;
+    set_drive_pid(drive, -30, DRIVE_SPEED/1.5) ;
     sixlock(false) ;
     wait_drive() ;
     //grab
@@ -527,8 +601,8 @@ auto_skillz() {
     set_lift_position(700, 100) ;
     pros::delay(2000);
     //drive into
-    set_drive_pid(drive, -49, DRIVE_SPEED/1.5) ;
-    pros::delay (1000) ;
+    set_drive_pid(drive, -52, DRIVE_SPEED/1.5) ;
+    pros::delay (1100) ;
     set_lift_position(390, 60) ;
     wait_drive() ;
 
@@ -548,13 +622,13 @@ auto_skillz() {
     pros::delay(750) ;
 
     //escape
-    set_drive_pid(drive, 10, DRIVE_SPEED) ;
+    set_drive_pid(drive, 13, DRIVE_SPEED) ;
     pros::delay(250) ;
     set_lift_position(650, DRIVE_SPEED) ;
     wait_drive() ;
 
     //get last neut
-    set_drive_pid(turn, 39, DRIVE_SPEED) ;
+    set_drive_pid(turn, 37, DRIVE_SPEED) ;
     wait_drive() ;
     set_lift_position(0, 115) ;
     sixlock(false) ;
@@ -587,11 +661,11 @@ auto_skillz() {
 
 
     // get ally1
-    set_drive_pid(turn, -178, DRIVE_SPEED) ; // was -180
+    set_drive_pid(turn, -180, DRIVE_SPEED) ; // was -180
     wait_drive() ;
     set_lift_position(0, 100) ;
     // reverse into
-    set_drive_pid(drive, -67, DRIVE_SPEED/1.5) ;
+    set_drive_pid(drive, -67, DRIVE_SPEED/1.25) ;
     pros::delay(250) ;
     //grab
     sixlock(false) ;

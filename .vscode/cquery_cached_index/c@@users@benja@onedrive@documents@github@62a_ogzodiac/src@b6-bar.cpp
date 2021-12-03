@@ -121,6 +121,8 @@ lift_control(void*) {
   //actual motor moving stuff
     if(lift_state == 0)
     {
+      //claw activated to allow space
+      claw(true) ;
       //actuate pneumatic
       sixlock(false);
       //move motor to pos
@@ -128,6 +130,8 @@ lift_control(void*) {
     }
     else if (lift_state == 1)
     {
+      // claw in
+      claw(true) ;
       set_lift_position(lift_heights[lift_state], 100) ;
       sixlock (true) ;
     }
@@ -184,7 +188,7 @@ lift_control(void*) {
 
 
   // activate MogoClaw
-  if (master.get_digital(DIGITAL_L2) && claw_state == 0 && clawLock == 0)
+  if (master.get_digital(DIGITAL_L2) && claw_state == 0 && clawLock == 0 && (lift_state != 0 || lift_state != 1))
   {
     //activate claw
     printf("open \n");
@@ -192,12 +196,17 @@ lift_control(void*) {
     claw(false) ;
     clawLock = 1 ;
   }
-  else if (master.get_digital(DIGITAL_L2) && claw_state == 1 && clawLock == 0)
+  else if (master.get_digital(DIGITAL_L2) && claw_state == 1 && clawLock == 0 && (lift_state != 0 || lift_state != 1))
   {
     //deactivate claw
     claw_state = 0 ;
     claw(true) ;
     clawLock = 1 ;
+  }
+  else if (!master.get_digital(DIGITAL_L2) && (lift_state == 0 || lift_state == 1))
+  {
+    claw (true) ;
+    clawLock = 0 ;
   }
   else if (!master.get_digital(DIGITAL_L2))
   {

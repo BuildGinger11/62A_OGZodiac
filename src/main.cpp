@@ -57,8 +57,8 @@ auto_select(bool is_auton) {
       if (is_auton) auto_AWPCenterNeut();
       break;
     case 7: // Auto 8
-      pros::lcd::set_text(1, "empty");
-      if (is_auton) auto_basic();
+      pros::lcd::set_text(1, "Two Neut Right Ally");
+      if (is_auton) auto_allianceRight();
       break;
     case 8: //Auto 8
       pros::lcd::set_text(1, "Auton Skills");

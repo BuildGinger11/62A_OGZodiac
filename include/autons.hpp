@@ -10,7 +10,6 @@ void auto_allianceRight();
 void auto_AWPRightNeut();
 void auto_AWPLeftNeut();
 void auto_AWPCenterNeut();
-void auto_8();
 void auto_skillz();
 void auto_basic();
 
