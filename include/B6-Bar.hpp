@@ -4,7 +4,6 @@ void set_lift(int input);
 void zero_lift();
 int get_lift();
 int get_lift_vel();
-
 void moveLift (int power) ;
 
 void sixlock (bool position) ;

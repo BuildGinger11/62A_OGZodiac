@@ -17,7 +17,7 @@ disable_all_tasks() {
  * When is_auton is true, the autonomous mode will run.  Otherwise, it will only
  * print to brain.
  */
-const int num_of_pages = 10; // Number of pages
+const int num_of_pages = 11; // Number of pages
 int current_page = 0;
 
 void
@@ -67,6 +67,9 @@ auto_select(bool is_auton) {
     case 9: // Auto 10
       pros::lcd::set_text(1, "Auton Basic");
       if (is_auton) auto_basic() ;
+      break ;
+    case 10:
+      pros::lcd::set_text(1, "Blank");
       break ;
     default:
       break;

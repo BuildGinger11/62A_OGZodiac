@@ -2,6 +2,7 @@
 
 void reset_constants();
 
+extern bool goalHold ;
 
 void auto_test();
 void auto_winPointRight();

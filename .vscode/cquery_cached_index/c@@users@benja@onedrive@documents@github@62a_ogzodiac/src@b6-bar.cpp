@@ -8,7 +8,8 @@ const int lift_heights[num_of_pos] = {0, 0, 650, 400, 400, 650, 196}; // Lift Po
 // Driver Control Variables
 int up_lock = 0;
 int down_lock = 0;
-int lift_state = 0 ; //<-- when switch to drive mode, start here
+
+int lift_state = 0 ;
 
 int b_press = 0 ;
 bool b_lock = true ;
@@ -82,10 +83,14 @@ void tareLift ()
 
 ///
 // Driver Control
-//  - when R1 is pressed, bring the lift up the position ladder
+//  - when R1 is pressed, bring the lift up to new position in array
 ///
 void
 lift_control(void*) {
+
+   //<-- when switch to drive mode, start here
+
+
   // move lift value up
   while(1)
   {
