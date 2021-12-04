@@ -458,12 +458,7 @@ auto_AWPCenterNeut()
     set_drive_pid(drive, -40, DRIVE_SPEED) ;
     wait_drive() ;
   }
-
-
 }
-
-
-
 
 
 void
@@ -482,6 +477,9 @@ auto_allianceRight ()
   set_drive_brake(MOTOR_BRAKE_BRAKE);
 // get right neut
   sixlock(true) ;
+
+  setLiftStart(1) ;
+
   pros::delay(50) ;
   set_lift_position(50, DRIVE_SPEED) ;
   mogo_out() ;
@@ -520,9 +518,61 @@ auto_allianceRight ()
   set_drive_pid(drive, -35, DRIVE_SPEED) ;
   wait_drive () ;
   // make lift grab
-  setLiftStart(1) ;
   intake (0) ;
 }
+
+
+
+
+void
+auto_allianceLeft ()
+{
+  tareLift() ;
+  sixlock(false) ;
+  set_lift_position(0, 100) ;
+  set_drive_brake(MOTOR_BRAKE_COAST);
+  set_drive_pid(drive, -47, DRIVE_SPEED/1) ; // was 38
+
+// grab with sixLock
+
+  wait_drive() ;
+  set_drive_brake(MOTOR_BRAKE_BRAKE);
+// get right neut
+  sixlock(true) ;
+
+  setLiftStart(1) ;
+
+  pros::delay(50) ;
+  set_lift_position(50, DRIVE_SPEED) ;
+  mogo_out() ;
+  set_drive_pid(r_swing, -125, DRIVE_SPEED) ; // test angle adn type
+  wait_drive() ;
+  set_drive_pid(drive, 10, DRIVE_SPEED) ;
+  wait_drive() ;
+  mogo_in() ;
+  set_lift_position(600, 100) ;
+  set_drive_pid(drive, -10, DRIVE_SPEED) ;
+  wait_drive() ;
+  set_drive_pid(turn, -180, DRIVE_SPEED/1.5) ;
+  wait_drive() ;
+  set_drive_pid(drive, -47, DRIVE_SPEED) ;
+  wait_drive() ;
+  set_drive_pid(turn, -90, DRIVE_SPEED) ;
+  claw(false) ;
+  wait_drive() ;
+  set_drive_pid(drive, -30, DRIVE_SPEED) ;
+  timer = 0 ;
+  while (!limit_switch() && timer < 150) {
+    timer++;
+    pros::delay(10);
+  }
+  claw (true) ;
+  pros::delay(250) ;
+  intake (115) ;
+  set_tank(0, 0) ;
+}
+
+
 
 
 
