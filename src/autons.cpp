@@ -86,59 +86,9 @@ int timer = 0;
 void
 auto_test() // now is tester auton
 {
-  // rush rightside neut
-  tareLift() ;
+  set_lift_position(600, DRIVE_SPEED) ;
   sixlock(false) ;
-  set_lift_position(0, 100) ;
-  set_drive_brake(MOTOR_BRAKE_COAST);
-  set_drive_pid(drive, -47, DRIVE_SPEED/1) ; // was 38
-
-// grab with sixLock
-
-  wait_drive() ;
-  set_drive_brake(MOTOR_BRAKE_BRAKE);
-// get right neut
-  sixlock(true) ;
-  pros::delay(50) ;
-  set_lift_position(50, DRIVE_SPEED) ;
-  mogo_out() ;
-  set_drive_pid(l_swing, 125, DRIVE_SPEED) ;
-  wait_drive() ;
-  set_drive_pid(drive, 10, DRIVE_SPEED) ;
-  wait_drive() ;
-  mogo_in() ;
-  set_lift_position(600, 100) ;
-  set_drive_pid(drive, -41, DRIVE_SPEED) ;
-  wait_drive() ;
-  claw(false) ;
-  set_drive_pid(turn, 90, DRIVE_SPEED) ;
-  wait_drive() ;
-  set_drive_pid(drive, -40, DRIVE_SPEED) ;
-  timer = 0 ;
-  while (!limit_switch() && timer < 150) {
-    timer++;
-    pros::delay(10);
-  }
-  pros::delay(250) ;
-  claw (true) ;
-  pros::delay(250) ;
-  intake (115) ;
-
-// back up
-  set_drive_pid (drive, 12, DRIVE_SPEED) ;
-  wait_drive() ;
-// turn
-  set_drive_pid(turn, 180, DRIVE_SPEED/1.5) ;
-  wait_drive() ;
-// drive and collect row
-  set_drive_pid(drive, 20, DRIVE_SPEED/2) ;
-  wait_drive() ;
-// retreat
-  set_drive_pid(drive, -35, DRIVE_SPEED) ;
-  wait_drive () ;
-  // make lift grab
   setLiftStart(1) ;
-  intake (0) ;
 }
 
 
@@ -483,19 +433,26 @@ auto_allianceRight ()
   pros::delay(50) ;
   set_lift_position(50, DRIVE_SPEED) ;
   mogo_out() ;
+  // face tall
   set_drive_pid(l_swing, 125, DRIVE_SPEED) ;
   wait_drive() ;
+  // grab tall
   set_drive_pid(drive, 10, DRIVE_SPEED) ;
   wait_drive() ;
   mogo_in() ;
   set_lift_position(600, 100) ;
+  // align with ally
+  set_drive_pid(turn, 137, DRIVE_SPEED) ;
+  wait_drive() ;
   set_drive_pid(drive, -41, DRIVE_SPEED) ;
   wait_drive() ;
   claw(false) ;
+  //face ally mogo
   set_drive_pid(turn, 90, DRIVE_SPEED) ;
   wait_drive() ;
   set_drive_pid(drive, -40, DRIVE_SPEED) ;
   timer = 0 ;
+  // get ally mogo
   while (!limit_switch() && timer < 150) {
     timer++;
     pros::delay(10);
@@ -518,7 +475,6 @@ auto_allianceRight ()
   set_drive_pid(drive, -35, DRIVE_SPEED) ;
   wait_drive () ;
   // make lift grab
-  intake (0) ;
 }
 
 

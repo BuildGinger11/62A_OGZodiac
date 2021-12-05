@@ -2,8 +2,8 @@
 
 
 const int num_of_pos = 7; // Number of lift positions // was 5
-const int lift_heights[num_of_pos] = {0, 0, 650, 400, 400, 650, 196}; // Lift Positions
-//                          {pick_up/ready , compact/drive, lift_above_platform, place_on_platform, max_height}
+const int lift_heights[num_of_pos] = {0, 0, 650, 400, 400, 650, 325}; // Lift Positions
+//                          {ready, grab, above plat, on plat, release on plat, above plat, }
 
 // Driver Control Variables
 int up_lock = 0;
@@ -11,8 +11,10 @@ int down_lock = 0;
 
 int lift_state = 0 ;
 
-int b_press = 0 ;
+int a_press = 0 ;
 bool b_lock = true ;
+
+int b_press = 0 ;
 
 int clawLock = 0 ;
 
@@ -113,12 +115,19 @@ lift_control(void*) {
   }
 
 //  special position for intaking rings
-  else if (master.get_digital(DIGITAL_B) && b_press == 0) {
+  else if (master.get_digital(DIGITAL_A) && a_press == 0) {
      printf("b \n") ;
      lift_state = 1;
 
-    b_press = 1 ;
+    a_press = 1 ;
 
+  }
+
+  else if (master.get_digital(DIGITAL_B) && b_press == 0)
+  {
+    lift_state = 6 ;
+    b_press = 1 ;
+    b_lock = false ;
   }
 
   else if (!master.get_digital(DIGITAL_X)) {
@@ -162,13 +171,17 @@ lift_control(void*) {
 
 
 
-  if (!master.get_digital(DIGITAL_B))
+  if (!master.get_digital(DIGITAL_A))
   {
-    b_press = 0 ;
+    a_press = 0 ;
   }
   if (!master.get_digital(DIGITAL_R1))
   {
     up_lock = 0 ;
+  }
+  if (!master.get_digital(DIGITAL_B))
+  {
+    b_press = 0 ;
   }
 
 
@@ -176,6 +189,8 @@ lift_control(void*) {
 
   if (master.get_digital(DIGITAL_X))
   {
+    moveLift(-100) ;
+    pros::delay(250) ;
     while (limit_switch () == false)
     {
       moveLift (-100) ;
