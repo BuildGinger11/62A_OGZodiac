@@ -22,10 +22,13 @@ int clawLock = 0 ;
 int x_lock = 0 ;
 int XTimer = 0 ;
 
-pros::Motor lift(10, MOTOR_GEARSET_36, true, MOTOR_ENCODER_DEGREES);
+pros::Motor lift(9, MOTOR_GEARSET_36, true, MOTOR_ENCODER_DEGREES);
+
+
+
 
 //bmogo lock
-pros::ADIDigitalOut sixLock(7);
+pros::ADIDigitalOut sixLock(1);
 
 
 void sixlock(bool position)
@@ -43,7 +46,7 @@ void setLiftStart (int position)
 
 
 //back claw (under conveyor)
-pros::ADIDigitalOut Claw (6);
+pros::ADIDigitalOut Claw (3);
 
 int claw_state = 0 ;
 
@@ -52,7 +55,7 @@ void claw (bool position)
   Claw.set_value (position) ;
 }
 
-pros::ADIDigitalIn limiter (4) ;
+pros::ADIDigitalIn limiter (8) ;
 
 bool limit_switch ()
 {

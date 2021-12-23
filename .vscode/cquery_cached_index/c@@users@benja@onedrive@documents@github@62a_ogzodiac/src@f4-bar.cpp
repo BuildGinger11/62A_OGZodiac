@@ -17,10 +17,9 @@ bool is_out = false;
 bool is_down = false ;
 
 // pros::Motor mogo(6, MOTOR_GEARSET_36, false, MOTOR_ENCODER_DEGREES);
-pros::ADIDigitalOut FLock(8);
+pros::ADIDigitalOut FLock(4);
 
-pros::ADIDigitalOut RMogo (2) ;
-pros::ADIDigitalOut LMogo (5) ;
+pros::ADIDigitalOut FMogo (2) ;
 
 
 
@@ -36,8 +35,7 @@ void flock(bool position)
 
 void mogo_lift (bool position)
 {
-  RMogo.set_value(!position) ;
-  LMogo.set_value(!position) ;
+  FMogo.set_value(!position) ;
 }
 // void zero_mogo()
 //  {
@@ -115,7 +113,7 @@ mogo_control(void*)
       if (!is_down)
       {
         mogo_lift (false);
-        
+
         if(ITimer >= 50)
         {
              flock(true) ;
