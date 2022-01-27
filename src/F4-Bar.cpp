@@ -17,7 +17,7 @@ bool is_out = false;
 bool is_down = false ;
 
 // pros::Motor mogo(6, MOTOR_GEARSET_36, false, MOTOR_ENCODER_DEGREES);
-pros::ADIDigitalOut FLock(4);
+pros::ADIDigitalOut FLock(3);
 
 pros::ADIDigitalOut FMogo (2) ;
 
@@ -30,12 +30,14 @@ pros::ADIDigitalOut FMogo (2) ;
 // }
 void flock(bool position)
 {
+  printf("flock \n") ;
   FLock.set_value(position);
 }
 
 void mogo_lift (bool position)
 {
-  FMogo.set_value(!position) ;
+  printf("pneu lift \n") ;
+  FMogo.set_value(position) ;
 }
 // void zero_mogo()
 //  {

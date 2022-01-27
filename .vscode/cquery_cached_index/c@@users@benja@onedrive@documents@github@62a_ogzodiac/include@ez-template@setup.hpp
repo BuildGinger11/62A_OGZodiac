@@ -15,11 +15,11 @@ const int DELAY_TIME = 10;
 const int MOTORS_PER_SIDE = 3; // Motors per side of drive
 
 // Make the port negative if it's reversed
-const int  L_CHASSIS_PORTS[MOTORS_PER_SIDE] = {-4, 5, -6}; // Ports, the first number will be used for sensing
-const int  R_CHASSIS_PORTS[MOTORS_PER_SIDE] = {3, 17, -16}; // Ports, the first number will be used for sensing
+const int  L_CHASSIS_PORTS[MOTORS_PER_SIDE] = {4, -5, -6}; // Ports, the first number will be used for sensing
+const int  R_CHASSIS_PORTS[MOTORS_PER_SIDE] = {-3, 17, 8}; // Ports, the first number will be used for sensing
 
 // IMU Port
-#define IMU_PORT 12
+#define IMU_PORT 21
 
 
 

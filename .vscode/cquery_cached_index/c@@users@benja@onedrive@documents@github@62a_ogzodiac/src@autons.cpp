@@ -86,9 +86,8 @@ int timer = 0;
 void
 auto_test() // now is tester auton
 {
-  set_lift_position(600, DRIVE_SPEED) ;
-  sixlock(false) ;
-  setLiftStart(1) ;
+  set_drive_brake(MOTOR_BRAKE_COAST) ;
+  set_drive_pid(drive, , DRIVE_SPEED) ;
 }
 
 
@@ -96,22 +95,13 @@ auto_test() // now is tester auton
 
 
 
-
-
-
-//
-//
-// FOR LEFT SIDE (odds)
-//
-//
-
 void
-auto_winPointRight() { // ring row and AWP
+auto_rightHomeRow() { // ring row and AWP
 
   // rush
     set_drive_brake(MOTOR_BRAKE_COAST);
     set_drive_pid(drive, 43, DRIVE_SPEED/1.25) ; // was 38
-    // lower FMogo
+    // grip FMogo
     Auton_mogo_out () ;
     wait_drive() ;
     set_drive_brake(MOTOR_BRAKE_BRAKE);

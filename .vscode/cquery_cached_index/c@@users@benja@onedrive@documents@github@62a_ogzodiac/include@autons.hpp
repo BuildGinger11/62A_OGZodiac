@@ -5,7 +5,7 @@ void reset_constants();
 extern bool goalHold ;
 
 void auto_test();
-void auto_winPointRight();
+void auto_rightHomeRow();
 void auto_AWPcarry();
 void auto_allianceRight();
 void auto_AWPRightNeut();
